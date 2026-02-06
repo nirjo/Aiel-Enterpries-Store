@@ -1,26 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap');
+
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f1111;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-primary-50: #FFF8F0;
+  --color-primary-100: #FFECD6;
+  --color-primary-200: #FFD4A8;
+  --color-primary-300: #FFB870;
+  --color-primary-400: #FF9900;
+  --color-primary-500: #E68A00;
+  --color-primary-600: #CC7A00;
+  --color-primary-700: #A36200;
+  --color-primary-800: #7A4A00;
+  --color-primary-900: #523200;
+  
+  --color-secondary-50: #E8EBF0;
+  --color-secondary-100: #C7CDD9;
+  --color-secondary-200: #9DABC2;
+  --color-secondary-300: #6E84A3;
+  --color-secondary-400: #4A6484;
+  --color-secondary-500: #37475A;
+  --color-secondary-600: #2E3B4E;
+  --color-secondary-700: #232F3E;
+  --color-secondary-800: #1A2332;
+  --color-secondary-900: #0F1419;
+  
+  --color-accent-50: #E6F7F4;
+  --color-accent-100: #C2EBE3;
+  --color-accent-200: #8DD9CC;
+  --color-accent-300: #52C4B0;
+  --color-accent-400: #1AAF93;
+  --color-accent-500: #067D62;
+  --color-accent-600: #056B54;
+  --color-accent-700: #045847;
+  --color-accent-800: #034539;
+  --color-accent-900: #02322B;
+  
+  --color-surface-50: #FFFFFF;
+  --color-surface-100: #FAFBFC;
+  --color-surface-200: #F7F8FA;
+  --color-surface-300: #EAECF0;
+  --color-surface-400: #D5D9D9;
+  
+  --color-text-primary: #0F1111;
+  --color-text-secondary: #565959;
+  --color-text-muted: #8C8C8C;
+  --color-text-inverse: #FFFFFF;
+  
+  --color-success: #067D62;
+  --color-warning: #F3A847;
+  --color-error: #C7511F;
+  --color-info: #0066C0;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif;
+  
+  --shadow-soft: 0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 4px 16px -4px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 12px -2px rgba(0, 0, 0, 0.1), 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 16px 48px -8px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 20px rgba(255, 153, 0, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  font-family: var(--font-sans);
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
