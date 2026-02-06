@@ -96,7 +96,7 @@ async function getCategories(): Promise<Category[]> {
       .select("*")
       .eq("is_active", true)
       .order("sort_order", { ascending: true })
-      .limit(4);
+      .limit(4) as { data: Category[] | null; error: unknown };
 
     if (error || !data || data.length === 0) {
       return fallbackCategories;
@@ -116,7 +116,7 @@ async function getProducts(): Promise<{ featured: Product[]; all: Product[] }> {
       .select("*")
       .eq("is_active", true)
       .order("created_at", { ascending: false })
-      .limit(8);
+      .limit(8) as { data: Product[] | null; error: unknown };
 
     if (error || !allProducts || allProducts.length === 0) {
       return {

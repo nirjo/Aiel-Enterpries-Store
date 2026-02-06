@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { APP_NAME, FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 
+// Use static year to prevent hydration mismatch between server and client
+const CURRENT_YEAR = 2026;
+
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = CURRENT_YEAR;
 
   return (
     <footer className="bg-secondary-700 text-white">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header, Footer, CartDrawer, MobileNav } from "@/components/layout";
 import { ToastContainer } from "@/components/ui";
+import { AuthProvider } from "@/components/providers";
 import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -43,14 +44,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col antialiased">
-        <Header />
-        <MobileNav />
-        <CartDrawer />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ToastContainer />
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col antialiased" suppressHydrationWarning>
+        <AuthProvider>
+          <Header />
+          <MobileNav />
+          <CartDrawer />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <ToastContainer />
+        </AuthProvider>
       </body>
     </html>
   );

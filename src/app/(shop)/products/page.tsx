@@ -70,7 +70,7 @@ async function getProducts(searchParams: { category?: string; featured?: string;
         .from("categories")
         .select("id")
         .eq("slug", searchParams.category)
-        .single();
+        .single() as { data: { id: string } | null };
       
       if (category) {
         query = query.eq("category_id", category.id);
@@ -81,7 +81,7 @@ async function getProducts(searchParams: { category?: string; featured?: string;
       query = query.eq("is_featured", true);
     }
 
-    const { data, error } = await query;
+    const { data, error } = await query as { data: Product[] | null; error: unknown };
     if (error || !data || data.length === 0) {
       return fallbackProducts;
     }
@@ -98,7 +98,7 @@ async function getCategories(): Promise<Category[]> {
       .from("categories")
       .select("*")
       .eq("is_active", true)
-      .order("sort_order", { ascending: true });
+      .order("sort_order", { ascending: true }) as { data: Category[] | null; error: unknown };
 
     if (error || !data || data.length === 0) {
       return fallbackCategories;
