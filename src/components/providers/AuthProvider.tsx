@@ -12,6 +12,8 @@ import { User, Session } from "@supabase/supabase-js";
 import { getSupabaseClient } from "@/lib/supabase/client";
 import {
   signInWithGoogle as signInWithGoogleFn,
+  signInWithEmail as signInWithEmailFn,
+  verifyOtp as verifyOtpFn,
   signOut as signOutFn,
   getProfile,
   syncGoogleProfile,
@@ -25,6 +27,8 @@ interface AuthContextType {
   isLoading: boolean;
   error: Error | null;
   signInWithGoogle: (redirectTo?: string) => Promise<void>;
+  signInWithEmail: (email: string) => Promise<void>;
+  verifyOtp: (email: string, token: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -110,6 +114,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // Sign in with email OTP
+  const signInWithEmail = async (email: string) => {
+    try {
+      setError(null);
+      await signInWithEmailFn(email);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error("Failed to send OTP"));
+      throw err;
+    }
+  };
+
+  // Verify OTP code
+  const verifyOtp = async (email: string, token: string) => {
+    try {
+      setError(null);
+      await verifyOtpFn(email, token);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error("OTP verification failed"));
+      throw err;
+    }
+  };
+
   // Sign out
   const signOut = async () => {
     try {
@@ -140,6 +166,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isLoading,
         error,
         signInWithGoogle,
+        signInWithEmail,
+        verifyOtp,
         signOut,
         refreshProfile,
       }}

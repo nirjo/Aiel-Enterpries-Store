@@ -29,6 +29,56 @@ export async function signInWithGoogle(redirectTo?: string) {
 }
 
 /**
+ * Sign in with Email OTP (Magic Link)
+ * Sends a 6-digit OTP code to the user's email
+ */
+export async function signInWithEmail(email: string) {
+    const supabase = getSupabaseClient();
+
+    // Get origin safely (only available on client)
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+
+    console.log("Sending OTP to:", email);
+
+    const { data, error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+            // Allow new users to sign up
+            shouldCreateUser: true,
+            // Redirect URL after clicking magic link (if they click the link instead of using OTP)
+            emailRedirectTo: `${origin}/auth/callback`,
+        },
+    });
+
+    if (error) {
+        console.error("Email sign in error:", error.message, error);
+        throw error;
+    }
+
+    console.log("OTP sent successfully:", data);
+    return data;
+}
+
+/**
+ * Verify the OTP code sent to email
+ */
+export async function verifyOtp(email: string, token: string) {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token,
+        type: "email",
+    });
+
+    if (error) {
+        console.error("OTP verification error:", error);
+        throw error;
+    }
+
+    return data;
+}
+
+/**
  * Sign out the current user
  */
 export async function signOut() {

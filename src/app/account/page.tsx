@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,8 @@ import {
   ChevronRight,
   Loader2,
   ShoppingBag,
+  Mail,
+  ArrowLeft,
 } from "lucide-react";
 import { Button, Card, Skeleton } from "@/components/ui";
 import { useAuth } from "@/components/providers";
@@ -44,12 +46,57 @@ function GoogleLogo({ className }: { className?: string }) {
 
 export default function AccountPage() {
   const router = useRouter();
-  const { user, profile, isLoading, signInWithGoogle, signOut } = useAuth();
+  const { user, profile, isLoading, signInWithGoogle, signInWithEmail, verifyOtp, signOut } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
+  
+  // Email OTP state
+  const [email, setEmail] = useState("");
+  const [otpCode, setOtpCode] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  
+  // Debounce ref for auto-sending OTP
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-send OTP after 2 seconds of no typing (when email is valid)
+  useEffect(() => {
+    // Clear any existing timer
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(email.trim());
+
+    if (isValidEmail && !isOtpSent && !isSendingOtp) {
+      debounceTimerRef.current = setTimeout(async () => {
+        setIsSendingOtp(true);
+        setAuthError(null);
+        try {
+          await signInWithEmail(email.trim());
+          setIsOtpSent(true);
+        } catch (error) {
+          console.error("Auto-send OTP error:", error);
+          setAuthError(error instanceof Error ? error.message : "Failed to send OTP. Please try again.");
+        } finally {
+          setIsSendingOtp(false);
+        }
+      }, 2000); // 2 second delay
+    }
+
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, [email, isOtpSent, isSendingOtp, signInWithEmail]);
 
   // Fetch user orders and addresses
   useEffect(() => {
@@ -112,6 +159,51 @@ export default function AccountPage() {
     }
   };
 
+  // Handle email OTP send
+  const handleSendOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    
+    setIsSendingOtp(true);
+    setAuthError(null);
+    
+    try {
+      await signInWithEmail(email.trim());
+      setIsOtpSent(true);
+    } catch (error) {
+      console.error("Send OTP error:", error);
+      setAuthError(error instanceof Error ? error.message : "Failed to send OTP. Please try again.");
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
+
+  // Handle OTP verification
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otpCode.trim() || otpCode.length !== 6) return;
+    
+    setIsVerifyingOtp(true);
+    setAuthError(null);
+    
+    try {
+      await verifyOtp(email.trim(), otpCode.trim());
+      // Auth state change will be handled by the AuthProvider
+    } catch (error) {
+      console.error("Verify OTP error:", error);
+      setAuthError(error instanceof Error ? error.message : "Invalid OTP code. Please try again.");
+    } finally {
+      setIsVerifyingOtp(false);
+    }
+  };
+
+  // Reset to email input
+  const handleBackToEmail = () => {
+    setIsOtpSent(false);
+    setOtpCode("");
+    setAuthError(null);
+  };
+
   // Loading state
   if (isLoading) {
     return (
@@ -138,6 +230,104 @@ export default function AccountPage() {
             Sign in to access your account, track orders, and manage your
             preferences
           </p>
+
+          {/* Error Message */}
+          {authError && (
+            <div className="mb-4 p-3 rounded-lg bg-error/10 border border-error/20 text-error text-sm">
+              {authError}
+            </div>
+          )}
+
+          {/* Email OTP Form */}
+          {!isOtpSent ? (
+            <form onSubmit={handleSendOtp} className="mb-6">
+              <div className="relative mb-4">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-text-muted" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors text-text-primary placeholder:text-text-muted"
+                  required
+                />
+              </div>
+              <Button
+                type="submit"
+                isLoading={isSendingOtp}
+                size="lg"
+                fullWidth
+                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
+              >
+                Send OTP Code
+              </Button>
+            </form>
+          ) : (
+            <form onSubmit={handleVerifyOtp} className="mb-6">
+              <button
+                type="button"
+                onClick={handleBackToEmail}
+                className="flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary mb-4 mx-auto transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Change email
+              </button>
+              
+              <p className="text-sm text-text-secondary mb-4">
+                We sent a 6-digit code to <br />
+                <span className="font-medium text-text-primary">{email}</span>
+              </p>
+
+              {/* Success message with tips */}
+              <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/20 text-success text-sm text-left">
+                <p className="font-medium mb-1">✓ OTP request sent successfully!</p>
+                <p className="text-xs text-text-secondary">
+                  Check your inbox and spam folder. If not received, check Supabase Dashboard → Logs → Auth for errors.
+                </p>
+              </div>
+              
+              <div className="mb-4">
+                <input
+                  type="text"
+                  value={otpCode}
+                  onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  placeholder="Enter 6-digit code"
+                  className="w-full text-center text-2xl tracking-widest py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:tracking-normal"
+                  maxLength={6}
+                  required
+                />
+              </div>
+              <Button
+                type="submit"
+                isLoading={isVerifyingOtp}
+                disabled={otpCode.length !== 6}
+                size="lg"
+                fullWidth
+                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
+              >
+                Verify & Sign In
+              </Button>
+              
+              <button
+                type="button"
+                onClick={handleSendOtp}
+                disabled={isSendingOtp}
+                className="mt-4 text-sm text-primary-500 hover:text-primary-600 transition-colors disabled:opacity-50"
+              >
+                Resend code
+              </button>
+            </form>
+          )}
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-bg-primary text-text-muted">or continue with</span>
+            </div>
+          </div>
 
           {/* Google Sign In Button */}
           <Button

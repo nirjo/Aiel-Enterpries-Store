@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { Button, Input } from "@/components/ui";
 import { useAuth } from "@/components/providers";
+import { signInWithEmail } from "@/lib/auth";
 
 // Google logo SVG component
 function GoogleLogo({ className }: { className?: string }) {
@@ -48,6 +49,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
   
   const redirect = searchParams.get("redirect") || "/account";
   const error = searchParams.get("error");
@@ -55,13 +57,16 @@ function LoginForm() {
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setEmailError(null);
 
     try {
-      // In production, this would send OTP via Supabase
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await signInWithEmail(email);
       router.push(`/verify?email=${encodeURIComponent(email)}`);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error("Email sign-in error:", err);
+      setEmailError(
+        err instanceof Error ? err.message : "Failed to send verification code. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -104,6 +109,13 @@ function LoginForm() {
         {error && (
           <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-xl text-error text-sm">
             {decodeURIComponent(error)}
+          </div>
+        )}
+
+        {/* Email Error */}
+        {emailError && (
+          <div className="mb-6 p-4 bg-error/10 border border-error/20 rounded-xl text-error text-sm">
+            {emailError}
           </div>
         )}
 
