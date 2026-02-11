@@ -2,12 +2,13 @@ import Link from "next/link";
 import { CheckCircle, Package, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui";
 
-export default function CheckoutSuccessPage({
+export default async function CheckoutSuccessPage({
   searchParams,
 }: {
-  searchParams: { order?: string };
+  searchParams: Promise<{ order?: string }>;
 }) {
-  const orderNumber = searchParams.order || "AIEL-XXXX-XXXX";
+  const params = await searchParams;
+  const orderNumber = params.order || "AIEL-XXXX-XXXX";
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
