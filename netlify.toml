@@ -1,7 +1,6 @@
-
-
-  # netlify.toml
 [build]
-  base = ""          # optional: directory to run the build command from
-  publish = "dist"   # change to your build output folder (e.g. "build" or "dist")
   command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
