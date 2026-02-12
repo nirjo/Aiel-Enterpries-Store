@@ -1,8 +1,7 @@
-[build]
-  base = "aiel-enterprises"
-  publish = "aiel-enterprises/dist"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+
+  # netlify.toml
+[build]
+  base = ""          # optional: directory to run the build command from
+  publish = "dist"   # change to your build output folder (e.g. "build" or "dist")
+  command = "npm run build"
