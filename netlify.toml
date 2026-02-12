@@ -1,7 +1,8 @@
 [build]
   base = "aiel-enterprises"
-  command = "npm run build"
-  publish = ".next"
+  publish = "aiel-enterprises/dist"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
