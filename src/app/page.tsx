@@ -4,6 +4,8 @@ import { ArrowRight, Truck, Shield, Headphones, RefreshCw } from "lucide-react";
 import { Button, Badge } from "@/components/ui";
 import { ProductGrid } from "@/components/product";
 import { createClient } from "@/lib/supabase/server";
+import { NAV_LINKS } from "@/lib/constants";
+import type { NavLink } from "@/lib/constants";
 import type { Product, Category } from "@/types/database";
 
 const features = [
@@ -33,7 +35,7 @@ const features = [
 const fallbackCategories: Category[] = [
   {
     id: "1", name: "Toy Paradise", slug: "toy-paradise",
-    description: "Fun toys for all ages", image_url: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=400&h=400&fit=crop",
+    description: "Fun toys for all ages", image_url: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 1, is_active: true, created_at: "", updated_at: "",
   },
   {
@@ -60,38 +62,51 @@ const fallbackCategories: Category[] = [
 
 const fallbackProducts: Product[] = [
   {
-    id: "1", name: "Wireless Bluetooth Headphones", slug: "wireless-bluetooth-headphones",
-    description: "", short_description: "Premium ANC headphones", price: 2499, compare_at_price: 3999,
-    cost_price: null, sku: "WBH-001", barcode: null, category_id: "1",
-    images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600",
-    is_active: true, is_featured: true, tags: [], metadata: {}, created_at: "", updated_at: "",
+    id: "1", name: "Rainbow Sensory Blocks", slug: "rainbow-sensory-blocks",
+    description: "", short_description: "Colorful sensory play blocks", price: 1299, compare_at_price: 1799,
+    cost_price: null, sku: "TOY-001", barcode: null, category_id: "1",
+    images: ["https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600",
+    is_active: true, is_featured: true, tags: ["sensory-toys"], metadata: {}, created_at: "", updated_at: "",
   },
   {
-    id: "2", name: "Smart Watch with Heart Rate", slug: "smart-watch-heart-rate",
-    description: "", short_description: "Smart fitness watch", price: 4999, compare_at_price: 6999,
-    cost_price: null, sku: "SW-001", barcode: null, category_id: "1",
-    images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600",
-    is_active: true, is_featured: true, tags: [], metadata: {}, created_at: "", updated_at: "",
+    id: "2", name: "Montessori Wooden Puzzle Set", slug: "montessori-wooden-puzzle",
+    description: "", short_description: "Educational wood puzzles", price: 899, compare_at_price: 1299,
+    cost_price: null, sku: "TOY-002", barcode: null, category_id: "1",
+    images: ["https://images.unsplash.com/photo-1615715616181-6ba85d724137?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1615715616181-6ba85d724137?w=600",
+    is_active: true, is_featured: true, tags: ["montessori-toys"], metadata: {}, created_at: "", updated_at: "",
   },
   {
-    id: "3", name: "Premium Cotton T-Shirt", slug: "premium-cotton-tshirt",
-    description: "", short_description: "Soft cotton tee", price: 599, compare_at_price: 899,
-    cost_price: null, sku: "TS-001", barcode: null, category_id: "2",
-    images: ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600",
-    is_active: true, is_featured: false, tags: [], metadata: {}, created_at: "", updated_at: "",
+    id: "3", name: "Abstract Canvas Wall Art", slug: "abstract-canvas-wall-art",
+    description: "", short_description: "Modern abstract painting", price: 2499, compare_at_price: 3499,
+    cost_price: null, sku: "HD-001", barcode: null, category_id: "2",
+    images: ["https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600",
+    is_active: true, is_featured: true, tags: ["wall-art"], metadata: {}, created_at: "", updated_at: "",
   },
   {
-    id: "4", name: "Minimalist Desk Lamp", slug: "minimalist-desk-lamp",
-    description: "", short_description: "Stylish desk lamp", price: 1299, compare_at_price: null,
-    cost_price: null, sku: "DL-001", barcode: null, category_id: "3",
-    images: ["https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600",
-    is_active: true, is_featured: true, tags: [], metadata: {}, created_at: "", updated_at: "",
+    id: "4", name: "Cast Iron Cookware Set", slug: "cast-iron-cookware-set",
+    description: "", short_description: "5-piece cast iron set", price: 3999, compare_at_price: 5499,
+    cost_price: null, sku: "KI-001", barcode: null, category_id: "3",
+    images: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600",
+    is_active: true, is_featured: true, tags: ["cookware"], metadata: {}, created_at: "", updated_at: "",
   },
 ];
+
+// Get all subcategories from NAV_LINKS for home page display
+const allSubcategories = NAV_LINKS
+  .filter((link: NavLink) => link.subcategories && link.subcategories.length > 0)
+  .flatMap((link: NavLink) => {
+    const categorySlug = link.href.match(/category=([^&]+)/)?.[1] || "";
+    return (link.subcategories || []).slice(0, 3).map((sub) => ({
+      ...sub,
+      categorySlug,
+      categoryLabel: link.label,
+    }));
+  })
+  .slice(0, 12);
 
 async function getCategories(): Promise<Category[]> {
   try {
@@ -248,6 +263,40 @@ export default async function HomePage() {
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="font-semibold text-white text-lg">{category.name}</h3>
                   <p className="text-white/70 text-sm mt-0.5">Shop now →</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Browse Subcategories */}
+      <section className="py-12 md:py-16 bg-surface-100">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary">Browse Subcategories</h2>
+              <p className="text-text-secondary mt-1">Find exactly what you&apos;re looking for</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {allSubcategories.map((sub) => (
+              <Link
+                key={`${sub.categorySlug}-${sub.slug}`}
+                href={`/products?category=${sub.categorySlug}&sub=${sub.slug}`}
+                className="group relative rounded-2xl overflow-hidden aspect-square"
+              >
+                <Image
+                  src={sub.image}
+                  alt={sub.label}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 16vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-white text-xs font-semibold leading-tight">{sub.label}</p>
+                  <p className="text-white/60 text-[10px] mt-0.5">{sub.categoryLabel}</p>
                 </div>
               </Link>
             ))}
