@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Truck, Shield, Headphones, RefreshCw } from "lucide-react";
 import { Button, Badge } from "@/components/ui";
+import { HeroCarousel } from "@/components/ui/HeroCarousel";
 import { ProductGrid } from "@/components/product";
 import { createClient } from "@/lib/supabase/server";
 import { NAV_LINKS } from "@/lib/constants";
@@ -165,63 +166,8 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-secondary-700 via-secondary-600 to-secondary-500 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-primary-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-400 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
-
-        <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
-              <Badge className="bg-primary-400/20 text-primary-300 border-primary-400/30 mb-4">
-                ✨ New Collection Available
-              </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-                Discover Your
-                <span className="text-primary-400"> Style</span>
-              </h1>
-              <p className="text-lg text-white/80 mb-8 max-w-lg">
-                Shop the latest trends with premium quality products. 
-                Free shipping on your first order over ₹999.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/products">
-                  <Button size="lg" className="text-base">
-                    Shop Now
-                    <ArrowRight className="h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link href="/categories">
-                  <Button variant="outline" size="lg" className="text-base border-white/30 text-white hover:bg-white/10">
-                    Browse Categories
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            <div className="hidden lg:grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="relative h-48 rounded-2xl overflow-hidden shadow-strong">
-                  <Image src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop" alt="Shopping" fill className="object-cover" />
-                </div>
-                <div className="relative h-64 rounded-2xl overflow-hidden shadow-strong">
-                  <Image src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop" alt="Products" fill className="object-cover" />
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="relative h-64 rounded-2xl overflow-hidden shadow-strong">
-                  <Image src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&h=400&fit=crop" alt="Store" fill className="object-cover" />
-                </div>
-                <div className="relative h-48 rounded-2xl overflow-hidden shadow-strong">
-                  <Image src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=300&fit=crop" alt="Fashion" fill className="object-cover" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       {/* Features */}
       <section className="py-8 border-b border-surface-300">
