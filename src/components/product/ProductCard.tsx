@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ShoppingCart, Heart, Star } from "lucide-react";
 import { Button, Badge } from "@/components/ui";
 import { useCartStore } from "@/stores/cart";
+import { useWishlistStore } from "@/stores/wishlist";
 import { formatCurrency, calculateDiscount } from "@/lib/utils/format";
 import { cn } from "@/lib/utils/cn";
 import type { Product } from "@/types/database";
@@ -17,6 +18,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCartStore();
+  const { toggleItem, isInWishlist } = useWishlistStore();
+  const wishlisted = isInWishlist(product.id);
   const discount = product.compare_at_price
     ? calculateDiscount(product.price, product.compare_at_price)
     : 0;
@@ -76,8 +79,22 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
             {/* Quick actions */}
             <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button className="w-9 h-9 rounded-full bg-white shadow-soft flex items-center justify-center hover:bg-surface-100 transition-colors">
-                <Heart className="h-4 w-4 text-text-secondary" />
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleItem({
+                    productId: product.id,
+                    name: product.name,
+                    slug: product.slug,
+                    price: product.price,
+                    compareAtPrice: product.compare_at_price,
+                    image: product.thumbnail_url || product.images?.[0] || null,
+                  });
+                }}
+                className="w-9 h-9 rounded-full bg-white shadow-soft flex items-center justify-center hover:bg-surface-100 transition-colors"
+              >
+                <Heart className={cn("h-4 w-4", wishlisted ? "text-red-500 fill-red-500" : "text-text-secondary")} />
               </button>
             </div>
 

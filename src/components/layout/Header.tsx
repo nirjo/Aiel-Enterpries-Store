@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui";
 import { useCartStore } from "@/stores/cart";
+import { useWishlistStore } from "@/stores/wishlist";
 import { useUIStore } from "@/stores/ui";
 import { cn } from "@/lib/utils/cn";
 import { APP_NAME, NAV_LINKS } from "@/lib/constants";
@@ -26,8 +27,10 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { getItemCount, toggleCart } = useCartStore();
+  const { getItemCount: getWishlistCount } = useWishlistStore();
   const { toggleMobileMenu, isMobileMenuOpen, openSearch } = useUIStore();
   const itemCount = mounted ? getItemCount() : 0;
+  const wishlistCount = mounted ? getWishlistCount() : 0;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,9 +121,14 @@ export function Header() {
               {/* Wishlist */}
               <Link
                 href="/wishlist"
-                className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg bg-transparent text-text-primary hover:bg-surface-200 active:bg-surface-300 transition-all duration-200"
+                className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg bg-transparent text-text-primary hover:bg-surface-200 active:bg-surface-300 transition-all duration-200 relative"
               >
                 <Heart className="h-5 w-5" />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-[10px] font-medium flex items-center justify-center">
+                    {wishlistCount > 99 ? "99+" : wishlistCount}
+                  </span>
+                )}
               </Link>
 
               {/* Account */}
