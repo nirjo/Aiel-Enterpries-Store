@@ -51,6 +51,16 @@ const fallbackCategories: Category[] = [
     description: "Fitness gear", image_url: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 4, is_active: true, created_at: "", updated_at: "",
   },
+  {
+    id: "5", name: "Toys", slug: "toys",
+    description: "Fun for everyone", image_url: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=400&h=400&fit=crop",
+    parent_id: null, sort_order: 5, is_active: true, created_at: "", updated_at: "",
+  },
+  {
+    id: "6", name: "Home Appliances", slug: "home-appliances",
+    description: "Smart home essentials", image_url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
+    parent_id: null, sort_order: 6, is_active: true, created_at: "", updated_at: "",
+  },
 ];
 
 const fallbackProducts: Product[] = [
@@ -96,7 +106,7 @@ async function getCategories(): Promise<Category[]> {
       .select("*")
       .eq("is_active", true)
       .order("sort_order", { ascending: true })
-      .limit(4) as { data: Category[] | null; error: unknown };
+      .limit(8) as { data: Category[] | null; error: unknown };
 
     if (error || !data || data.length === 0) {
       return fallbackCategories;
@@ -235,7 +245,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {categories.map((category) => (
               <Link key={category.id} href={`/products?category=${category.slug}`} className="group relative aspect-square rounded-2xl overflow-hidden">
                 <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />

@@ -52,6 +52,8 @@ const fallbackCategories: Category[] = [
   { id: "2", name: "Fashion", slug: "fashion", description: "", image_url: "", parent_id: null, sort_order: 2, is_active: true, created_at: "", updated_at: "" },
   { id: "3", name: "Home & Living", slug: "home-living", description: "", image_url: "", parent_id: null, sort_order: 3, is_active: true, created_at: "", updated_at: "" },
   { id: "4", name: "Sports", slug: "sports", description: "", image_url: "", parent_id: null, sort_order: 4, is_active: true, created_at: "", updated_at: "" },
+  { id: "5", name: "Toys", slug: "toys", description: "", image_url: "", parent_id: null, sort_order: 5, is_active: true, created_at: "", updated_at: "" },
+  { id: "6", name: "Home Appliances", slug: "home-appliances", description: "", image_url: "", parent_id: null, sort_order: 6, is_active: true, created_at: "", updated_at: "" },
 ];
 
 async function getProducts(searchParams: { category?: string; featured?: string; search?: string }): Promise<Product[]> {
