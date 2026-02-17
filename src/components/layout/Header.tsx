@@ -10,7 +10,6 @@ import {
   User,
   Menu,
   X,
-  ChevronDown,
   Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui";
@@ -176,23 +175,26 @@ export function Header() {
 
           {/* Navigation - desktop */}
           <nav className="hidden md:flex items-center gap-6 mt-3 pb-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary-500",
-                  pathname === link.href
-                    ? "text-primary-500"
-                    : "text-text-secondary"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <button className="flex items-center gap-1 text-sm font-medium text-text-secondary hover:text-primary-500 transition-colors">
-              Categories <ChevronDown className="h-4 w-4" />
-            </button>
+            {NAV_LINKS.map((link) => {
+              const isActive = link.href === "/"
+                ? pathname === "/"
+                : pathname + (typeof window !== "undefined" ? window.location.search : "") === link.href
+                  || (link.href === "/products" && pathname === "/products");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary-500 whitespace-nowrap",
+                    isActive
+                      ? "text-primary-500"
+                      : "text-text-secondary"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </header>

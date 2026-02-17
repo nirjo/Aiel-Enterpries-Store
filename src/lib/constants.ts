@@ -33,8 +33,12 @@ export const PAYMENT_STATUSES = {
 // Navigation Links
 export const NAV_LINKS = [
     { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
-    { label: "Categories", href: "/categories" },
+    { label: "All Products", href: "/products" },
+    { label: "Toy Paradise", href: "/products?category=toy-paradise" },
+    { label: "Home Decor", href: "/products?category=home-decor" },
+    { label: "Kitchen Items", href: "/products?category=kitchen-items" },
+    { label: "Gardening", href: "/products?category=gardening" },
+    { label: "Gift Items", href: "/products?category=gift-items" },
 ] as const;
 
 // Footer Links

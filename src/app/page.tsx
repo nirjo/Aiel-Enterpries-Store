@@ -32,34 +32,29 @@ const features = [
 // Fallback data when database is empty
 const fallbackCategories: Category[] = [
   {
-    id: "1", name: "Electronics", slug: "electronics",
-    description: "Latest gadgets", image_url: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=400&fit=crop",
+    id: "1", name: "Toy Paradise", slug: "toy-paradise",
+    description: "Fun toys for all ages", image_url: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 1, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "2", name: "Fashion", slug: "fashion",
-    description: "Trendy fashion", image_url: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=400&fit=crop",
+    id: "2", name: "Home Decor", slug: "home-decor",
+    description: "Beautiful home decoration", image_url: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 2, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "3", name: "Home & Living", slug: "home-living",
-    description: "Beautiful decor", image_url: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=400&fit=crop",
+    id: "3", name: "Kitchen Items", slug: "kitchen-items",
+    description: "Essential kitchen tools", image_url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 3, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "4", name: "Sports", slug: "sports",
-    description: "Fitness gear", image_url: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=400&fit=crop",
+    id: "4", name: "Gardening", slug: "gardening",
+    description: "Garden tools & supplies", image_url: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 4, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "5", name: "Toys", slug: "toys",
-    description: "Fun for everyone", image_url: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=400&h=400&fit=crop",
+    id: "5", name: "Gift Items", slug: "gift-items",
+    description: "Perfect gifts for loved ones", image_url: "https://images.unsplash.com/photo-1549465220-1a8b9238f760?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 5, is_active: true, created_at: "", updated_at: "",
-  },
-  {
-    id: "6", name: "Home Appliances", slug: "home-appliances",
-    description: "Smart home essentials", image_url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
-    parent_id: null, sort_order: 6, is_active: true, created_at: "", updated_at: "",
   },
 ];
 
