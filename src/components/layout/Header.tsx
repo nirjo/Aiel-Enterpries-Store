@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -29,6 +29,7 @@ export function Header() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
+  const searchParamsObj = useSearchParams();
   const router = useRouter();
   const { getItemCount, toggleCart } = useCartStore();
   const { getItemCount: getWishlistCount } = useWishlistStore();
@@ -205,10 +206,12 @@ export function Header() {
           {/* Navigation - desktop with mega menu */}
           <nav className="hidden md:flex items-center gap-1 mt-3 pb-1">
             {NAV_LINKS.map((link: NavLink) => {
+              const search = searchParamsObj.toString();
+              const fullPath = search ? `${pathname}?${search}` : pathname;
               const isActive = link.href === "/"
                 ? pathname === "/"
-                : pathname + (typeof window !== "undefined" ? window.location.search : "") === link.href
-                  || (link.href === "/products" && pathname === "/products");
+                : fullPath === link.href
+                  || (link.href === "/products" && pathname === "/products" && !search);
               const hasSubmenu = link.subcategories && link.subcategories.length > 0;
 
               return (
