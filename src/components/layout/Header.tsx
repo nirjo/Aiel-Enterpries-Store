@@ -22,11 +22,12 @@ import { APP_NAME, NAV_LINKS } from "@/lib/constants";
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { getItemCount, toggleCart } = useCartStore();
   const { toggleMobileMenu, isMobileMenuOpen, openSearch } = useUIStore();
-  const itemCount = getItemCount();
+  const itemCount = mounted ? getItemCount() : 0;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +36,10 @@ export function Header() {
       router.push(`/products?search=${encodeURIComponent(trimmed)}`);
     }
   };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,17 +116,19 @@ export function Header() {
               </Button>
 
               {/* Wishlist */}
-              <Link href="/wishlist" className="hidden sm:block">
-                <Button variant="ghost" size="icon">
-                  <Heart className="h-5 w-5" />
-                </Button>
+              <Link
+                href="/wishlist"
+                className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg bg-transparent text-text-primary hover:bg-surface-200 active:bg-surface-300 transition-all duration-200"
+              >
+                <Heart className="h-5 w-5" />
               </Link>
 
               {/* Account */}
-              <Link href="/account">
-                <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
-                </Button>
+              <Link
+                href="/account"
+                className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-transparent text-text-primary hover:bg-surface-200 active:bg-surface-300 transition-all duration-200"
+              >
+                <User className="h-5 w-5" />
               </Link>
 
               {/* Cart */}
