@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -21,10 +21,20 @@ import { APP_NAME, NAV_LINKS } from "@/lib/constants";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
   const { getItemCount, toggleCart } = useCartStore();
   const { toggleMobileMenu, isMobileMenuOpen, openSearch } = useUIStore();
   const itemCount = getItemCount();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = searchQuery.trim();
+    if (trimmed) {
+      router.push(`/products?search=${encodeURIComponent(trimmed)}`);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,16 +84,18 @@ export function Header() {
 
             {/* Search bar - desktop */}
             <div className="hidden md:flex flex-1 max-w-xl">
-              <div className="relative w-full">
+              <form onSubmit={handleSearch} className="relative w-full">
                 <input
                   type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for products..."
                   className="w-full h-10 pl-4 pr-12 rounded-full border border-surface-400 bg-surface-100 text-sm focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-all"
                 />
-                <button className="absolute right-1 top-1 h-8 w-8 rounded-full bg-primary-400 text-white flex items-center justify-center hover:bg-primary-500 transition-colors">
+                <button type="submit" className="absolute right-1 top-1 h-8 w-8 rounded-full bg-primary-400 text-white flex items-center justify-center hover:bg-primary-500 transition-colors">
                   <Search className="h-4 w-4" />
                 </button>
-              </div>
+              </form>
             </div>
 
             {/* Actions */}

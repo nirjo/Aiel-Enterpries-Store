@@ -1,9 +1,6 @@
 [build]
-  # optional: set a base directory if your project lives in a subfolder
-  # base = "client"
-
-  # directory Netlify should publish (adjust to your build output)
-  publish = "dist"
-
-  # build command Netlify should run
   command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

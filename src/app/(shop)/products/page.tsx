@@ -81,8 +81,17 @@ async function getProducts(searchParams: { category?: string; featured?: string;
       query = query.eq("is_featured", true);
     }
 
+    if (searchParams.search) {
+      query = query.ilike("name", `%${searchParams.search}%`);
+    }
+
     const { data, error } = await query as { data: Product[] | null; error: unknown };
     if (error || !data || data.length === 0) {
+      // Also filter fallback products by search
+      if (searchParams.search) {
+        const term = searchParams.search.toLowerCase();
+        return fallbackProducts.filter(p => p.name.toLowerCase().includes(term));
+      }
       return fallbackProducts;
     }
     return data;
@@ -200,7 +209,11 @@ export default async function ProductsPage({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
                 <h1 className="text-2xl font-display font-bold text-text-primary">
-                  {params.category ? categories.find(c => c.slug === params.category)?.name || "Products" : "All Products"}
+                  {params.search
+                    ? `Search results for "${params.search}"`
+                    : params.category
+                      ? categories.find(c => c.slug === params.category)?.name || "Products"
+                      : "All Products"}
                 </h1>
                 <p className="text-sm text-text-muted mt-1">Showing {products.length} products</p>
               </div>
