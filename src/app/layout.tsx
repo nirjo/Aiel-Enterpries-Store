@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { Header, Footer, CartDrawer, MobileNav } from "@/components/layout";
 import { ToastContainer } from "@/components/ui";
@@ -47,9 +48,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col antialiased" suppressHydrationWarning>
         <AuthProvider>
-          <Header />
-          <MobileNav />
-          <CartDrawer />
+          <Suspense>
+            <Header />
+            <MobileNav />
+            <CartDrawer />
+          </Suspense>
           <main className="flex-1">{children}</main>
           <Footer />
           <ToastContainer />
@@ -58,3 +61,4 @@ export default function RootLayout({
     </html>
   );
 }
+

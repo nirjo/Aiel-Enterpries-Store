@@ -18,40 +18,40 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=1400&h=700&fit=crop",
-    title: "Toy Paradise",
-    highlight: "Fun for Everyone",
-    description: "Explore our curated collection of sensory, Montessori & STEM toys that inspire creativity and learning.",
-    cta: { label: "Shop Toys", href: "/products?category=toy-paradise" },
-    secondary: { label: "View All", href: "/categories" },
+    image: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1400&h=700&fit=crop",
+    title: "🧲 Levitation Toys",
+    highlight: "Defy Gravity",
+    description: "Magnetic levitation globes, floating speakers & hover gadgets that mesmerize kids and adults alike.",
+    cta: { label: "Shop Levitation", href: "/products?category=levitation-toys" },
+    secondary: { label: "Browse All", href: "/categories" },
   },
   {
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1400&h=700&fit=crop",
-    title: "Home Decor",
-    highlight: "Transform Your Space",
-    description: "Beautiful wall art, candles, cushions & more to make every corner of your home feel special.",
-    cta: { label: "Shop Decor", href: "/products?category=home-decor" },
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&h=700&fit=crop",
+    title: "🌀 Gyroscopes & Spinners",
+    highlight: "Mesmerizing Motion",
+    description: "Precision gyroscopes, Euler's disks & kinetic desk toys that spin forever. Pure physics magic.",
+    cta: { label: "Shop Gyroscopes", href: "/products?category=gyroscopes" },
   },
   {
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&h=700&fit=crop",
-    title: "Kitchen Essentials",
-    highlight: "Cook with Style",
-    description: "Premium cookware, bakeware and kitchen tools for the home chef in you.",
-    cta: { label: "Shop Kitchen", href: "/products?category=kitchen-items" },
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1400&h=700&fit=crop",
+    title: "🔬 STEM Kits",
+    highlight: "Learn by Playing",
+    description: "Feel Flux, magnet science, robotics & coding kits — hands-on STEM for curious young minds.",
+    cta: { label: "Shop STEM", href: "/products?category=stem-kits" },
   },
   {
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1400&h=700&fit=crop",
-    title: "Gardening",
-    highlight: "Grow Your Green World",
-    description: "Seeds, tools, planters and everything you need for a thriving garden.",
-    cta: { label: "Shop Garden", href: "/products?category=gardening" },
+    image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1400&h=700&fit=crop",
+    title: "🧲 Magnetic Gadgets",
+    highlight: "Feel the Force",
+    description: "Ferrofluid art, magnetic putty, neodymium sets & mag-lev train kits that make physics tactile.",
+    cta: { label: "Shop Magnets", href: "/products?category=magnetic-gadgets" },
   },
   {
-    image: "https://images.unsplash.com/photo-1549465220-1a8b9238f760?w=1400&h=700&fit=crop",
-    title: "Gift Items",
-    highlight: "Perfect Presents",
-    description: "Handpicked gift boxes, personalized items & curated hampers for every occasion.",
-    cta: { label: "Shop Gifts", href: "/products?category=gift-items" },
+    image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&h=700&fit=crop",
+    title: "🚀 Space & Gravity",
+    highlight: "Explore the Cosmos",
+    description: "Planetarium projectors, plasma balls, rocket launchers & Newton's cradles — the universe at your fingertips.",
+    cta: { label: "Shop Space", href: "/products?category=space-gravity" },
   },
 ];
 
@@ -111,13 +111,13 @@ export function HeroCarousel() {
             sizes="100vw"
             priority={current === 0}
           />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          {/* Deep space overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050510]/85 via-[#050510]/50 to-[#050510]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/60 to-transparent" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content overlay (always on top) */}
+      {/* Content overlay */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4">
           <div className="max-w-xl">
@@ -129,18 +129,18 @@ export function HeroCarousel() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary-400/20 text-primary-300 border border-primary-400/30 backdrop-blur-sm mb-4">
-                  ✨ {slide.title}
+                <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-accent-400/15 text-accent-400 border border-accent-400/30 backdrop-blur-sm mb-4 tracking-wide">
+                  {slide.title}
                 </span>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-4 drop-shadow-[0_0_30px_rgba(0,123,255,0.3)]">
                   {slide.highlight}
                 </h1>
-                <p className="text-sm sm:text-base md:text-lg text-white/80 mb-6 max-w-md leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-white/75 mb-6 max-w-md leading-relaxed">
                   {slide.description}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link href={slide.cta.href}>
-                    <Button size="lg" className="text-sm sm:text-base">
+                    <Button size="lg" className="text-sm sm:text-base bg-gradient-to-r from-primary-400 to-accent-400 hover:from-primary-500 hover:to-accent-500 border-0 shadow-[0_0_24px_rgba(0,255,136,0.3)]">
                       {slide.cta.label}
                       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                     </Button>
@@ -150,7 +150,7 @@ export function HeroCarousel() {
                       <Button
                         variant="outline"
                         size="lg"
-                        className="text-sm sm:text-base border-white/30 text-white hover:bg-white/10"
+                        className="text-sm sm:text-base border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
                       >
                         {slide.secondary.label}
                       </Button>
@@ -166,14 +166,14 @@ export function HeroCarousel() {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center hover:bg-white/25 transition-all"
+        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-accent-400/20 hover:border-accent-400/40 transition-all"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
       </button>
       <button
         onClick={next}
-        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center hover:bg-white/25 transition-all"
+        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-accent-400/20 hover:border-accent-400/40 transition-all"
         aria-label="Next slide"
       >
         <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
@@ -187,8 +187,8 @@ export function HeroCarousel() {
             onClick={() => goTo(i)}
             className={`transition-all duration-300 rounded-full ${
               i === current
-                ? "w-8 h-2.5 bg-primary-400"
-                : "w-2.5 h-2.5 bg-white/40 hover:bg-white/60"
+                ? "w-8 h-2.5 bg-gradient-to-r from-primary-400 to-accent-400"
+                : "w-2.5 h-2.5 bg-white/30 hover:bg-white/50"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />

@@ -1,69 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f1111;
+  --background: #050510;
+  --foreground: #FFFFFF;
 }
 
 @theme {
-  --color-primary-50: #F5F3FF;
-  --color-primary-100: #EDE9FE;
-  --color-primary-200: #DDD6FE;
-  --color-primary-300: #C4B5FD;
-  --color-primary-400: #7C3AED;
-  --color-primary-500: #6D28D9;
-  --color-primary-600: #5B21B6;
-  --color-primary-700: #4C1D95;
-  --color-primary-800: #3B1578;
-  --color-primary-900: #2E1065;
-  
-  --color-secondary-50: #F0ECFA;
-  --color-secondary-100: #D4C8F0;
-  --color-secondary-200: #B09DE0;
-  --color-secondary-300: #8A70CC;
-  --color-secondary-400: #6B4DB3;
-  --color-secondary-500: #4A3580;
-  --color-secondary-600: #3D2C6E;
-  --color-secondary-700: #2D1F54;
-  --color-secondary-800: #1F1540;
-  --color-secondary-900: #120D26;
-  
-  --color-accent-50: #FDF4FF;
-  --color-accent-100: #FAE8FF;
-  --color-accent-200: #F5D0FE;
-  --color-accent-300: #E879F9;
-  --color-accent-400: #D946EF;
-  --color-accent-500: #A21CAF;
-  --color-accent-600: #86198F;
-  --color-accent-700: #701A75;
-  --color-accent-800: #5B185E;
-  --color-accent-900: #451A47;
-  
-  --color-surface-50: #FFFFFF;
-  --color-surface-100: #FAFAFB;
-  --color-surface-200: #F5F3FF;
-  --color-surface-300: #EDE9FE;
-  --color-surface-400: #D5D3E0;
-  
-  --color-text-primary: #1A1035;
-  --color-text-secondary: #4A4560;
-  --color-text-muted: #8B85A0;
-  --color-text-inverse: #FFFFFF;
-  
-  --color-success: #059669;
-  --color-warning: #D97706;
-  --color-error: #DC2626;
-  --color-info: #2563EB;
-  
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Outfit', system-ui, sans-serif;
-  
-  --shadow-soft: 0 2px 8px -2px rgba(124, 58, 237, 0.06), 0 4px 16px -4px rgba(0, 0, 0, 0.08);
-  --shadow-medium: 0 4px 12px -2px rgba(124, 58, 237, 0.1), 0 8px 24px -4px rgba(0, 0, 0, 0.08);
-  --shadow-strong: 0 8px 24px -4px rgba(124, 58, 237, 0.12), 0 16px 48px -8px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+  /* Electric Blue (trust, calm focus) */
+  --color-primary-50: #E6F0FF;
+  --color-primary-100: #CCE0FF;
+  --color-primary-200: #99C2FF;
+  --color-primary-300: #4D94FF;
+  --color-primary-400: #007BFF;
+  --color-primary-500: #006ADB;
+  --color-primary-600: #0056B3;
+  --color-primary-700: #004494;
+  --color-primary-800: #003375;
+  --color-primary-900: #001F4D;
+
+  /* Deep Space (dark cosmic backgrounds) */
+  --color-secondary-50: #1E1E42;
+  --color-secondary-100: #1A1A3E;
+  --color-secondary-200: #16163A;
+  --color-secondary-300: #121236;
+  --color-secondary-400: #0E0E30;
+  --color-secondary-500: #0A0A2E;
+  --color-secondary-600: #080824;
+  --color-secondary-700: #06061A;
+  --color-secondary-800: #040410;
+  --color-secondary-900: #020208;
+
+  /* Neon Green (energy, excitement, magnetic thrill) */
+  --color-accent-50: #E6FFF3;
+  --color-accent-100: #B3FFD9;
+  --color-accent-200: #80FFBF;
+  --color-accent-300: #4DFFA6;
+  --color-accent-400: #00FF88;
+  --color-accent-500: #00DB74;
+  --color-accent-600: #00B360;
+  --color-accent-700: #008A4A;
+  --color-accent-800: #006636;
+  --color-accent-900: #003D20;
+
+  /* Space Surface (dark panels, subtle glow) */
+  --color-surface-50: #1A1A3E;
+  --color-surface-100: #12122C;
+  --color-surface-200: #0D0D22;
+  --color-surface-300: #1E1E42;
+  --color-surface-400: #2A2A50;
+
+  /* Text for dark backgrounds */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #C0C0C0;
+  --color-text-muted: #8888AA;
+  --color-text-inverse: #050510;
+
+  /* Status colors */
+  --color-success: #00FF88;
+  --color-warning: #FFD700;
+  --color-error: #FF4444;
+  --color-info: #007BFF;
+
+  /* Sci-fi fonts */
+  --font-sans: 'Poppins', system-ui, sans-serif;
+  --font-display: 'Orbitron', 'Poppins', system-ui, sans-serif;
+
+  /* Anti-gravity shadows */
+  --shadow-soft: 0 4px 16px rgba(0, 123, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 8px 32px rgba(0, 123, 255, 0.15), 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 16px 48px rgba(0, 123, 255, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 123, 255, 0.2);
 }
 
 * {
@@ -82,38 +90,153 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar — neon glow */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-surface-200);
+  background: #0A0A2E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface-400);
+  background: linear-gradient(180deg, #007BFF, #00FF88);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
+  background: linear-gradient(180deg, #4D94FF, #4DFFA6);
 }
 
-/* Focus visible styles */
+/* Focus visible */
 :focus-visible {
-  outline: 2px solid var(--color-primary-400);
+  outline: 2px solid #00FF88;
   outline-offset: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: var(--color-primary-100);
-  color: var(--color-primary-700);
+  background: rgba(0, 123, 255, 0.4);
+  color: #FFFFFF;
 }
 
-/* Line clamp utilities */
+/* =========================================
+   ANTI-GRAVITY ANIMATIONS
+   ========================================= */
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes levitate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2), 0 0 40px rgba(0, 123, 255, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 123, 255, 0.2);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes drift {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  25% {
+    transform: translateY(-6px) translateX(4px);
+  }
+
+  50% {
+    transform: translateY(-10px) translateX(-2px);
+  }
+
+  75% {
+    transform: translateY(-4px) translateX(-6px);
+  }
+}
+
+/* Utility classes */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-levitate {
+  animation: levitate 3s ease-in-out infinite alternate;
+}
+
+.animate-drift {
+  animation: drift 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.metal-sheen {
+  background: linear-gradient(120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.08) 38%,
+      rgba(255, 255, 255, 0.12) 40%,
+      rgba(255, 255, 255, 0.08) 42%,
+      transparent 50%);
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.glow-border {
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.glow-border:hover {
+  border-color: rgba(0, 255, 136, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.15), 0 0 40px rgba(0, 123, 255, 0.1);
+}
+
+.space-glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(192, 192, 192, 0.15);
+}
+
+/* =========================================
+   LINE CLAMP & SCROLLBAR UTILITIES
+   ========================================= */
+
 .line-clamp-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -135,7 +258,6 @@ body {
   overflow: hidden;
 }
 
-/* Hide scrollbar but keep functionality */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

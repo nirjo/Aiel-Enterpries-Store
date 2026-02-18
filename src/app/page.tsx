@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Truck, Shield, Headphones, RefreshCw } from "lucide-react";
+import { ArrowRight, Zap, Shield, Rocket, Headphones } from "lucide-react";
 import { Button, Badge } from "@/components/ui";
 import { HeroCarousel } from "@/components/ui/HeroCarousel";
 import { ProductGrid } from "@/components/product";
@@ -11,92 +11,124 @@ import type { Product, Category } from "@/types/database";
 
 const features = [
   {
-    icon: Truck,
+    icon: Rocket,
     title: "Free Shipping",
     description: "On orders over ₹999",
   },
   {
     icon: Shield,
-    title: "Secure Payment",
-    description: "100% protected",
+    title: "Parent Approved",
+    description: "100% safe for kids",
   },
   {
-    icon: RefreshCw,
+    icon: Zap,
     title: "Easy Returns",
     description: "30-day return policy",
   },
   {
     icon: Headphones,
     title: "24/7 Support",
-    description: "Dedicated support",
+    description: "Expert toy guidance",
   },
 ];
 
-// Fallback data when database is empty
+// Fallback categories — anti-gravity themed
 const fallbackCategories: Category[] = [
   {
-    id: "1", name: "Toy Paradise", slug: "toy-paradise",
-    description: "Fun toys for all ages", image_url: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=400&fit=crop",
+    id: "1", name: "Levitation Toys", slug: "levitation-toys",
+    description: "Magnetic floating gadgets", image_url: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 1, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "2", name: "Home Decor", slug: "home-decor",
-    description: "Beautiful home decoration", image_url: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=400&fit=crop",
+    id: "2", name: "Gyroscopes & Spinners", slug: "gyroscopes",
+    description: "Precision spinning magic", image_url: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 2, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "3", name: "Kitchen Items", slug: "kitchen-items",
-    description: "Essential kitchen tools", image_url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
+    id: "3", name: "STEM Kits", slug: "stem-kits",
+    description: "Hands-on science fun", image_url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 3, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "4", name: "Gardening", slug: "gardening",
-    description: "Garden tools & supplies", image_url: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop",
+    id: "4", name: "Magnetic Gadgets", slug: "magnetic-gadgets",
+    description: "Feel the magnetic force", image_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 4, is_active: true, created_at: "", updated_at: "",
   },
   {
-    id: "5", name: "Gift Items", slug: "gift-items",
-    description: "Perfect gifts for loved ones", image_url: "https://images.unsplash.com/photo-1549465220-1a8b9238f760?w=400&h=400&fit=crop",
+    id: "5", name: "Space & Gravity", slug: "space-gravity",
+    description: "Explore cosmic wonders", image_url: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400&h=400&fit=crop",
     parent_id: null, sort_order: 5, is_active: true, created_at: "", updated_at: "",
   },
 ];
 
 const fallbackProducts: Product[] = [
   {
-    id: "1", name: "Rainbow Sensory Blocks", slug: "rainbow-sensory-blocks",
-    description: "", short_description: "Colorful sensory play blocks", price: 1299, compare_at_price: 1799,
-    cost_price: null, sku: "TOY-001", barcode: null, category_id: "1",
-    images: ["https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600",
-    is_active: true, is_featured: true, tags: ["sensory-toys"], metadata: {}, created_at: "", updated_at: "",
+    id: "1", name: "Magnetic Levitation Globe", slug: "mag-lev-globe",
+    description: "", short_description: "Floating world globe with LED base", price: 2999, compare_at_price: 4499,
+    cost_price: null, sku: "LEV-001", barcode: null, category_id: "1",
+    images: ["https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=600",
+    is_active: true, is_featured: true, tags: ["lev-globes"], metadata: {}, created_at: "", updated_at: "",
   },
   {
-    id: "2", name: "Montessori Wooden Puzzle Set", slug: "montessori-wooden-puzzle",
-    description: "", short_description: "Educational wood puzzles", price: 899, compare_at_price: 1299,
-    cost_price: null, sku: "TOY-002", barcode: null, category_id: "1",
-    images: ["https://images.unsplash.com/photo-1615715616181-6ba85d724137?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1615715616181-6ba85d724137?w=600",
-    is_active: true, is_featured: true, tags: ["montessori-toys"], metadata: {}, created_at: "", updated_at: "",
+    id: "2", name: "Precision Gyroscope Pro", slug: "precision-gyroscope-pro",
+    description: "", short_description: "CNC-machined metal gyroscope", price: 1899, compare_at_price: 2499,
+    cost_price: null, sku: "GYR-001", barcode: null, category_id: "2",
+    images: ["https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600",
+    is_active: true, is_featured: true, tags: ["precision-gyros"], metadata: {}, created_at: "", updated_at: "",
   },
   {
-    id: "3", name: "Abstract Canvas Wall Art", slug: "abstract-canvas-wall-art",
-    description: "", short_description: "Modern abstract painting", price: 2499, compare_at_price: 3499,
-    cost_price: null, sku: "HD-001", barcode: null, category_id: "2",
-    images: ["https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600",
-    is_active: true, is_featured: true, tags: ["wall-art"], metadata: {}, created_at: "", updated_at: "",
+    id: "3", name: "Feel Flux Original", slug: "feel-flux-original",
+    description: "", short_description: "Gravity-defying magnetic tube", price: 3499, compare_at_price: 4999,
+    cost_price: null, sku: "STM-001", barcode: null, category_id: "3",
+    images: ["https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?w=600",
+    is_active: true, is_featured: true, tags: ["feel-flux"], metadata: {}, created_at: "", updated_at: "",
   },
   {
-    id: "4", name: "Cast Iron Cookware Set", slug: "cast-iron-cookware-set",
-    description: "", short_description: "5-piece cast iron set", price: 3999, compare_at_price: 5499,
-    cost_price: null, sku: "KI-001", barcode: null, category_id: "3",
-    images: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600"],
-    thumbnail_url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600",
-    is_active: true, is_featured: true, tags: ["cookware"], metadata: {}, created_at: "", updated_at: "",
+    id: "4", name: "Ferrofluid Display Bottle", slug: "ferrofluid-display",
+    description: "", short_description: "Mesmerizing magnetic liquid art", price: 1499, compare_at_price: 1999,
+    cost_price: null, sku: "MAG-001", barcode: null, category_id: "4",
+    images: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600",
+    is_active: true, is_featured: true, tags: ["ferrofluid"], metadata: {}, created_at: "", updated_at: "",
+  },
+  {
+    id: "5", name: "Planetarium Star Projector", slug: "planetarium-star-projector",
+    description: "", short_description: "Project the cosmos on your ceiling", price: 2499, compare_at_price: 3499,
+    cost_price: null, sku: "SPC-001", barcode: null, category_id: "5",
+    images: ["https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600",
+    is_active: true, is_featured: true, tags: ["planetarium"], metadata: {}, created_at: "", updated_at: "",
+  },
+  {
+    id: "6", name: "Hover UFO Controller", slug: "hover-ufo-controller",
+    description: "", short_description: "Hand-controlled hovering drone", price: 999, compare_at_price: 1499,
+    cost_price: null, sku: "LEV-002", barcode: null, category_id: "1",
+    images: ["https://images.unsplash.com/photo-1601892782225-e7a4a27d0e5c?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1601892782225-e7a4a27d0e5c?w=600",
+    is_active: true, is_featured: false, tags: ["hover-ufo"], metadata: {}, created_at: "", updated_at: "",
+  },
+  {
+    id: "7", name: "Robotics Starter Kit", slug: "robotics-starter-kit",
+    description: "", short_description: "Build & program your first robot", price: 4999, compare_at_price: 6999,
+    cost_price: null, sku: "STM-002", barcode: null, category_id: "3",
+    images: ["https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600",
+    is_active: true, is_featured: true, tags: ["robotics-starter"], metadata: {}, created_at: "", updated_at: "",
+  },
+  {
+    id: "8", name: "Euler's Disk Chrome", slug: "eulers-disk-chrome",
+    description: "", short_description: "Hypnotic spinning chrome disk", price: 1299, compare_at_price: null,
+    cost_price: null, sku: "GYR-002", barcode: null, category_id: "2",
+    images: ["https://images.unsplash.com/photo-1504610926078-a1611562236f?w=600"],
+    thumbnail_url: "https://images.unsplash.com/photo-1504610926078-a1611562236f?w=600",
+    is_active: true, is_featured: false, tags: ["eulers-disk"], metadata: {}, created_at: "", updated_at: "",
   },
 ];
 
-// Get all subcategories from NAV_LINKS for home page display
+// Get subcategories for home page display
 const allSubcategories = NAV_LINKS
   .filter((link: NavLink) => link.subcategories && link.subcategories.length > 0)
   .flatMap((link: NavLink) => {
@@ -165,21 +197,21 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#050510]">
       {/* Hero Carousel */}
       <HeroCarousel />
 
-      {/* Features */}
-      <section className="py-8 border-b border-surface-300">
+      {/* Features bar */}
+      <section className="py-6 border-b border-white/5 bg-[#0A0A2E]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {features.map((feature) => (
               <div key={feature.title} className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
-                  <feature.icon className="h-6 w-6 text-primary-500" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-400/20 flex items-center justify-center flex-shrink-0 border border-primary-400/20">
+                  <feature.icon className="h-5 w-5 text-accent-400" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-text-primary">{feature.title}</h3>
+                  <h3 className="font-semibold text-sm text-white">{feature.title}</h3>
                   <p className="text-xs text-text-muted">{feature.description}</p>
                 </div>
               </div>
@@ -189,26 +221,30 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="py-12 md:py-16">
+      <section className="py-14 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary">Shop by Category</h2>
-              <p className="text-text-secondary mt-1">Browse our curated collections</p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">Shop by Category</h2>
+              <p className="text-text-muted mt-1">Explore our anti-gravity collections</p>
             </div>
-            <Link href="/categories" className="hidden sm:flex items-center gap-1 text-primary-500 font-medium hover:underline">
+            <Link href="/categories" className="hidden sm:flex items-center gap-1 text-accent-400 font-medium hover:text-accent-300 transition-colors">
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
             {categories.map((category) => (
-              <Link key={category.id} href={`/products?category=${category.slug}`} className="group relative aspect-square rounded-2xl overflow-hidden">
-                <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <Link
+                key={category.id}
+                href={`/products?category=${category.slug}`}
+                className="group relative aspect-[4/5] rounded-2xl overflow-hidden glow-border"
+              >
+                <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 20vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/90 via-[#050510]/30 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="font-semibold text-white text-lg">{category.name}</h3>
-                  <p className="text-white/70 text-sm mt-0.5">Shop now →</p>
+                  <h3 className="font-display font-bold text-white text-sm md:text-base tracking-wide">{category.name}</h3>
+                  <p className="text-accent-400/80 text-xs mt-0.5 font-medium">Explore →</p>
                 </div>
               </Link>
             ))}
@@ -217,12 +253,12 @@ export default async function HomePage() {
       </section>
 
       {/* Browse Subcategories */}
-      <section className="py-12 md:py-16 bg-surface-100">
+      <section className="py-14 md:py-20 bg-[#0A0A2E]/50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary">Browse Subcategories</h2>
-              <p className="text-text-secondary mt-1">Find exactly what you&apos;re looking for</p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">Browse Collections</h2>
+              <p className="text-text-muted mt-1">Find the perfect physics toy</p>
             </div>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -230,7 +266,7 @@ export default async function HomePage() {
               <Link
                 key={`${sub.categorySlug}-${sub.slug}`}
                 href={`/products?category=${sub.categorySlug}&sub=${sub.slug}`}
-                className="group relative rounded-2xl overflow-hidden aspect-square"
+                className="group relative rounded-2xl overflow-hidden aspect-square glow-border"
               >
                 <Image
                   src={sub.image}
@@ -239,10 +275,10 @@ export default async function HomePage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 16vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/85 via-[#050510]/20 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3">
                   <p className="text-white text-xs font-semibold leading-tight">{sub.label}</p>
-                  <p className="text-white/60 text-[10px] mt-0.5">{sub.categoryLabel}</p>
+                  <p className="text-accent-400/60 text-[10px] mt-0.5 font-medium">{sub.categoryLabel}</p>
                 </div>
               </Link>
             ))}
@@ -252,14 +288,14 @@ export default async function HomePage() {
 
       {/* Featured Products */}
       {products.featured.length > 0 && (
-        <section className="py-12 md:py-16 bg-surface-100">
+        <section className="py-14 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-10">
               <div>
-                <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary">Featured Products</h2>
-                <p className="text-text-secondary mt-1">Our top picks just for you</p>
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">Featured Products</h2>
+                <p className="text-text-muted mt-1">Our most mesmerizing picks</p>
               </div>
-              <Link href="/products?featured=true" className="hidden sm:flex items-center gap-1 text-primary-500 font-medium hover:underline">
+              <Link href="/products?featured=true" className="hidden sm:flex items-center gap-1 text-accent-400 font-medium hover:text-accent-300 transition-colors">
                 View All <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -269,14 +305,14 @@ export default async function HomePage() {
       )}
 
       {/* All Products */}
-      <section className="py-12 md:py-16">
+      <section className="py-14 md:py-20 bg-[#0A0A2E]/50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary">New Arrivals</h2>
-              <p className="text-text-secondary mt-1">Check out our latest products</p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">New Arrivals</h2>
+              <p className="text-text-muted mt-1">Latest anti-gravity gadgets</p>
             </div>
-            <Link href="/products?sort=newest" className="hidden sm:flex items-center gap-1 text-primary-500 font-medium hover:underline">
+            <Link href="/products?sort=newest" className="hidden sm:flex items-center gap-1 text-accent-400 font-medium hover:text-accent-300 transition-colors">
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -285,13 +321,17 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-r from-primary-400 to-primary-500">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Get 20% Off Your First Order</h2>
-          <p className="text-white/90 text-lg mb-8 max-w-lg mx-auto">Subscribe to our newsletter and receive exclusive offers.</p>
+      <section className="py-16 md:py-20 bg-gradient-to-r from-primary-400 via-primary-500 to-accent-400 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-400 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4 tracking-wide">Launch Into Savings 🚀</h2>
+          <p className="text-white/90 text-lg mb-8 max-w-lg mx-auto">Get 20% off your first anti-gravity toy order. Join our space crew!</p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input type="email" placeholder="Enter your email" className="flex-1 h-12 px-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:outline-none focus:bg-white/20 transition-colors" />
-            <Button variant="secondary" size="lg" className="min-w-[120px]">Subscribe</Button>
+            <input type="email" placeholder="Enter your email" className="flex-1 h-12 px-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:outline-none focus:bg-white/20 transition-colors backdrop-blur-sm" />
+            <Button variant="secondary" size="lg" className="min-w-[120px] bg-white text-primary-500 hover:bg-white/90">Subscribe</Button>
           </div>
         </div>
       </section>

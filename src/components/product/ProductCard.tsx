@@ -46,9 +46,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       transition={{ duration: 0.2 }}
     >
       <Link href={`/products/${product.slug}`} className="block group">
-        <div className="relative bg-white rounded-2xl border border-surface-300 overflow-hidden transition-all duration-300 hover:shadow-medium hover:border-surface-400">
+        <div className="relative bg-[#0D0D22]/80 rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,136,0.15),0_16px_48px_rgba(0,0,0,0.4)] hover:border-accent-400/30">
           {/* Image container */}
-          <div className="relative aspect-square bg-surface-100 overflow-hidden">
+          <div className="relative aspect-square bg-white/5 overflow-hidden">
             {product.thumbnail_url || product.images?.[0] ? (
               <Image
                 src={product.thumbnail_url || product.images[0]}
@@ -58,7 +58,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-text-muted">
+              <div className="w-full h-full flex items-center justify-center text-white/20">
                 <ShoppingCart className="h-12 w-12" />
               </div>
             )}
@@ -92,9 +92,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                     image: product.thumbnail_url || product.images?.[0] || null,
                   });
                 }}
-                className="w-9 h-9 rounded-full bg-white shadow-soft flex items-center justify-center hover:bg-surface-100 transition-colors"
+                className="w-9 h-9 rounded-full bg-[#0D0D22]/80 backdrop-blur-sm shadow-[0_0_10px_rgba(0,0,0,0.3)] border border-white/10 flex items-center justify-center hover:bg-[#0D0D22] hover:border-accent-400/30 transition-colors"
               >
-                <Heart className={cn("h-4 w-4", wishlisted ? "text-red-500 fill-red-500" : "text-text-secondary")} />
+                <Heart className={cn("h-4 w-4", wishlisted ? "text-red-500 fill-red-500" : "text-white/60")} />
               </button>
             </div>
 
@@ -133,13 +133,13 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             </div>
 
             {/* Title */}
-            <h3 className="font-medium text-sm text-text-primary line-clamp-2 mb-2 group-hover:text-primary-500 transition-colors">
+            <h3 className="font-medium text-sm text-white line-clamp-2 mb-2 group-hover:text-accent-400 transition-colors">
               {product.name}
             </h3>
 
             {/* Price */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-lg text-primary-500">
+              <span className="font-semibold text-lg text-accent-400">
                 {formatCurrency(product.price)}
               </span>
               {product.compare_at_price && (

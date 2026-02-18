@@ -85,25 +85,25 @@ export function MobileNav() {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-50 shadow-strong flex flex-col md:hidden"
+            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-[#0A0A2E] z-50 shadow-[0_0_40px_rgba(0,123,255,0.15)] flex flex-col md:hidden border-r border-white/10"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-4 border-b border-surface-300">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
               <Link
                 href="/"
                 className="flex items-center gap-2"
                 onClick={closeMobileMenu}
               >
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
                   <span className="text-white font-bold text-base">A</span>
                 </div>
-                <span className="font-display font-bold text-lg text-secondary-700">
+                <span className="font-display font-bold text-lg text-white tracking-wide">
                   Aiel
                 </span>
               </Link>
               <button
                 onClick={closeMobileMenu}
-                className="w-9 h-9 rounded-lg hover:bg-surface-200 flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-lg hover:bg-white/10 flex items-center justify-center transition-colors text-white/60"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -124,8 +124,8 @@ export function MobileNav() {
                         className={cn(
                           "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
                           isActive
-                            ? "bg-primary-50 text-primary-500"
-                            : "text-text-secondary hover:bg-surface-200"
+                            ? "bg-accent-400/10 text-accent-400"
+                            : "text-white/60 hover:bg-white/5 hover:text-white"
                         )}
                       >
                         <Icon className="h-5 w-5" />
@@ -138,7 +138,7 @@ export function MobileNav() {
 
               {/* Category sections with subcategories */}
               <div className="px-3">
-                <h3 className="px-4 text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">
+                <h3 className="px-4 text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">
                   Shop by Category
                 </h3>
                 <div className="space-y-1">
@@ -154,8 +154,8 @@ export function MobileNav() {
                           className={cn(
                             "w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all",
                             isExpanded
-                              ? "bg-primary-50 text-primary-500"
-                              : "text-text-secondary hover:bg-surface-200"
+                              ? "bg-accent-400/10 text-accent-400"
+                              : "text-white/60 hover:bg-white/5 hover:text-white"
                           )}
                         >
                           <span>{cat.label}</span>
@@ -181,7 +181,7 @@ export function MobileNav() {
                                 {/* View all link */}
                                 <Link
                                   href={cat.href}
-                                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-primary-500 hover:bg-primary-50 transition-colors"
+                                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-accent-400 hover:bg-accent-400/10 transition-colors"
                                 >
                                   View All {cat.label} →
                                 </Link>
@@ -190,9 +190,9 @@ export function MobileNav() {
                                   <Link
                                     key={sub.slug}
                                     href={`/products?category=${categorySlug}&sub=${sub.slug}`}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-100 transition-colors group"
+                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors group"
                                   >
-                                    <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-surface-100">
+                                    <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-white/5 border border-white/10">
                                       <Image
                                         src={sub.image}
                                         alt={sub.label}
@@ -202,7 +202,7 @@ export function MobileNav() {
                                       />
                                     </div>
                                     <div>
-                                      <p className="text-xs font-medium text-text-primary group-hover:text-primary-500 transition-colors">
+                                      <p className="text-xs font-medium text-white group-hover:text-accent-400 transition-colors">
                                         {sub.label}
                                       </p>
                                       <p className="text-[10px] text-text-muted line-clamp-1">
@@ -223,10 +223,10 @@ export function MobileNav() {
             </nav>
 
             {/* Footer */}
-            <div className="border-t border-surface-300 px-4 py-4">
+            <div className="border-t border-white/10 px-4 py-4">
               <Link
                 href="/account"
-                className="flex items-center justify-center gap-2 h-11 rounded-xl bg-primary-400 text-white font-medium hover:bg-primary-500 transition-colors"
+                className="flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-primary-400 to-accent-400 text-white font-medium hover:from-primary-500 hover:to-accent-500 transition-colors"
                 onClick={closeMobileMenu}
               >
                 Sign In
