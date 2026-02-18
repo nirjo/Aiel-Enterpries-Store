@@ -10,70 +10,71 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary - Vibrant Orange (Amazon-inspired)
+        // Primary - Electric Blue (Levitation/Trust)
         primary: {
-          50: "#FFF8F0",
-          100: "#FFECD6",
-          200: "#FFD4A8",
-          300: "#FFB870",
-          400: "#FF9900", // Main primary
-          500: "#E68A00",
-          600: "#CC7A00",
-          700: "#A36200",
-          800: "#7A4A00",
-          900: "#523200",
+          50: "#E6F2FF",
+          100: "#CCE5FF",
+          200: "#99CCFF",
+          300: "#66B2FF",
+          400: "#3399FF",
+          500: "#007BFF", // Main primary
+          600: "#0062CC",
+          700: "#004999",
+          800: "#003166",
+          900: "#001833",
         },
-        // Secondary - Deep Navy
+        // Secondary - Deep Space (Backgrounds)
         secondary: {
-          50: "#E8EBF0",
-          100: "#C7CDD9",
-          200: "#9DABC2",
-          300: "#6E84A3",
-          400: "#4A6484",
-          500: "#37475A", // Main secondary
-          600: "#2E3B4E",
-          700: "#232F3E", // Dark navy
-          800: "#1A2332",
-          900: "#0F1419",
+          50: "#E6E6ED",
+          100: "#C1C1D1",
+          200: "#9898B0",
+          300: "#6E6E8E",
+          400: "#4D4D6B",
+          500: "#2E2E4D",
+          600: "#23233A",
+          700: "#1A1A2E", // Darker space
+          800: "#0A0A2E", // Deep space void
+          900: "#050510", // Almost black
         },
-        // Accent - Teal Success
+        // Accent - Neon Green (Energy/Magnetic)
         accent: {
-          50: "#E6F7F4",
-          100: "#C2EBE3",
-          200: "#8DD9CC",
-          300: "#52C4B0",
-          400: "#1AAF93",
-          500: "#067D62", // Main accent
-          600: "#056B54",
-          700: "#045847",
-          800: "#034539",
-          900: "#02322B",
+          50: "#E6FFF3",
+          100: "#B3FFE0",
+          200: "#80FFCC",
+          300: "#4DFFB8",
+          400: "#1AFF9F",
+          500: "#00FF88", // Main neon green
+          600: "#00CC6D",
+          700: "#009952",
+          800: "#006636",
+          900: "#00331B",
         },
-        // Surface colors
+        // Surface colors - Metallic/Dark
         surface: {
           50: "#FFFFFF",
-          100: "#FAFBFC",
-          200: "#F7F8FA",
-          300: "#EAECF0",
-          400: "#D5D9D9",
+          100: "#F5F5F7", // Light silver
+          200: "#E0E0E5",
+          300: "#2E2E4D", // Dark card bg
+          400: "#1A1A2E", // Darker card bg
         },
         // Text colors
         text: {
-          primary: "#0F1111",
-          secondary: "#565959",
-          muted: "#8C8C8C",
-          inverse: "#FFFFFF",
+          primary: "#FFFFFF", // Default to white for dark theme
+          secondary: "#B0B0C0", // Light grey
+          muted: "#6E6E8E",    // Muted purple/grey
+          inverse: "#0A0A2E",  // Dark text for light bg
         },
         // Semantic colors
-        success: "#067D62",
-        warning: "#F3A847",
-        error: "#C7511F",
-        info: "#0066C0",
+        success: "#00FF88",
+        warning: "#FFD700", // Gold
+        error: "#FF3366",   // Neon red
+        info: "#00C2FF",    // Cyan
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Outfit", "system-ui", "sans-serif"],
+        sans: ["Poppins", "system-ui", "sans-serif"],
+        display: ["Orbitron", "system-ui", "sans-serif"],
       },
+      // ... keep existing spacings/animations ...
       fontSize: {
         "2xs": ["0.625rem", { lineHeight: "0.875rem" }],
       },
@@ -86,60 +87,38 @@ const config: Config = {
         "4xl": "2rem",
       },
       boxShadow: {
-        "soft": "0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 4px 16px -4px rgba(0, 0, 0, 0.08)",
-        "medium": "0 4px 12px -2px rgba(0, 0, 0, 0.1), 0 8px 24px -4px rgba(0, 0, 0, 0.1)",
-        "strong": "0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 16px 48px -8px rgba(0, 0, 0, 0.12)",
-        "glow": "0 0 20px rgba(255, 153, 0, 0.3)",
+        "soft": "0 2px 8px -2px rgba(0, 0, 0, 0.3), 0 4px 16px -4px rgba(0, 0, 0, 0.3)",
+        "medium": "0 4px 12px -2px rgba(0, 0, 0, 0.5), 0 8px 24px -4px rgba(0, 0, 0, 0.5)",
+        "strong": "0 8px 24px -4px rgba(0, 0, 0, 0.6), 0 16px 48px -8px rgba(0, 0, 0, 0.6)",
+        "glow": "0 0 20px rgba(0, 255, 136, 0.3)",
       },
       animation: {
-        "fade-in": "fadeIn 0.3s ease-out",
-        "slide-up": "slideUp 0.3s ease-out",
-        "slide-down": "slideDown 0.3s ease-out",
-        "slide-left": "slideLeft 0.3s ease-out",
-        "slide-right": "slideRight 0.3s ease-out",
-        "scale-in": "scaleIn 0.2s ease-out",
-        "bounce-subtle": "bounceSubtle 0.4s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "levitate": "levitate 5s ease-in-out infinite",
         "pulse-glow": "pulseGlow 2s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
       keyframes: {
-        fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        slideUp: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        slideDown: {
-          "0%": { opacity: "0", transform: "translateY(-10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        slideLeft: {
-          "0%": { opacity: "0", transform: "translateX(10px)" },
-          "100%": { opacity: "1", transform: "translateX(0)" },
-        },
-        slideRight: {
-          "0%": { opacity: "0", transform: "translateX(-10px)" },
-          "100%": { opacity: "1", transform: "translateX(0)" },
-        },
-        scaleIn: {
-          "0%": { opacity: "0", transform: "scale(0.95)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
-        },
-        bounceSubtle: {
+        float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-4px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        levitate: {
+          "0%": { transform: "translateY(0) rotate(0deg)" },
+          "100%": { transform: "translateY(-10px) rotate(2deg)" },
         },
         pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 5px rgba(255, 153, 0, 0.3)" },
-          "50%": { boxShadow: "0 0 20px rgba(255, 153, 0, 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 5px rgba(0, 255, 136, 0.2)" },
+          "50%": { boxShadow: "0 0 20px rgba(0, 255, 136, 0.6)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "hero-pattern": "linear-gradient(135deg, #232F3E 0%, #37475A 50%, #4A6484 100%)",
-        "cta-gradient": "linear-gradient(135deg, #FF9900 0%, #FFB870 100%)",
+        "space-gradient": "linear-gradient(135deg, #0A0A2E 0%, #1A1A3E 50%, #000000 100%)",
+        "neon-gradient": "linear-gradient(to right, #007BFF, #00FF88)",
       },
     },
   },
