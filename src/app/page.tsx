@@ -109,16 +109,43 @@ export default async function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
-            {categories.map((category) => (
-              <Link key={category.id} href={`/products?category=${category.slug}`} className="group relative aspect-[4/5] rounded-2xl overflow-hidden border border-primary-500/10 shadow-sm hover:shadow-[0_10px_40px_rgba(65,29,211,0.15)] transition-all duration-300">
-                <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 20vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#411dd3]/70 via-[#411dd3]/25 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="font-display font-bold text-white text-sm md:text-base tracking-wide">{category.name}</h3>
-                  <p className="text-secondary-300 text-xs mt-0.5 font-medium">Explore →</p>
-                </div>
-              </Link>
-            ))}
+            {categories.map((category, index) => {
+              const categoryOverlays = [
+                "bg-gradient-to-r from-[#411dd3]/90 to-[#1dd39c]/80",       /* Purple → Teal */
+                "bg-gradient-to-br from-[#1dd39c]/90 to-[#afd31d]/80",      /* Teal → Lime */
+                "bg-gradient-to-t from-[#d31d54]/90 to-[#411dd3]/80",       /* Magenta → Purple */
+                "bg-gradient-to-r from-[#411dd3]/85 via-[#1dd39c]/70 to-[#d31d54]/60", /* Purple → Teal → Magenta */
+                "bg-gradient-to-bl from-[#afd31d]/90 to-[#1dd39c]/80",      /* Lime → Teal */
+                "bg-gradient-to-tr from-[#1dd39c]/95 to-[#afd31d]/70",      /* Teal → Lime (Toys special) */
+                "bg-gradient-to-r from-[#d31d54]/85 to-[#411dd3]/75",       /* Magenta → Purple */
+                "bg-gradient-to-b from-[#411dd3]/90 via-[#afd31d]/60 to-[#1dd39c]/80", /* Purple → Lime → Teal */
+                "bg-gradient-to-r from-[#afd31d]/95 via-[#411dd3]/80 to-[#d31d54]/90", /* Lime → Purple → Magenta */
+              ];
+              const categoryShadows = [
+                "hover:shadow-[0_10px_40px_rgba(65,29,211,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(29,211,156,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(211,29,84,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(65,29,211,0.2)]",
+                "hover:shadow-[0_10px_40px_rgba(175,211,29,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(29,211,156,0.3)]",
+                "hover:shadow-[0_10px_40px_rgba(211,29,84,0.2)]",
+                "hover:shadow-[0_10px_40px_rgba(65,29,211,0.2)]",
+                "hover:shadow-[0_10px_40px_rgba(175,211,29,0.2)]",
+              ];
+              const overlay = categoryOverlays[index % categoryOverlays.length];
+              const shadow = categoryShadows[index % categoryShadows.length];
+              return (
+                <Link key={category.id} href={`/products?category=${category.slug}`} className={`group relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/15 shadow-sm ${shadow} hover:scale-[1.03] active:scale-[0.98] transition-all duration-300`}>
+                  <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 20vw" />
+                  <div className={`absolute inset-0 ${overlay} mix-blend-multiply transition-opacity duration-300 group-hover:opacity-90`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="font-display font-bold text-white text-sm md:text-base tracking-wide drop-shadow-md">{category.name}</h3>
+                    <p className="text-white/80 text-xs mt-0.5 font-medium">Explore →</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
