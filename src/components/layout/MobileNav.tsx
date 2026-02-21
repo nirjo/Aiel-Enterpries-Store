@@ -5,16 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  Home,
-  ShoppingBag,
-  User,
-  Heart,
-  Package,
-  Phone,
-  ChevronDown,
-} from "lucide-react";
+import { X, Home, ShoppingBag, User, Heart, Package, Phone, ChevronDown } from "lucide-react";
 import { useUIStore } from "@/stores/ui";
 import { cn } from "@/lib/utils/cn";
 import { NAV_LINKS } from "@/lib/constants";
@@ -29,7 +20,6 @@ const menuItems = [
   { label: "Contact", href: "/contact", icon: Phone },
 ];
 
-// Get only category links (those with subcategories)
 const categoryLinks = NAV_LINKS.filter(
   (link: NavLink) => link.subcategories && link.subcategories.length > 0
 );
@@ -39,19 +29,15 @@ export function MobileNav() {
   const pathname = usePathname();
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [isMobileMenuOpen]);
 
-  // Close menu on route change
   useEffect(() => {
     closeMobileMenu();
     setExpandedCategory(null);
@@ -70,62 +56,41 @@ export function MobileNav() {
     <AnimatePresence>
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeMobileMenu}
-            className="fixed inset-0 bg-black/50 z-50 md:hidden"
-          />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeMobileMenu} className="fixed inset-0 bg-black/50 z-50 md:hidden" />
 
-          {/* Menu */}
           <motion.div
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-slate-900/95 backdrop-blur-xl z-50 shadow-2xl flex flex-col md:hidden border-r border-slate-800/50"
+            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-[#0f0f23]/95 backdrop-blur-xl z-50 shadow-2xl flex flex-col md:hidden border-r border-primary-500/20"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-4 border-b border-slate-800/50">
-              <Link
-                href="/"
-                className="flex items-center gap-2"
-                onClick={closeMobileMenu}
-              >
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-primary-500/20">
+              <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-400 flex items-center justify-center">
                   <span className="text-white font-bold text-base">A</span>
                 </div>
-                <span className="font-display font-bold text-lg text-white/95 tracking-wide">
-                  Aiel
-                </span>
+                <span className="font-display font-bold text-lg text-white/95 tracking-wide">Aiel</span>
               </Link>
-              <button
-                onClick={closeMobileMenu}
-                className="w-9 h-9 rounded-lg hover:bg-slate-800/80 flex items-center justify-center transition-colors text-white/60"
-              >
+              <button onClick={closeMobileMenu} className="w-9 h-9 rounded-lg hover:bg-primary-500/20 flex items-center justify-center transition-colors text-white/60">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {/* Nav items */}
             <nav className="flex-1 overflow-y-auto py-4">
-              {/* Quick links */}
               <ul className="space-y-1 px-3 mb-4">
                 {menuItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname === item.href;
-
                   return (
                     <li key={item.href}>
                       <Link
                         href={item.href}
                         className={cn(
                           "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
-                          isActive
-                            ? "bg-white/10 text-white"
-                            : "text-white/60 hover:bg-slate-800/80 hover:text-white"
+                          isActive ? "bg-primary-500/15 text-secondary-400" : "text-white/60 hover:bg-primary-500/10 hover:text-white"
                         )}
                       >
                         <Icon className="h-5 w-5" />
@@ -136,78 +101,43 @@ export function MobileNav() {
                 })}
               </ul>
 
-              {/* Category sections with subcategories */}
               <div className="px-3">
-                <h3 className="px-4 text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">
-                  Shop by Category
-                </h3>
+                <h3 className="px-4 text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">Shop by Category</h3>
                 <div className="space-y-1">
                   {categoryLinks.map((cat: NavLink) => {
                     const isExpanded = expandedCategory === cat.label;
                     const categorySlug = getCategorySlug(cat.href);
-
                     return (
                       <div key={cat.href}>
-                        {/* Category header */}
                         <button
                           onClick={() => toggleCategory(cat.label)}
                           className={cn(
                             "w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all",
-                            isExpanded
-                              ? "bg-white/10 text-white"
-                              : "text-white/60 hover:bg-slate-800/80 hover:text-white"
+                            isExpanded ? "bg-primary-500/15 text-secondary-400" : "text-white/60 hover:bg-primary-500/10 hover:text-white"
                           )}
                         >
                           <span>{cat.label}</span>
-                          <ChevronDown
-                            className={cn(
-                              "h-4 w-4 transition-transform duration-200",
-                              isExpanded && "rotate-180"
-                            )}
-                          />
+                          <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", isExpanded && "rotate-180")} />
                         </button>
-
-                        {/* Subcategory list */}
                         <AnimatePresence>
                           {isExpanded && cat.subcategories && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                            >
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
                               <div className="pl-4 pr-2 py-2 space-y-1">
-                                {/* View all link */}
-                                <Link
-                                  href={cat.href}
-                                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-primary-400 hover:bg-white/5 transition-colors"
-                                >
+                                <Link href={cat.href} className="flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-secondary-400 hover:bg-primary-500/10 transition-colors">
                                   View All {cat.label} →
                                 </Link>
-
                                 {cat.subcategories.map((sub) => (
                                   <Link
                                     key={sub.slug}
                                     href={`/products?category=${categorySlug}&sub=${sub.slug}`}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800/80 transition-colors group"
+                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary-500/10 transition-colors group"
                                   >
-                                    <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-slate-800/40 border border-slate-700/50">
-                                      <Image
-                                        src={sub.image}
-                                        alt={sub.label}
-                                        fill
-                                        className="object-cover"
-                                        sizes="40px"
-                                      />
+                                    <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-primary-900/30 border border-primary-500/15">
+                                      <Image src={sub.image} alt={sub.label} fill className="object-cover" sizes="40px" />
                                     </div>
                                     <div>
-                                      <p className="text-xs font-medium text-white/80 group-hover:text-white transition-colors">
-                                        {sub.label}
-                                      </p>
-                                      <p className="text-[10px] text-slate-400 line-clamp-1">
-                                        {sub.description}
-                                      </p>
+                                      <p className="text-xs font-medium text-white/80 group-hover:text-secondary-400 transition-colors">{sub.label}</p>
+                                      <p className="text-[10px] text-white/35 line-clamp-1">{sub.description}</p>
                                     </div>
                                   </Link>
                                 ))}
@@ -222,11 +152,10 @@ export function MobileNav() {
               </div>
             </nav>
 
-            {/* Footer */}
-            <div className="border-t border-slate-800/50 px-4 py-4">
+            <div className="border-t border-primary-500/20 px-4 py-4">
               <Link
                 href="/account"
-                className="flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-primary-400 to-accent-400 text-white font-medium hover:from-primary-500 hover:to-accent-500 transition-colors"
+                className="flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-primary-500 to-secondary-400 text-white font-medium hover:from-primary-600 hover:to-secondary-500 transition-colors"
                 onClick={closeMobileMenu}
               >
                 Sign In

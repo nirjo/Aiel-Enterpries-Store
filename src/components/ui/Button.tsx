@@ -33,24 +33,24 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles = {
       primary: cn(
-        "bg-primary-400 text-white hover:bg-primary-500 active:bg-primary-600",
+        "bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700",
         "focus:ring-primary-400 shadow-soft hover:shadow-medium"
       ),
       secondary: cn(
-        "bg-secondary-700 text-white hover:bg-secondary-600 active:bg-secondary-800",
-        "focus:ring-secondary-500 shadow-soft hover:shadow-medium"
+        "bg-secondary-400 text-[#0f0f23] hover:bg-secondary-500 active:bg-secondary-600",
+        "focus:ring-secondary-400 shadow-soft hover:shadow-medium font-semibold"
       ),
       outline: cn(
-        "border-2 border-surface-400 bg-transparent text-text-primary",
-        "hover:bg-surface-200 active:bg-surface-300 focus:ring-primary-400"
+        "border-2 border-primary-500/30 bg-transparent text-text-primary",
+        "hover:bg-primary-50 hover:border-primary-500/50 active:bg-primary-100 focus:ring-primary-400"
       ),
       ghost: cn(
-        "bg-transparent text-text-primary hover:bg-surface-200 active:bg-surface-300",
+        "bg-transparent text-text-primary hover:bg-primary-50 active:bg-primary-100",
         "focus:ring-primary-400"
       ),
       danger: cn(
-        "bg-error text-white hover:bg-red-700 active:bg-red-800",
-        "focus:ring-red-500 shadow-soft hover:shadow-medium"
+        "bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700",
+        "focus:ring-accent-400 shadow-soft hover:shadow-medium"
       ),
     };
 

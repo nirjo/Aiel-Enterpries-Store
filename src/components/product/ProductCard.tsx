@@ -46,34 +46,24 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       transition={{ duration: 0.2 }}
     >
       <Link href={`/products/${product.slug}`} className="block group">
-        <div className="relative bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary-200">
-          {/* Image container */}
-          <div className="relative aspect-square bg-gray-50 overflow-hidden">
+        <div className="relative bg-white rounded-2xl border border-primary-500/10 overflow-hidden transition-all duration-300 hover:shadow-[0_10px_40px_rgba(65,29,211,0.12)] hover:border-secondary-400/30">
+          {/* Image */}
+          <div className="relative aspect-square bg-gradient-to-br from-secondary-50/50 to-primary-50/30 overflow-hidden">
             {product.thumbnail_url || product.images?.[0] ? (
-              <Image
-                src={product.thumbnail_url || product.images[0]}
-                alt={product.name}
-                fill
-                priority={priority}
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              <Image src={product.thumbnail_url || product.images[0]} alt={product.name} fill priority={priority} className="object-cover transition-transform duration-500 group-hover:scale-105" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-300">
+              <div className="w-full h-full flex items-center justify-center text-primary-200">
                 <ShoppingCart className="h-12 w-12" />
               </div>
             )}
 
-            {/* Badges */}
+            {/* Badges — accent magenta */}
             <div className="absolute top-3 left-3 flex flex-col gap-2">
               {discount > 0 && (
-                <Badge variant="error" size="sm">
-                  -{discount}%
-                </Badge>
+                <Badge variant="error" size="sm">-{discount}%</Badge>
               )}
               {product.is_featured && (
-                <Badge variant="info" size="sm">
-                  Featured
-                </Badge>
+                <Badge variant="info" size="sm">Featured</Badge>
               )}
             </div>
 
@@ -92,20 +82,15 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                     image: product.thumbnail_url || product.images?.[0] || null,
                   });
                 }}
-                className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-md border border-gray-200 flex items-center justify-center hover:bg-white hover:border-primary-300 transition-colors"
+                className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-md border border-primary-500/15 flex items-center justify-center hover:bg-white hover:border-accent-400/40 transition-colors"
               >
-                <Heart className={cn("h-4 w-4", wishlisted ? "text-red-500 fill-red-500" : "text-gray-500")} />
+                <Heart className={cn("h-4 w-4", wishlisted ? "text-accent-500 fill-accent-500" : "text-gray-500")} />
               </button>
             </div>
 
-            {/* Add to cart button */}
+            {/* Add to cart */}
             <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-              <Button
-                fullWidth
-                size="sm"
-                onClick={handleAddToCart}
-                className="shadow-md"
-              >
+              <Button fullWidth size="sm" onClick={handleAddToCart} className="shadow-md bg-primary-500 hover:bg-primary-600">
                 <ShoppingCart className="h-4 w-4" />
                 Add to Cart
               </Button>
@@ -114,38 +99,23 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
           {/* Content */}
           <div className="p-4">
-            {/* Rating */}
             <div className="flex items-center gap-1 mb-2">
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={cn(
-                      "h-3.5 w-3.5",
-                      i < 4
-                        ? "text-amber-400 fill-amber-400"
-                        : "text-gray-300"
-                    )}
-                  />
+                  <Star key={i} className={cn("h-3.5 w-3.5", i < 4 ? "text-lime-500 fill-lime-500" : "text-gray-300")} />
                 ))}
               </div>
-              <span className="text-xs text-gray-400">(24)</span>
+              <span className="text-xs text-text-muted">(24)</span>
             </div>
 
-            {/* Title */}
-            <h3 className="font-medium text-sm text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-500 transition-colors">
+            <h3 className="font-medium text-sm text-text-primary line-clamp-2 mb-2 group-hover:text-primary-500 transition-colors">
               {product.name}
             </h3>
 
-            {/* Price */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-lg text-primary-600">
-                {formatCurrency(product.price)}
-              </span>
+              <span className="font-semibold text-lg text-primary-500">{formatCurrency(product.price)}</span>
               {product.compare_at_price && (
-                <span className="text-sm text-gray-400 line-through">
-                  {formatCurrency(product.compare_at_price)}
-                </span>
+                <span className="text-sm text-text-muted line-through">{formatCurrency(product.compare_at_price)}</span>
               )}
             </div>
           </div>

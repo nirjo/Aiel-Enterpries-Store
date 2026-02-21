@@ -74,7 +74,6 @@ export function HeroCarousel() {
     setCurrent(index);
   }, [current]);
 
-  // Auto-advance every 5 seconds
   useEffect(() => {
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
@@ -89,8 +88,7 @@ export function HeroCarousel() {
   };
 
   return (
-    <section className="relative w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-hidden bg-slate-100">
-      {/* Slides */}
+    <section className="relative w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-hidden bg-[#0f0f23]">
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
         <motion.div
           key={current}
@@ -102,22 +100,14 @@ export function HeroCarousel() {
           transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
           className="absolute inset-0"
         >
-          {/* Background image */}
-          <Image
-            src={slide.image}
-            alt={slide.title}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority={current === 0}
-          />
-          {/* Soft overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          <Image src={slide.image} alt={slide.title} fill className="object-cover" sizes="100vw" priority={current === 0} />
+          {/* Tetradic gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#411dd3]/80 via-[#0f0f23]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f23]/70 to-transparent" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content overlay */}
+      {/* Content */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4">
           <div className="max-w-xl">
@@ -129,29 +119,25 @@ export function HeroCarousel() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
-                <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-white/20 text-white border border-white/30 backdrop-blur-sm mb-4 tracking-wide">
+                <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-secondary-400/20 text-secondary-300 border border-secondary-400/30 backdrop-blur-sm mb-4 tracking-wide">
                   {slide.title}
                 </span>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-4 drop-shadow-lg">
                   {slide.highlight}
                 </h1>
-                <p className="text-sm sm:text-base md:text-lg text-white/90 mb-6 max-w-md leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-white/85 mb-6 max-w-md leading-relaxed">
                   {slide.description}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link href={slide.cta.href}>
-                    <Button size="lg" className="text-sm sm:text-base bg-gradient-to-r from-primary-400 to-accent-400 hover:from-primary-500 hover:to-accent-500 border-0 shadow-lg">
+                    <Button size="lg" className="text-sm sm:text-base bg-gradient-to-r from-primary-500 to-secondary-400 hover:from-primary-600 hover:to-secondary-500 border-0 shadow-lg text-white">
                       {slide.cta.label}
                       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                     </Button>
                   </Link>
                   {slide.secondary && (
                     <Link href={slide.secondary.href}>
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        className="text-sm sm:text-base border-white/40 text-white hover:bg-white/15 backdrop-blur-sm"
-                      >
+                      <Button variant="outline" size="lg" className="text-sm sm:text-base border-white/30 text-white hover:bg-white/10 backdrop-blur-sm">
                         {slide.secondary.label}
                       </Button>
                     </Link>
@@ -163,23 +149,15 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Navigation arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/80 backdrop-blur-md border border-gray-200 text-gray-700 flex items-center justify-center hover:bg-white hover:shadow-md transition-all"
-        aria-label="Previous slide"
-      >
+      {/* Nav arrows */}
+      <button onClick={prev} className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-500/30 backdrop-blur-md border border-primary-400/30 text-white flex items-center justify-center hover:bg-primary-500/50 hover:shadow-lg transition-all" aria-label="Previous slide">
         <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
       </button>
-      <button
-        onClick={next}
-        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/80 backdrop-blur-md border border-gray-200 text-gray-700 flex items-center justify-center hover:bg-white hover:shadow-md transition-all"
-        aria-label="Next slide"
-      >
+      <button onClick={next} className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-500/30 backdrop-blur-md border border-primary-400/30 text-white flex items-center justify-center hover:bg-primary-500/50 hover:shadow-lg transition-all" aria-label="Next slide">
         <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
       </button>
 
-      {/* Dot indicators */}
+      {/* Dots */}
       <div className="absolute bottom-5 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
         {slides.map((_, i) => (
           <button
@@ -187,8 +165,8 @@ export function HeroCarousel() {
             onClick={() => goTo(i)}
             className={`transition-all duration-300 rounded-full ${
               i === current
-                ? "w-8 h-2.5 bg-white"
-                : "w-2.5 h-2.5 bg-white/50 hover:bg-white/75"
+                ? "w-8 h-2.5 bg-gradient-to-r from-secondary-400 to-primary-400"
+                : "w-2.5 h-2.5 bg-white/30 hover:bg-white/50"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />
