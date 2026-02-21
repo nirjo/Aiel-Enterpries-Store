@@ -46,9 +46,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       transition={{ duration: 0.2 }}
     >
       <Link href={`/products/${product.slug}`} className="block group">
-        <div className="relative bg-[#0D0D22]/80 rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,136,0.15),0_16px_48px_rgba(0,0,0,0.4)] hover:border-accent-400/30">
+        <div className="relative bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary-200">
           {/* Image container */}
-          <div className="relative aspect-square bg-white/5 overflow-hidden">
+          <div className="relative aspect-square bg-gray-50 overflow-hidden">
             {product.thumbnail_url || product.images?.[0] ? (
               <Image
                 src={product.thumbnail_url || product.images[0]}
@@ -58,7 +58,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white/20">
+              <div className="w-full h-full flex items-center justify-center text-gray-300">
                 <ShoppingCart className="h-12 w-12" />
               </div>
             )}
@@ -92,9 +92,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                     image: product.thumbnail_url || product.images?.[0] || null,
                   });
                 }}
-                className="w-9 h-9 rounded-full bg-[#0D0D22]/80 backdrop-blur-sm shadow-[0_0_10px_rgba(0,0,0,0.3)] border border-white/10 flex items-center justify-center hover:bg-[#0D0D22] hover:border-accent-400/30 transition-colors"
+                className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm shadow-md border border-gray-200 flex items-center justify-center hover:bg-white hover:border-primary-300 transition-colors"
               >
-                <Heart className={cn("h-4 w-4", wishlisted ? "text-red-500 fill-red-500" : "text-white/60")} />
+                <Heart className={cn("h-4 w-4", wishlisted ? "text-red-500 fill-red-500" : "text-gray-500")} />
               </button>
             </div>
 
@@ -104,7 +104,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 fullWidth
                 size="sm"
                 onClick={handleAddToCart}
-                className="shadow-medium"
+                className="shadow-md"
               >
                 <ShoppingCart className="h-4 w-4" />
                 Add to Cart
@@ -123,27 +123,27 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                     className={cn(
                       "h-3.5 w-3.5",
                       i < 4
-                        ? "text-warning fill-warning"
-                        : "text-surface-400"
+                        ? "text-amber-400 fill-amber-400"
+                        : "text-gray-300"
                     )}
                   />
                 ))}
               </div>
-              <span className="text-xs text-text-muted">(24)</span>
+              <span className="text-xs text-gray-400">(24)</span>
             </div>
 
             {/* Title */}
-            <h3 className="font-medium text-sm text-white line-clamp-2 mb-2 group-hover:text-accent-400 transition-colors">
+            <h3 className="font-medium text-sm text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-500 transition-colors">
               {product.name}
             </h3>
 
             {/* Price */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-lg text-accent-400">
+              <span className="font-semibold text-lg text-primary-600">
                 {formatCurrency(product.price)}
               </span>
               {product.compare_at_price && (
-                <span className="text-sm text-text-muted line-through">
+                <span className="text-sm text-gray-400 line-through">
                   {formatCurrency(product.compare_at_price)}
                 </span>
               )}

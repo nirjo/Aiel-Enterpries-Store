@@ -197,22 +197,22 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[#050510]">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Hero Carousel */}
       <HeroCarousel />
 
       {/* Features bar */}
-      <section className="py-6 border-b border-white/5 bg-[#0A0A2E]">
+      <section className="py-6 border-b border-gray-200 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {features.map((feature) => (
               <div key={feature.title} className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-400/20 flex items-center justify-center flex-shrink-0 border border-primary-400/20">
-                  <feature.icon className="h-5 w-5 text-accent-400" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center flex-shrink-0 border border-primary-200">
+                  <feature.icon className="h-5 w-5 text-primary-500" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">{feature.title}</h3>
-                  <p className="text-xs text-text-muted">{feature.description}</p>
+                  <h3 className="font-semibold text-sm text-gray-900">{feature.title}</h3>
+                  <p className="text-xs text-gray-500">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -225,10 +225,10 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">Shop by Category</h2>
-              <p className="text-text-muted mt-1">Explore our anti-gravity collections</p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 tracking-wide">Shop by Category</h2>
+              <p className="text-gray-500 mt-1">Explore our anti-gravity collections</p>
             </div>
-            <Link href="/categories" className="hidden sm:flex items-center gap-1 text-accent-400 font-medium hover:text-accent-300 transition-colors">
+            <Link href="/categories" className="hidden sm:flex items-center gap-1 text-primary-500 font-medium hover:text-primary-600 transition-colors">
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -238,13 +238,13 @@ export default async function HomePage() {
               <Link
                 key={category.id}
                 href={`/products?category=${category.slug}`}
-                className="group relative aspect-[4/5] rounded-2xl overflow-hidden glow-border"
+                className="group relative aspect-[4/5] rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow"
               >
                 <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 20vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/90 via-[#050510]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="font-display font-bold text-white text-sm md:text-base tracking-wide">{category.name}</h3>
-                  <p className="text-accent-400/80 text-xs mt-0.5 font-medium">Explore →</p>
+                  <p className="text-white/80 text-xs mt-0.5 font-medium">Explore →</p>
                 </div>
               </Link>
             ))}
@@ -253,12 +253,12 @@ export default async function HomePage() {
       </section>
 
       {/* Browse Subcategories */}
-      <section className="py-14 md:py-20 bg-[#0A0A2E]/50">
+      <section className="py-14 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">Browse Collections</h2>
-              <p className="text-text-muted mt-1">Find the perfect physics toy</p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 tracking-wide">Browse Collections</h2>
+              <p className="text-gray-500 mt-1">Find the perfect physics toy</p>
             </div>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -266,7 +266,7 @@ export default async function HomePage() {
               <Link
                 key={`${sub.categorySlug}-${sub.slug}`}
                 href={`/products?category=${sub.categorySlug}&sub=${sub.slug}`}
-                className="group relative rounded-2xl overflow-hidden aspect-square glow-border"
+                className="group relative rounded-2xl overflow-hidden aspect-square border border-gray-200 shadow-sm hover:shadow-lg transition-shadow"
               >
                 <Image
                   src={sub.image}
@@ -275,10 +275,10 @@ export default async function HomePage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 16vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/85 via-[#050510]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3">
                   <p className="text-white text-xs font-semibold leading-tight">{sub.label}</p>
-                  <p className="text-accent-400/60 text-[10px] mt-0.5 font-medium">{sub.categoryLabel}</p>
+                  <p className="text-white/70 text-[10px] mt-0.5 font-medium">{sub.categoryLabel}</p>
                 </div>
               </Link>
             ))}
@@ -292,10 +292,10 @@ export default async function HomePage() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-10">
               <div>
-                <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">Featured Products</h2>
-                <p className="text-text-muted mt-1">Our most mesmerizing picks</p>
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 tracking-wide">Featured Products</h2>
+                <p className="text-gray-500 mt-1">Our most mesmerizing picks</p>
               </div>
-              <Link href="/products?featured=true" className="hidden sm:flex items-center gap-1 text-accent-400 font-medium hover:text-accent-300 transition-colors">
+              <Link href="/products?featured=true" className="hidden sm:flex items-center gap-1 text-primary-500 font-medium hover:text-primary-600 transition-colors">
                 View All <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -305,14 +305,14 @@ export default async function HomePage() {
       )}
 
       {/* All Products */}
-      <section className="py-14 md:py-20 bg-[#0A0A2E]/50">
+      <section className="py-14 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">New Arrivals</h2>
-              <p className="text-text-muted mt-1">Latest anti-gravity gadgets</p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 tracking-wide">New Arrivals</h2>
+              <p className="text-gray-500 mt-1">Latest anti-gravity gadgets</p>
             </div>
-            <Link href="/products?sort=newest" className="hidden sm:flex items-center gap-1 text-accent-400 font-medium hover:text-accent-300 transition-colors">
+            <Link href="/products?sort=newest" className="hidden sm:flex items-center gap-1 text-primary-500 font-medium hover:text-primary-600 transition-colors">
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

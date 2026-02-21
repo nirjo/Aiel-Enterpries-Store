@@ -3,75 +3,75 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050510;
-  --foreground: #FFFFFF;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme {
-  /* Electric Blue (trust, calm focus) */
-  --color-primary-50: #E6F0FF;
-  --color-primary-100: #CCE0FF;
-  --color-primary-200: #99C2FF;
-  --color-primary-300: #4D94FF;
-  --color-primary-400: #007BFF;
-  --color-primary-500: #006ADB;
-  --color-primary-600: #0056B3;
-  --color-primary-700: #004494;
-  --color-primary-800: #003375;
-  --color-primary-900: #001F4D;
+  /* Primary Blue */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #3b82f6;
+  --color-primary-500: #2563eb;
+  --color-primary-600: #1d4ed8;
+  --color-primary-700: #1e40af;
+  --color-primary-800: #1e3a8a;
+  --color-primary-900: #172554;
 
-  /* Deep Space (dark cosmic backgrounds) */
-  --color-secondary-50: #1E1E42;
-  --color-secondary-100: #1A1A3E;
-  --color-secondary-200: #16163A;
-  --color-secondary-300: #121236;
-  --color-secondary-400: #0E0E30;
-  --color-secondary-500: #0A0A2E;
-  --color-secondary-600: #080824;
-  --color-secondary-700: #06061A;
-  --color-secondary-800: #040410;
-  --color-secondary-900: #020208;
+  /* Slate (subtle section alternation) */
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
 
-  /* Neon Green (energy, excitement, magnetic thrill) */
-  --color-accent-50: #E6FFF3;
-  --color-accent-100: #B3FFD9;
-  --color-accent-200: #80FFBF;
-  --color-accent-300: #4DFFA6;
-  --color-accent-400: #00FF88;
-  --color-accent-500: #00DB74;
-  --color-accent-600: #00B360;
-  --color-accent-700: #008A4A;
-  --color-accent-800: #006636;
-  --color-accent-900: #003D20;
+  /* Accent Teal-Green */
+  --color-accent-50: #ecfdf5;
+  --color-accent-100: #d1fae5;
+  --color-accent-200: #a7f3d0;
+  --color-accent-300: #6ee7b7;
+  --color-accent-400: #10b981;
+  --color-accent-500: #059669;
+  --color-accent-600: #047857;
+  --color-accent-700: #065f46;
+  --color-accent-800: #064e3b;
+  --color-accent-900: #022c22;
 
-  /* Space Surface (dark panels, subtle glow) */
-  --color-surface-50: #1A1A3E;
-  --color-surface-100: #12122C;
-  --color-surface-200: #0D0D22;
-  --color-surface-300: #1E1E42;
-  --color-surface-400: #2A2A50;
+  /* Surface (light panels & cards) */
+  --color-surface-50: #ffffff;
+  --color-surface-100: #f8fafc;
+  --color-surface-200: #f1f5f9;
+  --color-surface-300: #e2e8f0;
+  --color-surface-400: #cbd5e1;
 
-  /* Text for dark backgrounds */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #C0C0C0;
-  --color-text-muted: #8888AA;
-  --color-text-inverse: #050510;
+  /* Text for light backgrounds */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
 
   /* Status colors */
-  --color-success: #00FF88;
-  --color-warning: #FFD700;
-  --color-error: #FF4444;
-  --color-info: #007BFF;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
 
-  /* Sci-fi fonts */
+  /* Fonts */
   --font-sans: 'Poppins', system-ui, sans-serif;
   --font-display: 'Orbitron', 'Poppins', system-ui, sans-serif;
 
-  /* Anti-gravity shadows */
-  --shadow-soft: 0 4px 16px rgba(0, 123, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-medium: 0 8px 32px rgba(0, 123, 255, 0.15), 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-strong: 0 16px 48px rgba(0, 123, 255, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 123, 255, 0.2);
+  /* Shadows — clean, neutral */
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-strong: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 15px rgba(59, 130, 246, 0.15), 0 0 30px rgba(16, 185, 129, 0.08);
 }
 
 * {
@@ -90,39 +90,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar — neon glow */
+/* Custom scrollbar — subtle light */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A2E;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #007BFF, #00FF88);
+  background: linear-gradient(180deg, #94a3b8, #64748b);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #4D94FF, #4DFFA6);
+  background: linear-gradient(180deg, #64748b, #475569);
 }
 
 /* Focus visible */
 :focus-visible {
-  outline: 2px solid #00FF88;
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(0, 123, 255, 0.4);
-  color: #FFFFFF;
+  background: rgba(59, 130, 246, 0.2);
+  color: #0f172a;
 }
 
 /* =========================================
-   ANTI-GRAVITY ANIMATIONS
+   ANIMATIONS
    ========================================= */
 
 @keyframes float {
@@ -151,11 +151,11 @@ body {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2), 0 0 40px rgba(0, 123, 255, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
 
   50% {
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
   }
 }
 
@@ -209,28 +209,41 @@ body {
 .metal-sheen {
   background: linear-gradient(120deg,
       transparent 30%,
-      rgba(255, 255, 255, 0.08) 38%,
-      rgba(255, 255, 255, 0.12) 40%,
-      rgba(255, 255, 255, 0.08) 42%,
+      rgba(59, 130, 246, 0.05) 38%,
+      rgba(59, 130, 246, 0.08) 40%,
+      rgba(59, 130, 246, 0.05) 42%,
       transparent 50%);
   background-size: 200% 100%;
   animation: shimmer 4s ease-in-out infinite;
 }
 
+/* Light theme utility classes */
+.pale-white-section {
+  background: linear-gradient(to bottom, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
+  backdrop-filter: blur(20px);
+}
+
+.section-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
 .glow-border {
-  border: 1px solid rgba(0, 255, 136, 0.2);
+  border: 1px solid rgba(226, 232, 240, 0.8);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .glow-border:hover {
-  border-color: rgba(0, 255, 136, 0.5);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.15), 0 0 40px rgba(0, 123, 255, 0.1);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .space-glass {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(192, 192, 192, 0.15);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 /* =========================================
