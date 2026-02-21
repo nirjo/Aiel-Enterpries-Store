@@ -272,28 +272,28 @@ export default async function ProductsPage({
   const currentSort = params.sort || "newest";
 
   return (
-    <div className="min-h-screen bg-[#050510]">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Breadcrumb */}
-      <div className="bg-[#0A0A2E] py-4 border-b border-white/5">
+      <div className="bg-white py-4 border-b border-gray-200">
         <div className="container mx-auto px-4">
           <nav className="text-sm">
             <ol className="flex items-center gap-2">
-              <li><Link href="/" className="text-text-muted hover:text-accent-400 transition-colors">Home</Link></li>
+              <li><Link href="/" className="text-text-muted hover:text-primary-500 transition-colors">Home</Link></li>
               <li className="text-text-muted">/</li>
               {params.category ? (
                 <>
-                  <li><Link href="/products" className="text-text-muted hover:text-accent-400 transition-colors">Products</Link></li>
+                  <li><Link href="/products" className="text-text-muted hover:text-primary-500 transition-colors">Products</Link></li>
                   <li className="text-text-muted">/</li>
-                  <li className={params.sub ? "text-text-muted" : "text-white font-medium"}>
+                  <li className={params.sub ? "text-text-muted" : "text-text-primary font-medium"}>
                     {params.sub ? (
-                      <Link href={buildFilterUrl(params, { sub: undefined })} className="hover:text-accent-400 transition-colors">
+                      <Link href={buildFilterUrl(params, { sub: undefined })} className="hover:text-primary-500 transition-colors">
                         {categories.find((c) => c.slug === params.category)?.name || params.category}
                       </Link>
                     ) : (categories.find((c) => c.slug === params.category)?.name || params.category)}
                   </li>
-                  {params.sub && (<><li className="text-text-muted">/</li><li className="text-white font-medium">{subcategories.find((s) => s.slug === params.sub)?.label || params.sub}</li></>)}
+                  {params.sub && (<><li className="text-text-muted">/</li><li className="text-text-primary font-medium">{subcategories.find((s) => s.slug === params.sub)?.label || params.sub}</li></>)}
                 </>
-              ) : (<li className="text-white font-medium">Products</li>)}
+              ) : (<li className="text-text-primary font-medium">Products</li>)}
             </ol>
           </nav>
         </div>
@@ -301,12 +301,12 @@ export default async function ProductsPage({
 
       {/* Subcategory bar */}
       {subcategories.length > 0 && (
-        <div className="bg-[#0D0D22] border-b border-white/5">
+        <div className="bg-gray-50 border-b border-gray-200">
           <div className="container mx-auto px-4 py-3">
             <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-              <Link href={buildFilterUrl(params, { sub: undefined })} className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium border transition-all ${!params.sub ? "bg-accent-400 text-[#050510] border-accent-400" : "bg-white/5 text-text-secondary border-white/10 hover:border-accent-400/40 hover:text-accent-400"}`}>All</Link>
+              <Link href={buildFilterUrl(params, { sub: undefined })} className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium border transition-all ${!params.sub ? "bg-primary-500 text-white border-primary-500" : "bg-white text-text-secondary border-gray-200 hover:border-primary-400 hover:text-primary-500"}`}>All</Link>
               {subcategories.map((sub) => (
-                <Link key={sub.slug} href={buildFilterUrl(params, { sub: sub.slug })} className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium border transition-all ${params.sub === sub.slug ? "bg-accent-400 text-[#050510] border-accent-400" : "bg-white/5 text-text-secondary border-white/10 hover:border-accent-400/40 hover:text-accent-400"}`}>
+                <Link key={sub.slug} href={buildFilterUrl(params, { sub: sub.slug })} className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium border transition-all ${params.sub === sub.slug ? "bg-primary-500 text-white border-primary-500" : "bg-white text-text-secondary border-gray-200 hover:border-primary-400 hover:text-primary-500"}`}>
                   <div className="relative w-5 h-5 rounded-full overflow-hidden"><Image src={sub.image} alt={sub.label} fill className="object-cover" sizes="20px" /></div>
                   {sub.label}
                 </Link>
@@ -322,22 +322,22 @@ export default async function ProductsPage({
           <aside className="w-full lg:w-64 flex-shrink-0">
             <div className="lg:sticky lg:top-40">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display font-semibold text-lg text-white tracking-wide">Filters</h2>
+                <h2 className="font-display font-semibold text-lg text-text-primary tracking-wide">Filters</h2>
                 {hasActiveFilters && (
-                  <Link href={buildFilterUrl(params, { price: undefined, featured: undefined, sub: undefined })} className="text-xs font-medium text-accent-400 hover:text-accent-300 transition-colors flex items-center gap-1"><X className="h-3 w-3" />Clear All</Link>
+                  <Link href={buildFilterUrl(params, { price: undefined, featured: undefined, sub: undefined })} className="text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors flex items-center gap-1"><X className="h-3 w-3" />Clear All</Link>
                 )}
               </div>
 
               {/* Category filter */}
               <div className="mb-6">
-                <h3 className="font-medium text-sm text-white mb-3">Category</h3>
+                <h3 className="font-medium text-sm text-text-primary mb-3">Category</h3>
                 <div className="space-y-1.5">
-                  <Link href={buildFilterUrl(params, { category: undefined, sub: undefined })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${!params.category ? "text-accent-400 font-medium bg-accent-400/10" : "text-text-secondary hover:text-white hover:bg-white/5"}`}>
-                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${!params.category ? "bg-accent-400" : "bg-white/20"}`} />All Products
+                  <Link href={buildFilterUrl(params, { category: undefined, sub: undefined })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${!params.category ? "text-primary-500 font-medium bg-primary-50" : "text-text-secondary hover:text-text-primary hover:bg-gray-50"}`}>
+                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${!params.category ? "bg-primary-500" : "bg-gray-300"}`} />All Products
                   </Link>
                   {categories.map((cat) => (
-                    <Link key={cat.id} href={buildFilterUrl(params, { category: cat.slug, sub: undefined })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${params.category === cat.slug ? "text-accent-400 font-medium bg-accent-400/10" : "text-text-secondary hover:text-white hover:bg-white/5"}`}>
-                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${params.category === cat.slug ? "bg-accent-400" : "bg-white/20"}`} />{cat.name}
+                    <Link key={cat.id} href={buildFilterUrl(params, { category: cat.slug, sub: undefined })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${params.category === cat.slug ? "text-primary-500 font-medium bg-primary-50" : "text-text-secondary hover:text-text-primary hover:bg-gray-50"}`}>
+                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${params.category === cat.slug ? "bg-primary-500" : "bg-gray-300"}`} />{cat.name}
                     </Link>
                   ))}
                 </div>
@@ -345,14 +345,14 @@ export default async function ProductsPage({
 
               {/* Price filter */}
               <div className="mb-6">
-                <h3 className="font-medium text-sm text-white mb-3">Price Range</h3>
+                <h3 className="font-medium text-sm text-text-primary mb-3">Price Range</h3>
                 <div className="space-y-1.5">
                   {PRICE_RANGES.map((range) => {
                     const isActive = params.price === range.slug;
                     return (
-                      <Link key={range.slug} href={buildFilterUrl(params, { price: isActive ? undefined : range.slug })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${isActive ? "text-accent-400 font-medium bg-accent-400/10" : "text-text-secondary hover:text-white hover:bg-white/5"}`}>
-                        <span className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 ${isActive ? "border-accent-400 bg-accent-400" : "border-white/20"}`}>
-                          {isActive && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#050510" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                      <Link key={range.slug} href={buildFilterUrl(params, { price: isActive ? undefined : range.slug })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${isActive ? "text-primary-500 font-medium bg-primary-50" : "text-text-secondary hover:text-text-primary hover:bg-gray-50"}`}>
+                        <span className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 ${isActive ? "border-primary-500 bg-primary-500" : "border-gray-300"}`}>
+                          {isActive && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                         </span>{range.label}
                       </Link>
                     );
@@ -362,10 +362,10 @@ export default async function ProductsPage({
 
               {/* Featured filter */}
               <div className="mb-6">
-                <h3 className="font-medium text-sm text-white mb-3">Other</h3>
-                <Link href={buildFilterUrl(params, { featured: params.featured === "true" ? undefined : "true" })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${params.featured === "true" ? "text-accent-400 font-medium bg-accent-400/10" : "text-text-secondary hover:text-white hover:bg-white/5"}`}>
-                  <span className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 ${params.featured === "true" ? "border-accent-400 bg-accent-400" : "border-white/20"}`}>
-                    {params.featured === "true" && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#050510" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                <h3 className="font-medium text-sm text-text-primary mb-3">Other</h3>
+                <Link href={buildFilterUrl(params, { featured: params.featured === "true" ? undefined : "true" })} className={`flex items-center gap-2 text-sm py-1.5 px-2.5 rounded-lg transition-colors ${params.featured === "true" ? "text-primary-500 font-medium bg-primary-50" : "text-text-secondary hover:text-text-primary hover:bg-gray-50"}`}>
+                  <span className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 ${params.featured === "true" ? "border-primary-500 bg-primary-500" : "border-gray-300"}`}>
+                    {params.featured === "true" && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                   </span>Featured Only
                 </Link>
               </div>
@@ -376,7 +376,7 @@ export default async function ProductsPage({
           <div className="flex-1">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-2xl font-display font-bold text-white tracking-wide">{getPageTitle()}</h1>
+                <h1 className="text-2xl font-display font-bold text-text-primary tracking-wide">{getPageTitle()}</h1>
                 <p className="text-sm text-text-muted mt-1">
                   Showing {products.length} product{products.length !== 1 ? "s" : ""}
                   {params.price && <span className="ml-1">· {PRICE_RANGES.find((r) => r.slug === params.price)?.label}</span>}
@@ -385,13 +385,13 @@ export default async function ProductsPage({
               <div className="flex items-center gap-2">
                 <span className="text-sm text-text-muted">Sort:</span>
                 <div className="relative group">
-                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm hover:bg-white/5 transition-colors bg-white/5 text-white">
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-sm hover:bg-gray-50 transition-colors bg-white text-text-primary">
                     {sortOptions.find((o) => o.value === currentSort)?.label || "Newest"}
                     <ChevronDown className="h-4 w-4" />
                   </button>
-                  <div className="absolute right-0 top-full mt-1 bg-[#1A1A3E] border border-white/10 rounded-lg shadow-strong opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 min-w-[180px]">
+                  <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-strong opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 min-w-[180px]">
                     {sortOptions.map((option) => (
-                      <Link key={option.value} href={buildFilterUrl(params, { sort: option.value })} className={`block px-4 py-2.5 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg ${currentSort === option.value ? "text-accent-400 font-medium bg-accent-400/10" : "text-text-secondary hover:bg-white/5 hover:text-white"}`}>{option.label}</Link>
+                      <Link key={option.value} href={buildFilterUrl(params, { sort: option.value })} className={`block px-4 py-2.5 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg ${currentSort === option.value ? "text-primary-500 font-medium bg-primary-50" : "text-text-secondary hover:bg-gray-50 hover:text-text-primary"}`}>{option.label}</Link>
                     ))}
                   </div>
                 </div>
@@ -400,9 +400,9 @@ export default async function ProductsPage({
 
             {hasActiveFilters && (
               <div className="flex flex-wrap gap-2 mb-6">
-                {params.price && (<Link href={buildFilterUrl(params, { price: undefined })} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent-400/10 text-accent-400 text-xs font-medium border border-accent-400/20 hover:bg-accent-400/20 transition-colors">{PRICE_RANGES.find((r) => r.slug === params.price)?.label}<X className="h-3 w-3" /></Link>)}
-                {params.featured === "true" && (<Link href={buildFilterUrl(params, { featured: undefined })} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent-400/10 text-accent-400 text-xs font-medium border border-accent-400/20 hover:bg-accent-400/20 transition-colors">Featured Only<X className="h-3 w-3" /></Link>)}
-                {params.sub && (<Link href={buildFilterUrl(params, { sub: undefined })} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent-400/10 text-accent-400 text-xs font-medium border border-accent-400/20 hover:bg-accent-400/20 transition-colors">{subcategories.find((s) => s.slug === params.sub)?.label || params.sub}<X className="h-3 w-3" /></Link>)}
+                {params.price && (<Link href={buildFilterUrl(params, { price: undefined })} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-50 text-primary-500 text-xs font-medium border border-primary-200 hover:bg-primary-100 transition-colors">{PRICE_RANGES.find((r) => r.slug === params.price)?.label}<X className="h-3 w-3" /></Link>)}
+                {params.featured === "true" && (<Link href={buildFilterUrl(params, { featured: undefined })} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-50 text-primary-500 text-xs font-medium border border-primary-200 hover:bg-primary-100 transition-colors">Featured Only<X className="h-3 w-3" /></Link>)}
+                {params.sub && (<Link href={buildFilterUrl(params, { sub: undefined })} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-50 text-primary-500 text-xs font-medium border border-primary-200 hover:bg-primary-100 transition-colors">{subcategories.find((s) => s.slug === params.sub)?.label || params.sub}<X className="h-3 w-3" /></Link>)}
               </div>
             )}
 
@@ -410,10 +410,10 @@ export default async function ProductsPage({
               <ProductGrid products={products} />
             ) : (
               <div className="text-center py-16">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
                   <SlidersHorizontal className="h-8 w-8 text-text-muted" />
                 </div>
-                <h3 className="text-lg font-display font-semibold text-white mb-2">No products found</h3>
+                <h3 className="text-lg font-display font-semibold text-text-primary mb-2">No products found</h3>
                 <p className="text-sm text-text-muted mb-4">Try adjusting your filters or browse a different category.</p>
                 <Link href="/products"><Button>View All Products</Button></Link>
               </div>
