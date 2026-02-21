@@ -76,7 +76,7 @@ export function MobileNav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeMobileMenu}
-            className="fixed inset-0 bg-black/30 z-50 md:hidden"
+            className="fixed inset-0 bg-black/50 z-50 md:hidden"
           />
 
           {/* Menu */}
@@ -85,10 +85,10 @@ export function MobileNav() {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-50 shadow-xl flex flex-col md:hidden border-r border-gray-200"
+            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-slate-900/95 backdrop-blur-xl z-50 shadow-2xl flex flex-col md:hidden border-r border-slate-800/50"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-slate-800/50">
               <Link
                 href="/"
                 className="flex items-center gap-2"
@@ -97,13 +97,13 @@ export function MobileNav() {
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
                   <span className="text-white font-bold text-base">A</span>
                 </div>
-                <span className="font-display font-bold text-lg text-gray-900 tracking-wide">
+                <span className="font-display font-bold text-lg text-white/95 tracking-wide">
                   Aiel
                 </span>
               </Link>
               <button
                 onClick={closeMobileMenu}
-                className="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-500"
+                className="w-9 h-9 rounded-lg hover:bg-slate-800/80 flex items-center justify-center transition-colors text-white/60"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -124,8 +124,8 @@ export function MobileNav() {
                         className={cn(
                           "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
                           isActive
-                            ? "bg-primary-50 text-primary-500"
-                            : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                            ? "bg-white/10 text-white"
+                            : "text-white/60 hover:bg-slate-800/80 hover:text-white"
                         )}
                       >
                         <Icon className="h-5 w-5" />
@@ -138,7 +138,7 @@ export function MobileNav() {
 
               {/* Category sections with subcategories */}
               <div className="px-3">
-                <h3 className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                <h3 className="px-4 text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">
                   Shop by Category
                 </h3>
                 <div className="space-y-1">
@@ -154,8 +154,8 @@ export function MobileNav() {
                           className={cn(
                             "w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all",
                             isExpanded
-                              ? "bg-primary-50 text-primary-500"
-                              : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                              ? "bg-white/10 text-white"
+                              : "text-white/60 hover:bg-slate-800/80 hover:text-white"
                           )}
                         >
                           <span>{cat.label}</span>
@@ -181,7 +181,7 @@ export function MobileNav() {
                                 {/* View all link */}
                                 <Link
                                   href={cat.href}
-                                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-primary-500 hover:bg-primary-50 transition-colors"
+                                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-primary-400 hover:bg-white/5 transition-colors"
                                 >
                                   View All {cat.label} →
                                 </Link>
@@ -190,9 +190,9 @@ export function MobileNav() {
                                   <Link
                                     key={sub.slug}
                                     href={`/products?category=${categorySlug}&sub=${sub.slug}`}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors group"
+                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-800/80 transition-colors group"
                                   >
-                                    <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100 border border-gray-200">
+                                    <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-slate-800/40 border border-slate-700/50">
                                       <Image
                                         src={sub.image}
                                         alt={sub.label}
@@ -202,10 +202,10 @@ export function MobileNav() {
                                       />
                                     </div>
                                     <div>
-                                      <p className="text-xs font-medium text-gray-700 group-hover:text-primary-500 transition-colors">
+                                      <p className="text-xs font-medium text-white/80 group-hover:text-white transition-colors">
                                         {sub.label}
                                       </p>
-                                      <p className="text-[10px] text-gray-400 line-clamp-1">
+                                      <p className="text-[10px] text-slate-400 line-clamp-1">
                                         {sub.description}
                                       </p>
                                     </div>
@@ -223,7 +223,7 @@ export function MobileNav() {
             </nav>
 
             {/* Footer */}
-            <div className="border-t border-gray-200 px-4 py-4">
+            <div className="border-t border-slate-800/50 px-4 py-4">
               <Link
                 href="/account"
                 className="flex items-center justify-center gap-2 h-11 rounded-xl bg-gradient-to-r from-primary-400 to-accent-400 text-white font-medium hover:from-primary-500 hover:to-accent-500 transition-colors"

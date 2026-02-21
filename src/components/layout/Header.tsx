@@ -71,7 +71,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mega menu on route change
   useEffect(() => {
     setActiveMenu(null);
   }, [pathname]);
@@ -87,19 +86,19 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-md"
-            : "bg-white"
+            ? "dark-header-footer shadow-2xl"
+            : "bg-gradient-to-r from-gray-900 via-slate-900 to-neutral-900"
         )}
       >
         {/* Top bar */}
-        <div className="bg-slate-50 text-gray-500 text-xs py-1.5 border-b border-gray-200">
+        <div className="bg-slate-950/60 text-white/50 text-xs py-1.5 border-b border-slate-800/50">
           <div className="container mx-auto px-4 flex justify-between items-center">
             <p>🚀 Free shipping on anti-gravity orders over ₹999</p>
             <div className="hidden md:flex items-center gap-4">
-              <Link href="/contact" className="hover:text-primary-500 transition-colors">
+              <Link href="/contact" className="hover:text-white transition-colors">
                 Contact Us
               </Link>
-              <Link href="/track" className="hover:text-primary-500 transition-colors">
+              <Link href="/track" className="hover:text-white transition-colors">
                 Track Order
               </Link>
             </div>
@@ -111,10 +110,10 @@ export function Header() {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.2)]">
                 <span className="text-white font-bold text-lg">A</span>
               </div>
-              <span className="font-display font-bold text-xl text-gray-900 hidden sm:block tracking-wide">
+              <span className="font-display font-bold text-xl text-white/95 hidden sm:block tracking-wide">
                 {APP_NAME}
               </span>
             </Link>
@@ -127,7 +126,7 @@ export function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search anti-gravity toys..."
-                  className="w-full h-10 pl-4 pr-12 rounded-full border border-gray-200 bg-gray-50 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 transition-all"
+                  className="w-full h-10 pl-4 pr-12 rounded-full border border-slate-700/60 bg-white/5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-primary-400/60 focus:ring-2 focus:ring-primary-400/20 transition-all backdrop-blur-sm"
                 />
                 <button type="submit" className="absolute right-1 top-1 h-8 w-8 rounded-full bg-gradient-to-r from-primary-400 to-accent-400 text-white flex items-center justify-center hover:from-primary-500 hover:to-accent-500 transition-colors">
                   <Search className="h-4 w-4" />
@@ -137,11 +136,10 @@ export function Header() {
 
             {/* Actions */}
             <div className="flex items-center gap-2">
-              {/* Search - mobile */}
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
+                className="md:hidden text-white/80 hover:bg-slate-800/80 hover:text-white"
                 onClick={openSearch}
               >
                 <Search className="h-5 w-5" />
@@ -150,7 +148,7 @@ export function Header() {
               {/* Wishlist */}
               <Link
                 href="/wishlist"
-                className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg bg-transparent text-gray-500 hover:bg-gray-100 hover:text-primary-500 active:bg-gray-200 transition-all duration-200 relative"
+                className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg text-white/70 hover:bg-slate-800/80 hover:text-white active:bg-slate-700/80 transition-all duration-200 relative"
               >
                 <Heart className="h-5 w-5" />
                 {wishlistCount > 0 && (
@@ -163,7 +161,7 @@ export function Header() {
               {/* Account */}
               <Link
                 href="/account"
-                className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-transparent text-gray-500 hover:bg-gray-100 hover:text-primary-500 active:bg-gray-200 transition-all duration-200"
+                className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-white/70 hover:bg-slate-800/80 hover:text-white active:bg-slate-700/80 transition-all duration-200"
               >
                 <User className="h-5 w-5" />
               </Link>
@@ -172,7 +170,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative"
+                className="relative text-white/80 hover:bg-slate-800/80 hover:text-white"
                 onClick={toggleCart}
               >
                 <ShoppingCart className="h-5 w-5" />
@@ -180,7 +178,7 @@ export function Header() {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary-500 text-white text-2xs font-medium flex items-center justify-center"
+                    className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary-400 text-white text-2xs font-medium flex items-center justify-center"
                   >
                     {itemCount > 99 ? "99+" : itemCount}
                   </motion.span>
@@ -191,7 +189,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
+                className="md:hidden text-white/80 hover:bg-slate-800/80 hover:text-white"
                 onClick={toggleMobileMenu}
               >
                 {isMobileMenuOpen ? (
@@ -224,11 +222,11 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:text-primary-500 hover:bg-gray-100 whitespace-nowrap",
+                      "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:text-white hover:bg-slate-800/80 whitespace-nowrap",
                       isActive
-                        ? "text-primary-500 bg-primary-50"
-                        : "text-gray-600",
-                      activeMenu === link.label && "text-primary-500 bg-primary-50"
+                        ? "text-white bg-white/10"
+                        : "text-white/70",
+                      activeMenu === link.label && "text-white bg-white/10"
                     )}
                   >
                     {link.label}
@@ -252,15 +250,15 @@ export function Header() {
                         onMouseEnter={() => handleMenuEnter(link.label)}
                         onMouseLeave={handleMenuLeave}
                       >
-                        <div className="bg-white backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-gray-200 p-5 min-w-[680px]">
+                        <div className="bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-800/50 p-5 min-w-[680px]">
                           {/* Header */}
-                          <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
-                            <h3 className="font-display font-bold text-gray-900 text-base tracking-wide">
+                          <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800/50">
+                            <h3 className="font-display font-bold text-white/95 text-base tracking-wide">
                               {link.label}
                             </h3>
                             <Link
                               href={link.href}
-                              className="text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
+                              className="text-xs font-medium text-primary-400 hover:text-primary-300 transition-colors"
                             >
                               View All →
                             </Link>
@@ -274,9 +272,9 @@ export function Header() {
                                 <Link
                                   key={sub.slug}
                                   href={`/products?category=${categorySlug}&sub=${sub.slug}`}
-                                  className="group/card flex flex-col rounded-xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all duration-300"
+                                  className="group/card flex flex-col rounded-xl overflow-hidden border border-slate-800/50 hover:border-primary-400/40 hover:shadow-[0_0_20px_rgba(59,130,246,0.1)] transition-all duration-300"
                                 >
-                                  <div className="relative h-24 w-full overflow-hidden bg-gray-100">
+                                  <div className="relative h-24 w-full overflow-hidden bg-slate-800/40">
                                     <Image
                                       src={sub.image}
                                       alt={sub.label}
@@ -284,13 +282,13 @@ export function Header() {
                                       className="object-cover transition-transform duration-500 group-hover/card:scale-110"
                                       sizes="160px"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
                                   </div>
                                   <div className="p-2.5">
-                                    <p className="text-xs font-semibold text-gray-900 group-hover/card:text-primary-500 transition-colors leading-tight">
+                                    <p className="text-xs font-semibold text-white/90 group-hover/card:text-primary-400 transition-colors leading-tight">
                                       {sub.label}
                                     </p>
-                                    <p className="text-[10px] text-gray-400 mt-0.5 leading-tight line-clamp-1">
+                                    <p className="text-[10px] text-slate-400 mt-0.5 leading-tight line-clamp-1">
                                       {sub.description}
                                     </p>
                                   </div>
