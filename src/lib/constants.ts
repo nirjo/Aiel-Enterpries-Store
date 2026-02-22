@@ -48,12 +48,27 @@ export interface NavLink {
 export const NAV_LINKS: NavLink[] = [
     { label: "Home", href: "/" },
     { label: "All Products", href: "/products" },
+    {
+        label: "Aiel Toy Paradise",
+        href: "/products?category=aiel-toy-paradise",
+        subcategories: [
+            { label: "Sensory Toys", slug: "sensory-toys", image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=300&fit=crop", description: "Fidget spinners, pop-its & tactile play" },
+            { label: "Montessori Toys", slug: "montessori-toys", image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop", description: "Wooden puzzles & learning materials" },
+            { label: "Educational Toys", slug: "educational-toys", image: "https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=400&h=300&fit=crop", description: "Interactive learning & discovery" },
+            { label: "STEM Toys", slug: "stem-toys", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop", description: "Robotics, coding & science kits" },
+            { label: "Action Figures", slug: "action-figures", image: "https://images.unsplash.com/photo-1558507652-2d9626c4e67a?w=400&h=300&fit=crop", description: "Superheroes, vehicles & collectibles" },
+            { label: "Musical Toys", slug: "musical-toys", image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=300&fit=crop", description: "Instruments & music makers for kids" },
+            { label: "Board & Card Games", slug: "board-card-games", image: "https://images.unsplash.com/photo-1611371805429-8b5c1b2c34ba?w=400&h=300&fit=crop", description: "Family strategy & party games" },
+            { label: "Wooden Toys", slug: "wooden-toys", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=300&fit=crop", description: "Classic handcrafted wooden play" },
+        ],
+    },
     { label: "Home & Kitchen", href: "/products?category=home-kitchen" },
     { label: "Home Decor", href: "/products?category=home-decor" },
     { label: "Gardening", href: "/products?category=gardening" },
-    { label: "Gift Items", href: "/products?category=gift-items" },
     { label: "Electronics", href: "/products?category=electronics" },
+    { label: "Stationery Items", href: "/products?category=stationery-items" },
     { label: "Sport & Exercise", href: "/products?category=sport-exercise" },
+    { label: "Gift Items", href: "/products?category=gift-items" },
 ];
 
 // Footer Links

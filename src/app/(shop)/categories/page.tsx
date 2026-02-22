@@ -19,7 +19,8 @@ const fallbackCategories: Category[] = [
   { id: "11", name: "Gardening", slug: "gardening", description: "Tools, planters & garden decor", image_url: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop", parent_id: null, sort_order: 11, is_active: true, created_at: "", updated_at: "" },
   { id: "12", name: "Gift Items", slug: "gift-items", description: "Curated gifts for every occasion", image_url: "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&h=400&fit=crop", parent_id: null, sort_order: 12, is_active: true, created_at: "", updated_at: "" },
   { id: "13", name: "Electronics", slug: "electronics", description: "Gadgets, speakers & accessories", image_url: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop", parent_id: null, sort_order: 13, is_active: true, created_at: "", updated_at: "" },
-  { id: "14", name: "Sport & Exercise", slug: "sport-exercise", description: "Fitness gear & outdoor sports", image_url: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=400&fit=crop", parent_id: null, sort_order: 14, is_active: true, created_at: "", updated_at: "" },
+  { id: "14", name: "Stationery Items", slug: "stationery-items", description: "Notebooks, pens & art supplies", image_url: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=800&h=400&fit=crop", parent_id: null, sort_order: 14, is_active: true, created_at: "", updated_at: "" },
+  { id: "15", name: "Sport & Exercise", slug: "sport-exercise", description: "Fitness gear & outdoor sports", image_url: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=400&fit=crop", parent_id: null, sort_order: 15, is_active: true, created_at: "", updated_at: "" },
 ];
 
 async function getCategories(): Promise<Category[]> {

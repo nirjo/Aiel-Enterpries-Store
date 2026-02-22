@@ -18,12 +18,19 @@ interface Slide {
 
 const slides: Slide[] = [
   {
+    image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=1400&h=700&fit=crop",
+    title: "🧸 Aiel Toy Paradise",
+    highlight: "Play, Learn & Grow",
+    description: "Sensory toys, Montessori sets, STEM kits, action figures & more — the ultimate toy destination for curious kids.",
+    cta: { label: "Shop Toys", href: "/products?category=aiel-toy-paradise" },
+    secondary: { label: "Browse All", href: "/products" },
+  },
+  {
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&h=700&fit=crop",
     title: "🏠 Home & Kitchen",
     highlight: "Upgrade Your Kitchen",
     description: "Smart kitchen gadgets, cookware, storage solutions & everyday home essentials that make life easier.",
     cta: { label: "Shop Now", href: "/products?category=home-kitchen" },
-    secondary: { label: "Browse All", href: "/products" },
   },
   {
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1400&h=700&fit=crop",
@@ -52,6 +59,13 @@ const slides: Slide[] = [
     highlight: "Tech You'll Love",
     description: "Bluetooth speakers, smart gadgets, phone accessories & cutting-edge electronics at great prices.",
     cta: { label: "Shop Now", href: "/products?category=electronics" },
+  },
+  {
+    image: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=1400&h=700&fit=crop",
+    title: "✏️ Stationery Items",
+    highlight: "Write, Create & Organise",
+    description: "Notebooks, pens, art supplies, desk organisers & premium stationery for school, office & creativity.",
+    cta: { label: "Shop Now", href: "/products?category=stationery-items" },
   },
   {
     image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1400&h=700&fit=crop",
