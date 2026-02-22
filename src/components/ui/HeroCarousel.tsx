@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui";
 
+import { getCategoryHeroImage } from "@/lib/categoryImages";
+
 interface Slide {
   image: string;
   title: string;
@@ -18,7 +20,7 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=1400&h=700&fit=crop",
+    image: getCategoryHeroImage("toys") || "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=1400&h=700&fit=crop",
     title: "🧸 Aiel Toy Paradise",
     highlight: "Play, Learn & Grow",
     description: "Sensory toys, Montessori sets, STEM kits, action figures & more — the ultimate toy destination for curious kids.",
@@ -26,7 +28,7 @@ const slides: Slide[] = [
     secondary: { label: "Browse All", href: "/products" },
   },
   {
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&h=700&fit=crop",
+    image: getCategoryHeroImage("home-kitchen") || "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&h=700&fit=crop",
     title: "🏠 Home & Kitchen",
     highlight: "Upgrade Your Kitchen",
     description: "Smart kitchen gadgets, cookware, storage solutions & everyday home essentials that make life easier.",
@@ -40,7 +42,7 @@ const slides: Slide[] = [
     cta: { label: "Shop Now", href: "/products?category=home-decor" },
   },
   {
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1400&h=700&fit=crop",
+    image: getCategoryHeroImage("gardening") || "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1400&h=700&fit=crop",
     title: "🌿 Gardening",
     highlight: "Grow Your Garden",
     description: "Premium tools, planters, seeds & garden decor — everything you need for a beautiful green space.",
@@ -54,7 +56,7 @@ const slides: Slide[] = [
     cta: { label: "Shop Now", href: "/products?category=gift-items" },
   },
   {
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=700&fit=crop",
+    image: getCategoryHeroImage("electronics") || "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=700&fit=crop",
     title: "⚡ Electronics",
     highlight: "Tech You'll Love",
     description: "Bluetooth speakers, smart gadgets, phone accessories & cutting-edge electronics at great prices.",
@@ -73,6 +75,13 @@ const slides: Slide[] = [
     highlight: "Stay Active & Fit",
     description: "Fitness gear, yoga mats, outdoor sports equipment & exercise accessories for an active lifestyle.",
     cta: { label: "Shop Now", href: "/products?category=sport-exercise" },
+  },
+  {
+    image: getCategoryHeroImage("wooden-toys") || "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=1400&h=700&fit=crop",
+    title: "🪵 Wooden Toys",
+    highlight: "Classic Wooden Play",
+    description: "Handcrafted wooden puzzles, board games, stacking toys & educational wooden sets kids love.",
+    cta: { label: "Shop Now", href: "/products?category=wooden-toys" },
   },
 ];
 

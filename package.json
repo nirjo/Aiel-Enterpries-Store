@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "upload-images": "node scripts/upload-images.mjs"
   },
   "dependencies": {
     "@react-email/components": "^1.0.7",
