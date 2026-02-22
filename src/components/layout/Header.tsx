@@ -15,6 +15,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { useCartStore } from "@/stores/cart";
 import { useWishlistStore } from "@/stores/wishlist";
 import { useUIStore } from "@/stores/ui";
@@ -87,7 +88,7 @@ export function Header() {
         {/* Top bar */}
         <div className="bg-primary-900/60 text-white/50 text-xs py-1.5 border-b border-primary-500/20">
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <p>🚀 Free shipping on anti-gravity orders over ₹999</p>
+            <p>🚀 Free shipping on orders over ₹999</p>
             <div className="hidden md:flex items-center gap-4">
               <Link href="/contact" className="hover:text-lime-400 transition-colors">
                 Contact Us
@@ -103,13 +104,8 @@ export function Header() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-400 flex items-center justify-center shadow-[0_0_20px_rgba(65,29,211,0.3)]">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <span className="font-display font-bold text-xl text-white/95 hidden sm:block tracking-wide">
-                {APP_NAME}
-              </span>
+            <Link href="/" className="flex items-center">
+              <BrandLogo className="scale-75 sm:scale-90 origin-left" variant="dark" />
             </Link>
 
             {/* Search bar - desktop */}
@@ -119,7 +115,7 @@ export function Header() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search anti-gravity toys..."
+                  placeholder="Search toys, home, electronics..."
                   className="w-full h-10 pl-4 pr-12 rounded-full border border-primary-500/30 bg-white/8 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-secondary-400/60 focus:ring-2 focus:ring-secondary-400/20 transition-all backdrop-blur-sm"
                 />
                 <button type="submit" className="absolute right-1 top-1 h-8 w-8 rounded-full bg-gradient-to-r from-primary-500 to-secondary-400 text-white flex items-center justify-center hover:from-primary-600 hover:to-secondary-500 transition-colors">
@@ -196,12 +192,12 @@ export function Header() {
                         onMouseEnter={() => handleMenuEnter(link.label)}
                         onMouseLeave={handleMenuLeave}
                       >
-                        <div className="bg-[#0f0f23]/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-primary-500/20 p-5 min-w-[680px]">
+                        <div className="bg-[#0f0f23]/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-primary-500/20 p-5 min-w-[820px]">
                           <div className="flex items-center justify-between mb-4 pb-3 border-b border-primary-500/20">
                             <h3 className="font-display font-bold text-white/95 text-base tracking-wide">{link.label}</h3>
                             <Link href={link.href} className="text-xs font-medium text-secondary-400 hover:text-secondary-300 transition-colors">View All →</Link>
                           </div>
-                          <div className="grid grid-cols-4 gap-3">
+                          <div className="grid grid-cols-5 gap-3">
                             {link.subcategories!.map((sub) => {
                               const categorySlug = getCategorySlug(link.href);
                               return (

@@ -18,40 +18,47 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1400&h=700&fit=crop",
-    title: "🧲 Levitation Toys",
-    highlight: "Defy Gravity",
-    description: "Magnetic levitation globes, floating speakers & hover gadgets that mesmerize kids and adults alike.",
-    cta: { label: "Shop Levitation", href: "/products?category=levitation-toys" },
-    secondary: { label: "Browse All", href: "/categories" },
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&h=700&fit=crop",
+    title: "🏠 Home & Kitchen",
+    highlight: "Upgrade Your Kitchen",
+    description: "Smart kitchen gadgets, cookware, storage solutions & everyday home essentials that make life easier.",
+    cta: { label: "Shop Now", href: "/products?category=home-kitchen" },
+    secondary: { label: "Browse All", href: "/products" },
   },
   {
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&h=700&fit=crop",
-    title: "🌀 Gyroscopes & Spinners",
-    highlight: "Mesmerizing Motion",
-    description: "Precision gyroscopes, Euler's disks & kinetic desk toys that spin forever. Pure physics magic.",
-    cta: { label: "Shop Gyroscopes", href: "/products?category=gyroscopes" },
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1400&h=700&fit=crop",
+    title: "🪞 Home Decor",
+    highlight: "Style Your Space",
+    description: "Wall art, candles, cushions & stylish decor pieces to transform every room in your home.",
+    cta: { label: "Shop Now", href: "/products?category=home-decor" },
   },
   {
-    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1400&h=700&fit=crop",
-    title: "🔬 STEM Kits",
-    highlight: "Learn by Playing",
-    description: "Feel Flux, magnet science, robotics & coding kits — hands-on STEM for curious young minds.",
-    cta: { label: "Shop STEM", href: "/products?category=stem-kits" },
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1400&h=700&fit=crop",
+    title: "🌿 Gardening",
+    highlight: "Grow Your Garden",
+    description: "Premium tools, planters, seeds & garden decor — everything you need for a beautiful green space.",
+    cta: { label: "Shop Now", href: "/products?category=gardening" },
   },
   {
-    image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1400&h=700&fit=crop",
-    title: "🧲 Magnetic Gadgets",
-    highlight: "Feel the Force",
-    description: "Ferrofluid art, magnetic putty, neodymium sets & mag-lev train kits that make physics tactile.",
-    cta: { label: "Shop Magnets", href: "/products?category=magnetic-gadgets" },
+    image: "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=1400&h=700&fit=crop",
+    title: "🎁 Gift Items",
+    highlight: "Perfect Gifts Await",
+    description: "Curated gift hampers, personalised presents & unique finds for birthdays, weddings & every occasion.",
+    cta: { label: "Shop Now", href: "/products?category=gift-items" },
   },
   {
-    image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&h=700&fit=crop",
-    title: "🚀 Space & Gravity",
-    highlight: "Explore the Cosmos",
-    description: "Planetarium projectors, plasma balls, rocket launchers & Newton's cradles — the universe at your fingertips.",
-    cta: { label: "Shop Space", href: "/products?category=space-gravity" },
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=700&fit=crop",
+    title: "⚡ Electronics",
+    highlight: "Tech You'll Love",
+    description: "Bluetooth speakers, smart gadgets, phone accessories & cutting-edge electronics at great prices.",
+    cta: { label: "Shop Now", href: "/products?category=electronics" },
+  },
+  {
+    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1400&h=700&fit=crop",
+    title: "🏋️ Sport & Exercise",
+    highlight: "Stay Active & Fit",
+    description: "Fitness gear, yoga mats, outdoor sports equipment & exercise accessories for an active lifestyle.",
+    cta: { label: "Shop Now", href: "/products?category=sport-exercise" },
   },
 ];
 
@@ -101,13 +108,11 @@ export function HeroCarousel() {
           className="absolute inset-0"
         >
           <Image src={slide.image} alt={slide.title} fill className="object-cover" sizes="100vw" priority={current === 0} />
-          {/* Tetradic gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#411dd3]/80 via-[#0f0f23]/50 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f23]/70 to-transparent" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4">
           <div className="max-w-xl">
@@ -149,7 +154,6 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Nav arrows */}
       <button onClick={prev} className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-500/30 backdrop-blur-md border border-primary-400/30 text-white flex items-center justify-center hover:bg-primary-500/50 hover:shadow-lg transition-all" aria-label="Previous slide">
         <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
       </button>
@@ -157,7 +161,6 @@ export function HeroCarousel() {
         <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
       </button>
 
-      {/* Dots */}
       <div className="absolute bottom-5 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
         {slides.map((_, i) => (
           <button

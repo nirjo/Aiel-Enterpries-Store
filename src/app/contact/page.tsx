@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with Aiel Enterprises. We're here to help with questions about anti-gravity toys, orders, and more.",
+  description: "Get in touch with Aiel Enterprises. We're here to help with questions about products, orders, and more.",
 };
 
 const contactInfo = [
@@ -47,7 +47,7 @@ export default function ContactPage() {
             Contact Us
           </h1>
           <p className="text-white/85 text-lg max-w-xl mx-auto">
-            Have a question about our anti-gravity toys? We&apos;d love to hear from you.
+            Have a question about our products? We&apos;d love to hear from you.
           </p>
         </div>
       </section>

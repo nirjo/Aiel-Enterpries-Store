@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { APP_NAME, FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 
 const CURRENT_YEAR = 2026;
@@ -14,15 +15,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-400 flex items-center justify-center shadow-[0_0_20px_rgba(65,29,211,0.3)]">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <span className="font-display font-bold text-xl tracking-wide text-white/95">{APP_NAME}</span>
+            <Link href="/" className="flex items-center mb-4">
+              <BrandLogo className="scale-75 sm:scale-90 origin-left" variant="dark" />
             </Link>
             <p className="text-sm text-white/50 mb-4">
-              Anti-gravity toys, magnetic levitation gadgets & STEM skill toys.
-              Your trusted destination for physics-defying fun.
+              Toys, home essentials, electronics & gifts — your one-stop family store.
+              Quality products for every age and need.
             </p>
             <div className="flex items-center gap-3">
               {[

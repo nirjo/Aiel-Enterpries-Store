@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Home, ShoppingBag, User, Heart, Package, Phone, ChevronDown } from "lucide-react";
 import { useUIStore } from "@/stores/ui";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { cn } from "@/lib/utils/cn";
 import { NAV_LINKS } from "@/lib/constants";
 import type { NavLink } from "@/lib/constants";
@@ -67,11 +68,8 @@ export function MobileNav() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-primary-500/20">
-              <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-400 flex items-center justify-center">
-                  <span className="text-white font-bold text-base">A</span>
-                </div>
-                <span className="font-display font-bold text-lg text-white/95 tracking-wide">Aiel</span>
+              <Link href="/" onClick={closeMobileMenu}>
+                <BrandLogo className="scale-75 origin-left" variant="dark" />
               </Link>
               <button onClick={closeMobileMenu} className="w-9 h-9 rounded-lg hover:bg-primary-500/20 flex items-center justify-center transition-colors text-white/60">
                 <X className="h-5 w-5" />

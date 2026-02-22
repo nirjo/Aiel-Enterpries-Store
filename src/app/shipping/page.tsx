@@ -77,7 +77,7 @@ export default function ShippingPage() {
             Shipping Information
           </h1>
           <p className="text-white/85 text-lg max-w-xl mx-auto">
-            Fast, reliable delivery across India — your anti-gravity toys are on their way!
+            Fast, reliable delivery across India — your orders are on their way!
           </p>
         </div>
       </section>

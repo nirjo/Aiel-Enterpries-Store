@@ -3,7 +3,7 @@ import { RotateCcw, CheckCircle2, XCircle, Clock, Package, ArrowRight } from "lu
 
 export const metadata: Metadata = {
   title: "Returns & Refunds",
-  description: "Aiel Enterprises returns and refund policy. Easy 30-day returns on anti-gravity toys and STEM products.",
+  description: "Aiel Enterprises returns and refund policy. Easy 30-day returns on all products.",
 };
 
 const steps = [
