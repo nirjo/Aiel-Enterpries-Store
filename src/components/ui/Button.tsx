@@ -28,6 +28,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200",
       "rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2",
       "disabled:opacity-50 disabled:cursor-not-allowed",
+      "select-none",          // prevent text selection on double-tap
+      "touch-action-manipulation", // handled via globals.css
       fullWidth && "w-full"
     );
 
@@ -55,10 +57,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const sizeStyles = {
-      sm: "h-8 px-3 text-sm",
-      md: "h-10 px-4 text-sm",
-      lg: "h-12 px-6 text-base",
-      icon: "h-10 w-10 p-0",
+      // sm bumped from h-8→h-10 so it clears 40px on mobile
+      sm:   "h-10 px-3 text-sm",
+      // md unchanged — 40px is fine, add slightly more padding for easier tapping
+      md:   "h-11 px-5 text-sm",
+      // lg unchanged — 48px is well above WCAG minimum
+      lg:   "h-12 px-6 text-base",
+      // icon: bumped to 44px (WCAG minimum)
+      icon: "h-11 w-11 p-0",
     };
 
     return (

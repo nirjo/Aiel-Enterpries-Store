@@ -498,20 +498,20 @@ export default function ProductDetailPage() {
                     key={i}
                     onClick={() => setSelectedImage(i)}
                     className={cn(
-                      "relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-200",
+                      "relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 flex-shrink-0",
                       i === selectedImage
                         ? "border-primary-400 shadow-glow ring-2 ring-primary-300 ring-offset-1 scale-105"
-                        : "border-transparent hover:border-surface-400 hover:scale-105"
+                        : "border-transparent hover:border-surface-400 hover:scale-105 active:scale-95"
                     )}
                     aria-label={`View image ${i + 1}`}
                   >
                     <Image src={img} alt="" fill className="object-cover" />
                   </button>
                 ))}
-                {/* "Zoom" hint */}
-                <div className="flex items-center gap-1 text-xs text-text-muted ml-2 self-center">
+                {/* Zoom hint — hidden on narrow mobile */}
+                <div className="hidden sm:flex items-center gap-1 text-xs text-text-muted ml-2 self-center">
                   <ZoomIn className="h-3.5 w-3.5" />
-                  Click to zoom
+                  Tap to zoom
                 </div>
               </div>
             )}
@@ -572,15 +572,15 @@ export default function ProductDetailPage() {
                 <div className="flex items-center border border-surface-400 rounded-xl overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 flex items-center justify-center hover:bg-surface-100 transition-colors"
+                    className="w-12 h-12 flex items-center justify-center hover:bg-surface-100 active:bg-surface-200 transition-colors"
                     aria-label="Decrease quantity"
                   >
                     <Minus className="h-4 w-4" />
                   </button>
-                  <span className="w-12 text-center font-semibold text-text-primary">{quantity}</span>
+                  <span className="w-12 text-center font-semibold text-text-primary select-none">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 flex items-center justify-center hover:bg-surface-100 transition-colors"
+                    className="w-12 h-12 flex items-center justify-center hover:bg-surface-100 active:bg-surface-200 transition-colors"
                     aria-label="Increase quantity"
                   >
                     <Plus className="h-4 w-4" />
@@ -588,15 +588,15 @@ export default function ProductDetailPage() {
                 </div>
                 <div className="flex items-center gap-1.5 text-sm text-success-600">
                   <Check className="h-4 w-4" />
-                  In stock · Ships in 2-3 days
+                  <span className="hidden xs:inline">In stock · </span>Ships in 2-3 days
                 </div>
               </div>
             </div>
 
             {/* ── Action Buttons ──────────────────────────────────────────── */}
             <div className="space-y-3 mb-8">
-              {/* Row 1: Add to Cart + Wishlist + Share */}
-              <div className="flex gap-3">
+              {/* Row 1: Add to Cart (full-width on mobile, flex-1 on larger) */}
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
                   className="flex-1 gap-2"
@@ -607,36 +607,39 @@ export default function ProductDetailPage() {
                   Add to Cart
                 </Button>
 
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className={cn(
-                    "gap-2 px-4 transition-all duration-300 border-2",
-                    wishlisted
-                      ? "border-red-400 bg-red-50 text-red-600 hover:bg-red-100"
-                      : "border-surface-400 hover:border-red-300 hover:text-red-500"
-                  )}
-                  onClick={handleWishlist}
-                  aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                >
-                  <Heart className={cn("h-5 w-5 transition-all", wishlisted && "fill-red-500 text-red-500")} />
-                  <span className="hidden sm:inline text-sm font-medium">
-                    {wishlisted ? "Wishlisted" : "Wishlist"}
-                  </span>
-                </Button>
+                {/* Wishlist + Share side-by-side on all sizes */}
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className={cn(
+                      "flex-1 sm:flex-none gap-2 transition-all duration-300 border-2",
+                      wishlisted
+                        ? "border-red-400 bg-red-50 text-red-600 hover:bg-red-100"
+                        : "border-surface-400 hover:border-red-300 hover:text-red-500"
+                    )}
+                    onClick={handleWishlist}
+                    aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                  >
+                    <Heart className={cn("h-5 w-5 transition-all", wishlisted && "fill-red-500 text-red-500")} />
+                    <span className="text-sm font-medium">
+                      {wishlisted ? "Wishlisted" : "Wishlist"}
+                    </span>
+                  </Button>
 
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-11 px-0"
-                  onClick={handleShare}
-                  aria-label="Share product"
-                >
-                  <Share2 className="h-5 w-5" />
-                </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="min-w-[48px] w-12 px-0"
+                    onClick={handleShare}
+                    aria-label="Share product"
+                  >
+                    <Share2 className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
 
-              {/* Row 2: Proceed to Checkout */}
+              {/* Row 2: Proceed to Checkout — always full width */}
               <Button
                 size="lg"
                 className="w-full gap-2"

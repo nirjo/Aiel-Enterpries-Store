@@ -80,27 +80,30 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-surface-100">
       {/* Breadcrumb */}
-      <div className="bg-white py-4 border-b border-surface-300">
+      <div className="bg-white border-b border-surface-300 pt-6 pb-4 shadow-sm">
         <div className="container mx-auto px-4">
-          <nav className="text-sm">
-            <ol className="flex items-center gap-2">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm">
               <li>
-                <Link href="/cart" className="text-text-muted hover:text-primary-500 transition-colors">
-                  Cart
-                </Link>
+                <Link href="/" className="text-text-muted hover:text-primary-500 transition-colors font-medium">Home</Link>
+              </li>
+              <li className="text-text-muted">›</li>
+              <li>
+                <Link href="/cart" className="text-text-muted hover:text-primary-500 transition-colors font-medium">Cart</Link>
               </li>
               <ChevronRight className="h-3 w-3 text-text-muted" />
-              <li className="text-text-primary font-medium">Checkout</li>
+              <li className="text-text-primary font-semibold">Checkout</li>
             </ol>
           </nav>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         <form onSubmit={handleSubmit}>
-          <div className="grid lg:grid-cols-2 gap-8">
+          {/* On mobile: summary first (order-first), form below */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {/* Left - Form */}
-            <div className="space-y-6">
+            <div className="space-y-5 order-2 lg:order-1">
               {/* Contact */}
               <div className="bg-white rounded-2xl border border-surface-300 p-6">
                 <h2 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
@@ -159,7 +162,7 @@ export default function CheckoutPage() {
                     onChange={handleInputChange}
                     placeholder="Apartment, suite, etc."
                   />
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
                       label="City"
                       name="city"
@@ -195,13 +198,13 @@ export default function CheckoutPage() {
                   Payment Method
                 </h2>
                 <div className="space-y-3">
-                  <label className="flex items-center gap-3 p-4 border border-primary-400 bg-primary-50 rounded-xl cursor-pointer">
+                    <label className="flex items-center gap-3 p-4 min-h-[56px] border border-primary-400 bg-primary-50 rounded-xl cursor-pointer">
                     <input type="radio" name="payment" defaultChecked className="text-primary-400" />
                     <CreditCard className="h-5 w-5 text-primary-500" />
                     <span className="font-medium">Pay with Razorpay</span>
                     <Badge variant="success" size="sm" className="ml-auto">Secure</Badge>
                   </label>
-                  <label className="flex items-center gap-3 p-4 border border-surface-400 rounded-xl cursor-pointer hover:bg-surface-50 transition-colors">
+                    <label className="flex items-center gap-3 p-4 min-h-[56px] border border-surface-400 rounded-xl cursor-pointer hover:bg-surface-50 transition-colors">
                     <input type="radio" name="payment" className="text-primary-400" />
                     <Truck className="h-5 w-5 text-text-muted" />
                     <span className="text-text-secondary">Cash on Delivery</span>
@@ -210,8 +213,8 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Right - Order Summary */}
-            <div>
+            {/* Right - Order Summary — moves to top on mobile */}
+            <div className="order-1 lg:order-2">
               <div className="bg-white rounded-2xl border border-surface-300 p-6 lg:sticky lg:top-40">
                 <h2 className="text-lg font-semibold text-text-primary mb-6">
                   Order Summary
