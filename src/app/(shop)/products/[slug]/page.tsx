@@ -465,22 +465,29 @@ export default function ProductDetailPage() {
 
           {/* ── Image Gallery ─────────────────────────────────────────────── */}
           <div className="space-y-4">
-            {/* Main image with SVG frame */}
-            <SvgImageFrame
-              src={images[selectedImage] || ""}
-              alt={product.name}
-              selected
+            {/* Main image */}
+            <div
+              className="relative aspect-square rounded-2xl overflow-hidden bg-surface-100 cursor-zoom-in group shadow-md hover:shadow-xl transition-shadow duration-300"
               onClick={() => setLightboxOpen(true)}
-              priority
-            />
-
-            {/* Discount badge overlay — absolute on parent */}
-            <div className="relative -mt-4">
-              {discount > 0 && (
-                <div className="absolute -top-[calc(100%+8px)] left-3 z-20">
-                  <Badge variant="error" className="shadow-md">-{discount}% OFF</Badge>
-                </div>
+            >
+              {images[selectedImage] && (
+                <Image
+                  src={images[selectedImage]}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               )}
+              {discount > 0 && (
+                <Badge variant="error" className="absolute top-4 left-4 shadow-md">
+                  -{discount}% OFF
+                </Badge>
+              )}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                <ZoomIn className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" />
+              </div>
             </div>
 
             {/* Thumbnails */}
