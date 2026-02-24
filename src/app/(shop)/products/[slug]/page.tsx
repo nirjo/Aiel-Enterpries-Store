@@ -436,15 +436,25 @@ export default function ProductDetailPage() {
       )}
 
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
-      <div className="bg-surface-100 py-4 border-b border-surface-300">
+      <div className="bg-surface-50 border-b border-surface-200 pt-6 pb-4 shadow-sm">
         <div className="container mx-auto px-4">
-          <nav className="text-sm">
-            <ol className="flex items-center gap-2 flex-wrap">
-              <li><Link href="/" className="text-text-muted hover:text-primary-500 transition-colors">Home</Link></li>
-              <ChevronRight className="h-3 w-3 text-text-muted flex-shrink-0" />
-              <li><Link href="/products" className="text-text-muted hover:text-primary-500 transition-colors">Products</Link></li>
-              <ChevronRight className="h-3 w-3 text-text-muted flex-shrink-0" />
-              <li className="text-text-primary font-medium line-clamp-1">{product.name}</li>
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-start gap-2 flex-wrap text-sm">
+              <li className="flex items-center gap-2 flex-shrink-0">
+                <Link href="/" className="text-text-muted hover:text-primary-500 transition-colors font-medium">
+                  Home
+                </Link>
+              </li>
+              <ChevronRight className="h-3.5 w-3.5 text-text-muted flex-shrink-0 mt-0.5" />
+              <li className="flex items-center gap-2 flex-shrink-0">
+                <Link href="/products" className="text-text-muted hover:text-primary-500 transition-colors font-medium">
+                  Products
+                </Link>
+              </li>
+              <ChevronRight className="h-3.5 w-3.5 text-text-muted flex-shrink-0 mt-0.5" />
+              <li className="text-text-primary font-semibold line-clamp-2 max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl leading-snug">
+                {product.name}
+              </li>
             </ol>
           </nav>
         </div>
