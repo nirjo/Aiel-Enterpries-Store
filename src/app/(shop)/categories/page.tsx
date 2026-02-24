@@ -49,6 +49,23 @@ export default async function CategoriesPage() {
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
+      {/* ── Breadcrumb ── */}
+      <div className="bg-surface-50 border-b border-surface-200 pt-6 pb-4 shadow-sm">
+        <div className="container mx-auto px-4">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm flex-wrap">
+              <li>
+                <Link href="/" className="text-text-muted hover:text-primary-500 transition-colors font-medium">
+                  Home
+                </Link>
+              </li>
+              <li className="text-text-muted">›</li>
+              <li className="text-text-primary font-semibold">All Categories</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       {/* Hero banner */}
       <div className="bg-gradient-to-br from-primary-100/40 via-[#f8fafc] to-secondary-100/30 py-12 md:py-16 border-b border-primary-200/30">
         <div className="container mx-auto px-4 text-center">
