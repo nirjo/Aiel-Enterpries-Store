@@ -5,6 +5,8 @@ import { NAV_LINKS } from "@/lib/constants";
 import type { NavLink } from "@/lib/constants";
 import type { Category } from "@/types/database";
 
+export const revalidate = 0; // always fetch fresh from Supabase
+
 const fallbackCategories: Category[] = [
   { id: "1", name: "Sensory Toys", slug: "sensory-toys", description: "Stimulating fidget & sensory toys", image_url: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800&h=400&fit=crop", parent_id: null, sort_order: 1, is_active: true, created_at: "", updated_at: "" },
   { id: "2", name: "Montessori Toys", slug: "montessori-toys", description: "Hands-on learning for little ones", image_url: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&h=400&fit=crop", parent_id: null, sort_order: 2, is_active: true, created_at: "", updated_at: "" },
