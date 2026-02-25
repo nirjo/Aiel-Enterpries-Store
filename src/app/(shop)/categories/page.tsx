@@ -82,7 +82,7 @@ export default async function CategoriesPage() {
 
       {/* Categories grid */}
       <div className="container mx-auto px-4 py-10 md:py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
           {categories.map((cat) => {
             // Find matching subcategory in the nav link
             const matchingSub = toyParadiseLink?.subcategories?.find(
