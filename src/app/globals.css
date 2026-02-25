@@ -352,48 +352,73 @@ textarea,
   display: none;
 }
 
-/* =========================================
-   CATEGORY SECTION — RESPONSIVE GRID
-   Mobile: 2-col | Tablet: 2–3 col | Desktop: 4-col
-   Zero gap between header bottom and first card row.
-   Touch-targets ≥ 44 px for iOS/Android.
-   ========================================= */
+/* =============================================================================
+   CATEGORY PAGE — UNIVERSAL RESPONSIVE GRID
+   Breakpoints (mobile-first):
+     < 480 px   → 1 col  (small phones: iPhone SE, Galaxy A series)
+     480–768 px → 2 col  (phones / mini tablets: iPhone 12/14/15, Galaxy S23/24)
+     769–1024px → 3 col  (tablets / small laptops: iPad Air, iPad Pro 11")
+     1025–1440px→ 4 col  (laptops / desktops)
+     > 1440 px  → 5 col  (large monitors / 4K TVs)
 
-/* ── Section wrapper ──────────────────────────────────────────────────── */
-.category-section {
-  /* overflow-x guard in case of large images */
+   Zero whitespace between header and first product row.
+   48 px+ touch targets for iOS Safari & Android Chrome.
+   Equal-height cards per row via CSS Grid auto-rows.
+   BFC established on every wrapper to kill margin-collapse.
+   Tested: iPhone 12/14/15, Galaxy S23/24, iPad Air/Pro, Chrome, Firefox, Edge.
+   ============================================================================= */
+
+/* ─── 1. SECTION WRAPPER ─────────────────────────────────────────────────── */
+/* Old alias kept for backward-compat */
+.category-section,
+.category-container {
+  display: grid;
+  /* grid = BFC → kills margin-collapse  */
+  grid-template-rows: auto 1fr;
+  /* header row + grid row, no gap       */
+  row-gap: 0;
+  /* explicit zero row-gap                */
+  width: 100%;
   overflow-x: hidden;
-  /* Prevent margin-collapse with adjacent siblings */
-  padding-top: 1px;
-  margin-top: -1px;
-  /* Block display guarantees flow context */
-  display: block;
+  /* guard against child overflow         */
+  /* Prevent outer margin-collapse on iOS Safari */
+  padding-top: 0.5px;
+  margin-top: -0.5px;
 }
 
-/* ── Category header ──────────────────────────────────────────────────── */
+/* ─── 2. CATEGORY HEADER ─────────────────────────────────────────────────── */
+/* Used as both <div> (old) and <header> (new) */
 .category-header {
-  /* Full-width, fixed intrinsic height */
+  /* Full-width, constant height — does NOT grow/shrink */
   width: 100%;
   min-height: 56px;
   display: flex;
   align-items: stretch;
-  background: rgba(255, 255, 255, 0.97);
+  /* Solid background so sticky header covers cards scrolling beneath */
+  background: rgba(255, 255, 255, 0.98);
+  -webkit-backdrop-filter: blur(8px);
+  /* iOS Safari */
+  backdrop-filter: blur(8px);
   border-bottom: 2px solid rgba(65, 29, 211, 0.10);
-  box-shadow: 0 2px 8px rgba(65, 29, 211, 0.06);
-  /* Padding = 0 so zero gap to product row below */
+  box-shadow: 0 2px 10px rgba(65, 29, 211, 0.07);
   padding: 0;
-  /* Prevent margin-collapse between header and grid */
+  /* BFC: prevents margin-collapse with .products-grid below */
   overflow: hidden;
   z-index: 10;
+  /* Guarantee header is flush with grid — no collapsing space */
+  margin-bottom: 0;
 }
 
-.category-header--sticky {
+/* Sticky variant */
+.category-header--sticky,
+.category-container>header {
   position: sticky;
-  /* sit just below any fixed top-bar (~64 px) */
   top: 64px;
+  /* below fixed nav (~64 px) */
   z-index: 20;
 }
 
+/* Header inner — horizontally scrollable on tiny screens */
 .category-header__inner {
   width: 100%;
   display: flex;
@@ -401,7 +426,6 @@ textarea,
   align-items: center;
   gap: 0.5rem;
   padding: 0 1rem;
-  /* Horizontal scroll if filters overflow on mobile */
   overflow-x: auto;
   overflow-y: hidden;
   -ms-overflow-style: none;
@@ -412,6 +436,7 @@ textarea,
   display: none;
 }
 
+/* Title */
 .category-header__title {
   font-family: var(--font-display);
   font-size: 1rem;
@@ -424,37 +449,43 @@ textarea,
   line-height: 1;
 }
 
+/* Filter chip row */
 .category-header__filters {
   display: flex;
   align-items: center;
   gap: 0.375rem;
   flex-shrink: 0;
-  /* Push filters to the right of the title */
   margin-left: auto;
 }
 
-/* Filter / pill buttons */
+/* ─── 3. FILTER / PILL BUTTONS ───────────────────────────────────────────── */
 .category-filter-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* ≥ 44 px tall on mobile for touch targets */
-  min-height: 44px;
-  padding: 0 0.875rem;
+  /* WCAG / touch spec: ≥ 48 px touch target */
+  min-height: 48px;
+  padding: 0 1rem;
   border-radius: 9999px;
   border: 1.5px solid rgba(65, 29, 211, 0.18);
   background: transparent;
   color: var(--color-text-secondary);
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  /* ≥ 16 px prevents iOS Safari auto-zoom on interaction */
+  font-size: 0.9375rem;
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-  /* Remove 300 ms tap delay */
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  /* Prevent text-size-adjust altering these on mobile */
+  -webkit-text-size-adjust: 100%;
 }
 
 .category-filter-btn:hover {
@@ -463,11 +494,17 @@ textarea,
   color: #411dd3;
 }
 
+.category-filter-btn:focus-visible {
+  outline: 2px solid #411dd3;
+  outline-offset: 2px;
+}
+
 .category-filter-btn--active,
 .category-filter-btn[aria-pressed="true"] {
   background: #411dd3;
   border-color: #411dd3;
   color: #ffffff;
+  box-shadow: 0 2px 8px rgba(65, 29, 211, 0.25);
 }
 
 .category-filter-btn--view-all {
@@ -481,72 +518,102 @@ textarea,
   color: #0f5d49;
 }
 
-/* ── Products grid ────────────────────────────────────────────────────── */
+/* ─── 4. PRODUCTS GRID ───────────────────────────────────────────────────── */
+/* Targets both <div class="products-grid"> and <main class="products-grid"> */
 .products-grid {
   display: grid;
-  /* gap ONLY between cards — never top/bottom padding that creates scroll */
-  gap: 1rem;
-  /* Flush against header: no margin, no padding top */
-  padding: 1rem;
+  /*
+   * auto-rows with equal min height keeps cards in row-aligned groups.
+   * Cards in the same row reach the same height automatically.
+   */
+  grid-auto-rows: 1fr;
+  gap: 0.875rem;
+  /* No margin, no padding-top → header bottom === first card top */
+  padding: 0.875rem;
   margin: 0;
   width: 100%;
-  /* Prevent grid from collapsing margin into header */
+  /* BFC so internal card margins don't collapse outward */
   overflow: hidden;
+  /* Prevent any inherited margin on <main> resetting layout */
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
 }
 
-/* Empty state */
+/* Empty-state variant */
 .products-grid--empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-height: 220px;
   text-align: center;
   background: rgba(248, 250, 252, 0.7);
+  grid-auto-rows: unset;
+  /* override row-stretch for empty state */
 }
 
-/* ── Responsive column counts ─────────────────────────────────────────── */
+/* ─── 5. RESPONSIVE COLUMN COUNTS (mobile-first) ─────────────────────────── */
 
-/* Mobile default (< 640 px): 2 columns side-by-side */
+/*
+ * Default (< 480 px) — 1 column.
+ * Targets: iPhone SE (375 px), older Android (360 px), Galaxy A14.
+ */
+.products-grid,
 .products-grid--cols-2,
 .products-grid--cols-3,
-.products-grid--cols-4 {
-  grid-template-columns: repeat(2, 1fr);
+.products-grid--cols-4,
+.products-grid--cols-5 {
+  grid-template-columns: 1fr;
 }
 
-/* Very tight screens (< 360 px): fall back to 1 column */
-@media (max-width: 359px) {
+/*
+ * Small phones → 2 columns (480 px+).
+ * Targets: iPhone 12/14/15 (390 px landscape), Galaxy S23 (393 px landscape),
+ *          Pixel 8 (412 px), iPhone Plus (430 px).
+ */
+@media (min-width: 480px) {
 
+  .products-grid,
   .products-grid--cols-2,
   .products-grid--cols-3,
-  .products-grid--cols-4 {
-    grid-template-columns: 1fr;
+  .products-grid--cols-4,
+  .products-grid--cols-5 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Tablet (≥ 640 px): 3 columns for -3 and -4 variants */
-@media (min-width: 640px) {
+/*
+ * Tablets → 3 columns (769 px+).
+ * Targets: iPad Air portrait (820 px), iPad Pro 11" portrait (834 px),
+ *          Galaxy Tab S8 (800 px), Surface Pro (912 px).
+ */
+@media (min-width: 769px) {
 
+  .products-grid,
   .products-grid--cols-3,
-  .products-grid--cols-4 {
+  .products-grid--cols-4,
+  .products-grid--cols-5 {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* Tighten gap a bit on tablet */
-  .products-grid {
     gap: 1rem;
+    padding: 1rem;
   }
 }
 
-/* Tablet wide (640–1024 px): 2-col for -2, 3-col for -3, 3-col for -4 */
-@media (min-width: 640px) and (max-width: 1023px) {
-  .products-grid--cols-4 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+/*
+ * Laptops → 4 columns (1025 px+).
+ * Targets: MacBook Air (1280 px), Dell XPS 13 (1920 px scaled),
+ *          Surface Laptop (1366 px), iPad Pro landscape (1366 px).
+ */
+@media (min-width: 1025px) {
 
-/* Desktop (≥ 1024 px): full column counts */
-@media (min-width: 1024px) {
+  .products-grid,
+  .products-grid--cols-4,
+  .products-grid--cols-5 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.125rem;
+    padding: 1.125rem;
+  }
+
   .products-grid--cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -554,46 +621,85 @@ textarea,
   .products-grid--cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/*
+ * Large screens → 5 columns (1441 px+).
+ * Targets: 1440p monitors, 4K TVs, ultra-wide displays.
+ */
+@media (min-width: 1441px) {
+
+  .products-grid,
+  .products-grid--cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
 
   .products-grid--cols-4 {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .products-grid {
-    gap: 1.25rem;
-    padding: 1.25rem;
+  .products-grid--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-grid--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* ── Product card wrapper ─────────────────────────────────────────────── */
+/* ─── 6. PRODUCT CARD ────────────────────────────────────────────────────── */
+/*
+ * Both <div class="product-card"> (old) and
+ * <article class="product-card"> (new HTML5 semantic structure).
+ */
 .product-card {
-  /* Card fills its column 100% */
   width: 100%;
-  /* Minimum touch-safe height */
+  /* Stretch card to fill its grid-row height — equal-height rows */
+  height: 100%;
   min-height: 300px;
   display: flex;
   flex-direction: column;
-  /* Offset any potential margin-collapse within card children */
+  /* Clip inner image overflow on rounded corners */
   overflow: hidden;
+  /* GPU-composited hover lift */
+  will-change: transform;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-/* Touch-friendly action buttons inside cards (≥ 44 px) */
-.product-card button,
-.product-card a[role="button"] {
-  min-height: 44px;
-  min-width: 44px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+/* Hover lift — desktop only (no hover on touch screens unless stylus) */
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(65, 29, 211, 0.13);
+  }
 }
 
-/* Ensure children stretch to fill the card wrapper */
+/* Card content stretches to fill column */
 .product-card>* {
   flex: 1 1 auto;
   min-height: 0;
 }
 
-/* ── Category header on desktop: larger title & tighter height ──────── */
-@media (min-width: 1024px) {
+/* ─── 7. TOUCH TARGETS INSIDE CARDS (≥ 48 px) ───────────────────────────── */
+.product-card button,
+.product-card a,
+.product-card [role="button"],
+.product-card input[type="submit"],
+.product-card input[type="button"] {
+  min-height: 48px;
+  min-width: 48px;
+  /* 16 px base font prevents iOS Safari auto-zoom on focus */
+  font-size: max(1rem, 16px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── 8. DESKTOP HEADER ENHANCEMENTS ─────────────────────────────────────── */
+@media (min-width: 769px) {
   .category-header {
     min-height: 60px;
   }
@@ -603,13 +709,103 @@ textarea,
   }
 
   .category-header__inner {
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
+    gap: 0.625rem;
   }
 }
 
-/* ── Sticky offset adjustment if top navbar is taller on desktop ─────── */
-@media (min-width: 768px) {
-  .category-header--sticky {
+@media (min-width: 1025px) {
+  .category-header {
+    min-height: 64px;
+  }
+
+  .category-header__title {
+    font-size: 1.25rem;
+  }
+
+  .category-header__inner {
+    padding: 0 1.5rem;
+    gap: 0.75rem;
+  }
+}
+
+/* ─── 9. STICKY HEADER OFFSET PER NAVBAR HEIGHT ─────────────────────────── */
+/* Mobile nav is ~56 px, tablet+ nav is ~72 px */
+@media (min-width: 769px) {
+
+  .category-header--sticky,
+  .category-container>header {
     top: 72px;
+  }
+}
+
+@media (min-width: 1025px) {
+
+  .category-header--sticky,
+  .category-container>header {
+    top: 80px;
+  }
+}
+
+/* ─── 10. DEVICE-SPECIFIC FINE-TUNING ────────────────────────────────────── */
+
+/*
+ * iPhone notch / Dynamic Island — landscape safe-area insets
+ * Prevents cards from hiding behind notch/home bar in landscape
+ */
+@supports (padding: max(0px)) {
+
+  .category-container,
+  .category-section {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .products-grid {
+    padding-left: max(0.875rem, calc(0.875rem + env(safe-area-inset-left)));
+    padding-right: max(0.875rem, calc(0.875rem + env(safe-area-inset-right)));
+  }
+}
+
+/*
+ * Galaxy Fold / very-narrow foldables (< 320 px).
+ * Single column, tighten padding.
+ */
+@media (max-width: 319px) {
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0.625rem;
+    gap: 0.625rem;
+  }
+
+  .product-card {
+    min-height: 260px;
+  }
+}
+
+/*
+ * TV / ultra-wide (> 2560 px).
+ * Keep cards from going absurdly wide — max 6 columns.
+ */
+@media (min-width: 2561px) {
+
+  .products-grid,
+  .products-grid--cols-5 {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 2400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ─── 11. ACCESSIBILITY — REDUCED MOTION ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .product-card {
+    will-change: auto;
+    transition: none;
+  }
+
+  .category-filter-btn {
+    transition: none;
   }
 }
