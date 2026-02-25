@@ -315,6 +315,9 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [slideDir, setSlideDir] = useState<"left" | "right" | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const thumbsRef = useRef<HTMLDivElement>(null);
   const [quantity, setQuantity] = useState(1);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -419,8 +422,44 @@ export default function ProductDetailPage() {
     }
   };
 
-  const goPrev = () => setSelectedImage((i) => (i - 1 + images.length) % images.length);
-  const goNext = () => setSelectedImage((i) => (i + 1) % images.length);
+  const slideToIndex = useCallback((next: number, dir: "left" | "right") => {
+    if (isAnimating || next === selectedImage) return;
+    setSlideDir(dir);
+    setIsAnimating(true);
+    setSelectedImage(next);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setSlideDir(null);
+    }, 380);
+    // scroll thumb into view
+    setTimeout(() => {
+      const strip = thumbsRef.current;
+      if (!strip) return;
+      const thumb = strip.children[next] as HTMLElement;
+      if (thumb) thumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }, 50);
+  }, [isAnimating, selectedImage]);
+
+  const goPrev = useCallback(() => {
+    const next = (selectedImage - 1 + images.length) % images.length;
+    slideToIndex(next, "right");
+  }, [selectedImage, images.length, slideToIndex]);
+
+  const goNext = useCallback(() => {
+    const next = (selectedImage + 1) % images.length;
+    slideToIndex(next, "left");
+  }, [selectedImage, images.length, slideToIndex]);
+
+  // Touch swipe state
+  const touchStartX = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) < 40) return; // too small
+    if (dx < 0) goNext(); else goPrev();
+  };
 
   return (
     <div className="min-h-screen">
@@ -463,53 +502,136 @@ export default function ProductDetailPage() {
       <div className="container mx-auto px-4 py-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
 
-          {/* ── Image Gallery ─────────────────────────────────────────────── */}
-          <div className="space-y-4">
-            {/* Main image */}
+          {/* ── Image Carousel ────────────────────────────────────────────── */}
+          <div className="space-y-3">
+            {/* ── Main sliding frame ── */}
             <div
-              className="relative aspect-square rounded-2xl overflow-hidden bg-surface-100 cursor-zoom-in group shadow-md hover:shadow-xl transition-shadow duration-300"
-              onClick={() => setLightboxOpen(true)}
+              className="relative aspect-square rounded-2xl overflow-hidden bg-surface-100 shadow-md select-none"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
-              {images[selectedImage] && (
-                <Image
-                  src={images[selectedImage]}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              )}
+              {/* Slides */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr",
+                }}
+              >
+                {images.map((img, i) => {
+                  const isActive = i === selectedImage;
+
+                  return (
+                    <div
+                      key={i}
+                      className="absolute inset-0"
+                      style={{
+                        transform: `translateX(${isActive ? "0%" : (i < selectedImage ? "-100%" : "100%")})`,
+                        transition: isAnimating ? "transform 0.36s cubic-bezier(0.4,0,0.2,1)" : "none",
+                        zIndex: isActive ? 1 : 0,
+                        willChange: "transform",
+                      }}
+                      aria-hidden={!isActive}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${product.name} — image ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        priority={i === 0}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Discount badge */}
               {discount > 0 && (
-                <Badge variant="error" className="absolute top-4 left-4 shadow-md">
+                <Badge variant="error" className="absolute top-4 left-4 z-10 shadow-md">
                   -{discount}% OFF
                 </Badge>
               )}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                <ZoomIn className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" />
-              </div>
+
+              {/* Counter pill */}
+              {images.length > 1 && (
+                <div className="absolute top-4 right-4 z-10 bg-black/50 text-white text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                  {selectedImage + 1} / {images.length}
+                </div>
+              )}
+
+              {/* Prev / Next arrows — always visible on mobile, hover on desktop */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center transition-all active:scale-90 touch-manipulation"
+                    onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="h-5 w-5 text-gray-700" />
+                  </button>
+                  <button
+                    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center transition-all active:scale-90 touch-manipulation"
+                    onClick={(e) => { e.stopPropagation(); goNext(); }}
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="h-5 w-5 text-gray-700" />
+                  </button>
+                </>
+              )}
+
+              {/* Dot indicators */}
+              {images.length > 1 && images.length <= 8 && (
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => slideToIndex(i, i > selectedImage ? "left" : "right")}
+                      aria-label={`Go to image ${i + 1}`}
+                      className={cn(
+                        "rounded-full transition-all duration-300 touch-manipulation",
+                        i === selectedImage
+                          ? "w-5 h-2 bg-white shadow"
+                          : "w-2 h-2 bg-white/50 hover:bg-white/75"
+                      )}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Zoom tap target */}
+              <button
+                className="absolute inset-0 z-[2] cursor-zoom-in"
+                style={{ background: "transparent" }}
+                onClick={() => setLightboxOpen(true)}
+                aria-label="Open full-screen view"
+              />
             </div>
 
-            {/* Thumbnails */}
+            {/* ── Thumbnail strip ── */}
             {images.length > 1 && (
-              <div className="flex gap-2 flex-wrap pt-1">
+              <div
+                ref={thumbsRef}
+                className="flex gap-2 overflow-x-auto pb-1 snap-x snap-mandatory hide-scrollbar"
+                style={{ scrollbarWidth: "none" }}
+              >
                 {images.map((img, i) => (
                   <button
                     key={i}
-                    onClick={() => setSelectedImage(i)}
+                    onClick={() => slideToIndex(i, i > selectedImage ? "left" : "right")}
                     className={cn(
-                      "relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 flex-shrink-0",
+                      "relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 snap-start touch-manipulation",
                       i === selectedImage
-                        ? "border-primary-400 shadow-glow ring-2 ring-primary-300 ring-offset-1 scale-105"
-                        : "border-transparent hover:border-surface-400 hover:scale-105 active:scale-95"
+                        ? "border-primary-400 ring-2 ring-primary-300 ring-offset-1 scale-105"
+                        : "border-transparent hover:border-surface-400 hover:scale-105 active:scale-95 opacity-70 hover:opacity-100"
                     )}
                     aria-label={`View image ${i + 1}`}
+                    aria-pressed={i === selectedImage}
                   >
                     <Image src={img} alt="" fill className="object-cover" />
                   </button>
                 ))}
-                {/* Zoom hint — hidden on narrow mobile */}
-                <div className="hidden sm:flex items-center gap-1 text-xs text-text-muted ml-2 self-center">
+                <div className="hidden sm:flex items-center gap-1 text-xs text-text-muted ml-1 flex-shrink-0 self-center">
                   <ZoomIn className="h-3.5 w-3.5" />
                   Tap to zoom
                 </div>
