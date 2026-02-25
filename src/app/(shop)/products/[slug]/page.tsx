@@ -359,6 +359,48 @@ export default function ProductDetailPage() {
 
   useEffect(() => { fetchProduct(); }, [fetchProduct]);
 
+  // ── Derive images early (before early returns) so hooks below are unconditional
+  const images = product?.images ?? (product?.thumbnail_url ? [product.thumbnail_url] : []);
+
+  // ── Carousel callbacks — MUST be above early returns (Rules of Hooks) ────────
+  const slideToIndex = useCallback((next: number, dir: "left" | "right") => {
+    if (isAnimating || next === selectedImage) return;
+    setSlideDir(dir);
+    setIsAnimating(true);
+    setSelectedImage(next);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setSlideDir(null);
+    }, 380);
+    setTimeout(() => {
+      const strip = thumbsRef.current;
+      if (!strip) return;
+      const thumb = strip.children[next] as HTMLElement;
+      if (thumb) thumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }, 50);
+  }, [isAnimating, selectedImage]);
+
+  const goPrev = useCallback(() => {
+    const next = (selectedImage - 1 + images.length) % images.length;
+    slideToIndex(next, "right");
+  }, [selectedImage, images.length, slideToIndex]);
+
+  const goNext = useCallback(() => {
+    const next = (selectedImage + 1) % images.length;
+    slideToIndex(next, "left");
+  }, [selectedImage, images.length, slideToIndex]);
+
+  const touchStartX = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0) goNext(); else goPrev();
+  };
+
+  // ── Early returns (after all hooks) ─────────────────────────────────────────
   if (loading) return <ProductSkeleton />;
 
   if (notFound || !product) {
@@ -374,7 +416,6 @@ export default function ProductDetailPage() {
     );
   }
 
-  const images = product.images ?? (product.thumbnail_url ? [product.thumbnail_url] : []);
   const discount = product.compare_at_price ? calculateDiscount(product.price, product.compare_at_price) : 0;
   const isSpiceJar = product.slug === "premium-revolving-spice-jar-set";
   const wishlisted = isInWishlist(product.id);
@@ -420,45 +461,6 @@ export default function ProductDetailPage() {
       await navigator.clipboard.writeText(window.location.href);
       toast.success("Link copied!", "Product link copied to clipboard");
     }
-  };
-
-  const slideToIndex = useCallback((next: number, dir: "left" | "right") => {
-    if (isAnimating || next === selectedImage) return;
-    setSlideDir(dir);
-    setIsAnimating(true);
-    setSelectedImage(next);
-    setTimeout(() => {
-      setIsAnimating(false);
-      setSlideDir(null);
-    }, 380);
-    // scroll thumb into view
-    setTimeout(() => {
-      const strip = thumbsRef.current;
-      if (!strip) return;
-      const thumb = strip.children[next] as HTMLElement;
-      if (thumb) thumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    }, 50);
-  }, [isAnimating, selectedImage]);
-
-  const goPrev = useCallback(() => {
-    const next = (selectedImage - 1 + images.length) % images.length;
-    slideToIndex(next, "right");
-  }, [selectedImage, images.length, slideToIndex]);
-
-  const goNext = useCallback(() => {
-    const next = (selectedImage + 1) % images.length;
-    slideToIndex(next, "left");
-  }, [selectedImage, images.length, slideToIndex]);
-
-  // Touch swipe state
-  const touchStartX = useRef<number | null>(null);
-  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const dx = e.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-    if (Math.abs(dx) < 40) return; // too small
-    if (dx < 0) goNext(); else goPrev();
   };
 
   return (
