@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { createRazorpayOrder, generateOrderNumber } from "@/lib/razorpay";
 import { createClient } from "@supabase/supabase-js";
 
+// Force Node.js runtime (razorpay SDK uses Node crypto)
+export const runtime = "nodejs";
+
 // Use service-role client for server-side DB operations
 function getSupabaseAdmin() {
     return createClient(

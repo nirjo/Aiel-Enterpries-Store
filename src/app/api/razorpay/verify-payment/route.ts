@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyRazorpaySignature } from "@/lib/razorpay";
 import { createClient } from "@supabase/supabase-js";
 
+// Force Node.js runtime (razorpay lib uses Node crypto)
+export const runtime = "nodejs";
+
 function getSupabaseAdmin() {
     return createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
