@@ -351,3 +351,265 @@ textarea,
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* =========================================
+   CATEGORY SECTION — RESPONSIVE GRID
+   Mobile: 2-col | Tablet: 2–3 col | Desktop: 4-col
+   Zero gap between header bottom and first card row.
+   Touch-targets ≥ 44 px for iOS/Android.
+   ========================================= */
+
+/* ── Section wrapper ──────────────────────────────────────────────────── */
+.category-section {
+  /* overflow-x guard in case of large images */
+  overflow-x: hidden;
+  /* Prevent margin-collapse with adjacent siblings */
+  padding-top: 1px;
+  margin-top: -1px;
+  /* Block display guarantees flow context */
+  display: block;
+}
+
+/* ── Category header ──────────────────────────────────────────────────── */
+.category-header {
+  /* Full-width, fixed intrinsic height */
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 2px solid rgba(65, 29, 211, 0.10);
+  box-shadow: 0 2px 8px rgba(65, 29, 211, 0.06);
+  /* Padding = 0 so zero gap to product row below */
+  padding: 0;
+  /* Prevent margin-collapse between header and grid */
+  overflow: hidden;
+  z-index: 10;
+}
+
+.category-header--sticky {
+  position: sticky;
+  /* sit just below any fixed top-bar (~64 px) */
+  top: 64px;
+  z-index: 20;
+}
+
+.category-header__inner {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  /* Horizontal scroll if filters overflow on mobile */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.category-header__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.category-header__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.category-header__filters {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+  /* Push filters to the right of the title */
+  margin-left: auto;
+}
+
+/* Filter / pill buttons */
+.category-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* ≥ 44 px tall on mobile for touch targets */
+  min-height: 44px;
+  padding: 0 0.875rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(65, 29, 211, 0.18);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  /* Remove 300 ms tap delay */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-filter-btn:hover {
+  background: rgba(65, 29, 211, 0.06);
+  border-color: rgba(65, 29, 211, 0.35);
+  color: #411dd3;
+}
+
+.category-filter-btn--active,
+.category-filter-btn[aria-pressed="true"] {
+  background: #411dd3;
+  border-color: #411dd3;
+  color: #ffffff;
+}
+
+.category-filter-btn--view-all {
+  border-color: rgba(29, 211, 156, 0.40);
+  color: #1bb78a;
+}
+
+.category-filter-btn--view-all:hover {
+  background: rgba(29, 211, 156, 0.08);
+  border-color: #1dd39c;
+  color: #0f5d49;
+}
+
+/* ── Products grid ────────────────────────────────────────────────────── */
+.products-grid {
+  display: grid;
+  /* gap ONLY between cards — never top/bottom padding that creates scroll */
+  gap: 1rem;
+  /* Flush against header: no margin, no padding top */
+  padding: 1rem;
+  margin: 0;
+  width: 100%;
+  /* Prevent grid from collapsing margin into header */
+  overflow: hidden;
+}
+
+/* Empty state */
+.products-grid--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  background: rgba(248, 250, 252, 0.7);
+}
+
+/* ── Responsive column counts ─────────────────────────────────────────── */
+
+/* Mobile default (< 640 px): 2 columns side-by-side */
+.products-grid--cols-2,
+.products-grid--cols-3,
+.products-grid--cols-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Very tight screens (< 360 px): fall back to 1 column */
+@media (max-width: 359px) {
+
+  .products-grid--cols-2,
+  .products-grid--cols-3,
+  .products-grid--cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet (≥ 640 px): 3 columns for -3 and -4 variants */
+@media (min-width: 640px) {
+
+  .products-grid--cols-3,
+  .products-grid--cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Tighten gap a bit on tablet */
+  .products-grid {
+    gap: 1rem;
+  }
+}
+
+/* Tablet wide (640–1024 px): 2-col for -2, 3-col for -3, 3-col for -4 */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .products-grid--cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop (≥ 1024 px): full column counts */
+@media (min-width: 1024px) {
+  .products-grid--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-grid--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-grid--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .products-grid {
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+}
+
+/* ── Product card wrapper ─────────────────────────────────────────────── */
+.product-card {
+  /* Card fills its column 100% */
+  width: 100%;
+  /* Minimum touch-safe height */
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  /* Offset any potential margin-collapse within card children */
+  overflow: hidden;
+}
+
+/* Touch-friendly action buttons inside cards (≥ 44 px) */
+.product-card button,
+.product-card a[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure children stretch to fill the card wrapper */
+.product-card>* {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* ── Category header on desktop: larger title & tighter height ──────── */
+@media (min-width: 1024px) {
+  .category-header {
+    min-height: 60px;
+  }
+
+  .category-header__title {
+    font-size: 1.125rem;
+  }
+
+  .category-header__inner {
+    padding: 0 1.5rem;
+  }
+}
+
+/* ── Sticky offset adjustment if top navbar is taller on desktop ─────── */
+@media (min-width: 768px) {
+  .category-header--sticky {
+    top: 72px;
+  }
+}
