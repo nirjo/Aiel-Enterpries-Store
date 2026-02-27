@@ -7,14 +7,20 @@ export const runtime = "nodejs";
 
 // Use service-role client for server-side DB operations
 function getSupabaseAdmin() {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
     if (!url || !key) {
-        throw new Error(
-            "Missing Supabase credentials. Ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set."
-        );
+        console.error("⚠️ Supabase env vars status:", {
+            hasUrl: !!url,
+            hasKey: !!key,
+            urlLength: url.length,
+            keyLength: key.length,
+        });
     }
-    return createClient(url, key);
+    return createClient(
+        url || process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        key || process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 }
 
 interface CartItemPayload {
@@ -79,7 +85,7 @@ export async function POST(request: NextRequest) {
         const orderNumber = generateOrderNumber();
 
         // Create Razorpay order
-        let razorpayOrder;
+        let razorpayOrder: any;
         try {
             razorpayOrder = await createRazorpayOrder(
                 amountInPaise,

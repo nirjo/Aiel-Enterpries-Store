@@ -6,14 +6,12 @@ import { createClient } from "@supabase/supabase-js";
 export const runtime = "nodejs";
 
 function getSupabaseAdmin() {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    if (!url || !key) {
-        throw new Error(
-            "Missing Supabase credentials. Ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set."
-        );
-    }
-    return createClient(url, key);
+    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
+    return createClient(
+        url || process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        key || process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 }
 
 interface VerifyPaymentBody {
