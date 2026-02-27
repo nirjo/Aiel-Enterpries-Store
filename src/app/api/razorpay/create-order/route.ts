@@ -7,10 +7,14 @@ export const runtime = "nodejs";
 
 // Use service-role client for server-side DB operations
 function getSupabaseAdmin() {
-    return createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) {
+        throw new Error(
+            "Missing Supabase credentials. Ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set."
+        );
+    }
+    return createClient(url, key);
 }
 
 interface CartItemPayload {
@@ -75,10 +79,25 @@ export async function POST(request: NextRequest) {
         const orderNumber = generateOrderNumber();
 
         // Create Razorpay order
-        const razorpayOrder = await createRazorpayOrder(
-            amountInPaise,
-            orderNumber
-        );
+        let razorpayOrder;
+        try {
+            razorpayOrder = await createRazorpayOrder(
+                amountInPaise,
+                orderNumber
+            );
+        } catch (rzpError: any) {
+            console.error("Razorpay order creation failed:", {
+                message: rzpError.message,
+                statusCode: rzpError.statusCode,
+                error: rzpError.error,
+                hasKeyId: !!process.env.RAZORPAY_KEY_ID,
+                hasKeySecret: !!process.env.RAZORPAY_KEY_SECRET,
+            });
+            return NextResponse.json(
+                { error: `Razorpay error: ${rzpError.message || "Order creation failed"}` },
+                { status: 502 }
+            );
+        }
 
         // Store order in Supabase
         const supabase = getSupabaseAdmin();
@@ -172,7 +191,11 @@ export async function POST(request: NextRequest) {
             },
         });
     } catch (error: any) {
-        console.error("Create order error:", error);
+        console.error("Create order error:", {
+            name: error.name,
+            message: error.message,
+            stack: error.stack?.split("\n").slice(0, 3).join("\n"),
+        });
         return NextResponse.json(
             { error: error.message || "Internal server error" },
             { status: 500 }
