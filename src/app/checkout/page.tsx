@@ -80,7 +80,7 @@ export default function CheckoutPage() {
             customer: { name: string; email: string; phone: string };
         }) => {
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID?.trim(),
                 amount: orderData.amount,
                 currency: orderData.currency,
                 name: "Aiel Enterprises",
