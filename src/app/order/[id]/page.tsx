@@ -15,10 +15,9 @@ import { createClient } from "@supabase/supabase-js";
 import InvoicePDFButton from "@/components/InvoicePDF";
 
 async function getOrderWithDetails(orderId: string) {
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim();
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY ?? "").trim();
+    const supabase = createClient(url, key);
 
     const { data: order } = await supabase
         .from("orders")

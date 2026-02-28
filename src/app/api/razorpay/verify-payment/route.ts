@@ -6,12 +6,14 @@ import { createClient } from "@supabase/supabase-js";
 export const runtime = "nodejs";
 
 function getSupabaseAdmin() {
-    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
-    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
-    return createClient(
-        url || process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        key || process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim();
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY ?? "").trim();
+
+    if (!url || !key) {
+        console.warn("⚠️ Supabase admin env vars missing in verify-payment:", { hasUrl: !!url, hasKey: !!key });
+    }
+
+    return createClient(url, key);
 }
 
 interface VerifyPaymentBody {

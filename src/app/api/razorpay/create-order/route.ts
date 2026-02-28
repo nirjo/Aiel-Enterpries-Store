@@ -7,20 +7,17 @@ export const runtime = "nodejs";
 
 // Use service-role client for server-side DB operations
 function getSupabaseAdmin() {
-    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
-    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
+    const url = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").trim();
+    const key = (process.env.SUPABASE_SERVICE_ROLE_KEY ?? "").trim();
+
     if (!url || !key) {
-        console.error("⚠️ Supabase env vars status:", {
+        console.warn("⚠️ Supabase admin env vars missing in create-order:", {
             hasUrl: !!url,
             hasKey: !!key,
-            urlLength: url.length,
-            keyLength: key.length,
         });
     }
-    return createClient(
-        url || process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        key || process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+
+    return createClient(url, key);
 }
 
 interface CartItemPayload {
