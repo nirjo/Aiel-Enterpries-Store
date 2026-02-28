@@ -8,8 +8,8 @@ import {
     Clock,
     MapPin,
     CreditCard,
-    Printer,
 } from "lucide-react";
+import PrintButton from "@/components/PrintButton";
 import { Button } from "@/components/ui";
 import { createClient } from "@supabase/supabase-js";
 import InvoicePDFButton from "@/components/InvoicePDF";
@@ -146,13 +146,7 @@ export default async function OrderDetailPage({
                         </div>
                         <div className="flex items-center gap-2">
                             <InvoicePDFButton order={orderForPDF} />
-                            <button
-                                onClick={() => {}}
-                                className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-text-secondary border border-surface-300 rounded-lg hover:bg-surface-50 transition-colors"
-                            >
-                                <Printer className="h-4 w-4" />
-                                Print
-                            </button>
+                            <PrintButton />
                         </div>
                     </div>
                 </div>
