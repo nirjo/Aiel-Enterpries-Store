@@ -29,7 +29,7 @@ export async function POST(request: Request) {
                         <p>Hello! This is a quick update regarding your order <strong>${order}</strong>.</p>
                         <p>Your current status is: <strong style="color: #10b981;">${status}</strong></p>
                         ${eta ? `<p>Estimated Time of Arrival: ${eta}</p>` : ""}
-                        <p>Click <a href="${process.env.NEXT_PUBLIC_APP_URL}/track-order">here</a> to view your live tracking map.</p>
+                        <p>Click <a href="${process.env.NEXT_PUBLIC_APP_URL}/track-orders">here</a> to view your live tracking map.</p>
                         <hr style="border-top: 1px solid #eee; margin: 30px 0;" />
                         <p style="font-size: 12px; color: #999;">Play & Innovate - Aiel Enterprises</p>
                     </div>

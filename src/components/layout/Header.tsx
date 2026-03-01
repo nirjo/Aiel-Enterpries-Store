@@ -93,8 +93,8 @@ export function Header() {
               <Link href="/contact" className="hover:text-lime-400 transition-colors">
                 Contact Us
               </Link>
-              <Link href="/track" className="hover:text-lime-400 transition-colors">
-                Track Order
+              <Link href="/track-orders" className="hover:text-lime-400 transition-colors">
+                Track Orders
               </Link>
             </div>
           </div>
