@@ -1,22 +1,9 @@
 "use client";
 
-/**
- * TrackOrderForm — Client Component
- *
- * WHY "use client"?
- *   This component uses useState for form state and onClick / onSubmit
- *   event handlers, which are only available in Client Components.
- *   Server Components cannot attach event listeners.
- *
- * HOW STATE IS MANAGED:
- *   - `orderId` and `email` are controlled inputs via useState.
- *   - `status` tracks "idle" | "success" | "error" to show feedback.
- *   - On submit we log to console (no real API) and show a result message.
- */
-
 import { useState, type FormEvent } from "react";
-import { Search, Package, CheckCircle, AlertCircle } from "lucide-react";
+import { Search, Package, CheckCircle, AlertCircle, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui";
+import TrackingDashboard from "./TrackingDashboard";
 
 type TrackStatus = "idle" | "loading" | "success" | "error";
 
@@ -24,83 +11,68 @@ export default function TrackOrderForm() {
     const [orderId, setOrderId] = useState("");
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<TrackStatus>("idle");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [orderData, setOrderData] = useState<any>(null);
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         // Basic validation
         if (!orderId.trim() || !email.trim()) {
+            setErrorMessage("Please enter both your Order ID and email address.");
             setStatus("error");
             return;
         }
 
         setStatus("loading");
+        setErrorMessage("");
 
-        // Simulate an API call — log to console (frontend-only prototype)
-        console.log("🔍 Track Order submitted:", { orderId: orderId.trim(), email: email.trim() });
+        try {
+            const res = await fetch("/api/track-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId: orderId.trim(), email: email.trim() }),
+            });
 
-        // Simulate network delay then show success
-        setTimeout(() => {
+            const data = await res.json();
+
+            if (!res.ok) {
+                setErrorMessage(data.error || "Order not found. Please check your details.");
+                setStatus("error");
+                return;
+            }
+
+            setOrderData(data.order);
             setStatus("success");
-        }, 1200);
+            
+        } catch (error) {
+            setErrorMessage("Failed to connect to tracking service. Please try again.");
+            setStatus("error");
+        }
     };
 
     const handleReset = () => {
         setOrderId("");
         setEmail("");
+        setOrderData(null);
         setStatus("idle");
     };
 
-    // ── Success state ──
-    if (status === "success") {
+    // ── Success state (Dashboard) ──
+    if (status === "success" && orderData) {
         return (
-            <div className="text-center py-8 animate-fadeIn">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="h-8 w-8 text-emerald-500" />
-                </div>
-                <h3 className="text-xl font-bold text-text-primary mb-2">Order Found!</h3>
-                <p className="text-text-secondary mb-1">
-                    Order <span className="font-mono font-semibold text-primary-500">{orderId}</span>
-                </p>
-                <p className="text-text-muted text-sm mb-6">
-                    We&apos;ve sent tracking details to <strong>{email}</strong>
-                </p>
-
-                {/* Simulated order timeline */}
-                <div className="max-w-sm mx-auto text-left mb-8">
-                    <div className="space-y-4">
-                        {[
-                            { label: "Order Placed", done: true },
-                            { label: "Payment Confirmed", done: true },
-                            { label: "Processing", done: true },
-                            { label: "Shipped", done: false },
-                            { label: "Delivered", done: false },
-                        ].map((step, i) => (
-                            <div key={i} className="flex items-center gap-3">
-                                <div
-                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
-                                        step.done
-                                            ? "bg-emerald-500 text-white"
-                                            : "bg-surface-200 text-text-muted"
-                                    }`}
-                                >
-                                    {step.done ? "✓" : i + 1}
-                                </div>
-                                <span
-                                    className={`text-sm font-medium ${
-                                        step.done ? "text-text-primary" : "text-text-muted"
-                                    }`}
-                                >
-                                    {step.label}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <Button onClick={handleReset} variant="outline" size="lg">
-                    Track Another Order
-                </Button>
+            <div className="animate-fadeIn w-full relative">
+                <button 
+                    onClick={handleReset}
+                    className="absolute -top-12 left-0 flex items-center text-sm font-medium text-text-muted hover:text-primary-600 transition-colors"
+                >
+                    <ArrowLeft className="w-4 h-4 mr-1" /> Back to Search
+                </button>
+                <TrackingDashboard 
+                    orderNumber={orderData.order_number} 
+                    customerEmail={orderData.customer_email} 
+                    initialOrderData={orderData} 
+                />
             </div>
         );
     }
@@ -122,7 +94,7 @@ export default function TrackOrderForm() {
             {status === "error" && (
                 <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm animate-fadeIn">
                     <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                    Please enter both your Order ID and email address.
+                    {errorMessage}
                 </div>
             )}
 
