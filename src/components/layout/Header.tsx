@@ -81,19 +81,19 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
           isScrolled
-            ? "bg-gradient-to-r from-primary-900/98 via-[#1d0e1d]/98 to-secondary-900/90 backdrop-blur-xl shadow-2xl"
-            : "bg-gradient-to-r from-primary-800/98 to-secondary-800/90"
+            ? "bg-white shadow-[0_2px_20px_rgba(255,182,193,0.25)] border-b-2 border-[var(--header-border)]"
+            : "bg-gradient-to-b from-white to-[var(--header-accent)] border-b-2 border-[var(--header-border)]"
         )}
       >
         {/* Top bar */}
-        <div className="bg-primary-900/60 text-white/50 text-xs py-1.5 border-b border-primary-500/20">
+        <div className="bg-[var(--header-accent)] text-[var(--header-text)]/60 text-xs py-1.5 border-b border-[var(--header-border)]">
           <div className="container mx-auto px-4 flex justify-between items-center">
             <p>🚀 Free shipping on orders over ₹999</p>
             <div className="hidden md:flex items-center gap-4">
-              <Link href="/contact" className="hover:text-[#f0ad4e] transition-colors">
+              <Link href="/contact" className="hover:text-[#e91e63] transition-colors">
                 Contact Us
               </Link>
-              <Link href="/track-orders" className="hover:text-[#f0ad4e] transition-colors">
+              <Link href="/track-orders" className="hover:text-[#e91e63] transition-colors">
                 Track Orders
               </Link>
             </div>
@@ -105,7 +105,7 @@ export function Header() {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <BrandLogo className="scale-75 sm:scale-90 origin-left" variant="dark" />
+              <BrandLogo className="scale-75 sm:scale-90 origin-left" variant="light" />
             </Link>
 
             {/* Search bar - desktop */}
@@ -116,9 +116,9 @@ export function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search toys, home, electronics..."
-                  className="w-full h-10 pl-4 pr-12 rounded-full border border-primary-500/30 bg-white/8 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-secondary-400/60 focus:ring-2 focus:ring-secondary-400/20 transition-all backdrop-blur-sm"
+                  className="w-full h-10 pl-4 pr-12 rounded-full border-2 border-[var(--header-border)] bg-white text-sm text-[var(--header-text)] placeholder:text-[var(--cat-text)]/50 focus:outline-none focus:border-[#f48fb1] focus:ring-2 focus:ring-[rgba(255,182,193,0.3)] transition-all"
                 />
-                <button type="submit" className="absolute right-1 top-1 h-8 w-8 rounded-full bg-gradient-to-r from-primary-500 to-secondary-400 text-white flex items-center justify-center hover:from-primary-600 hover:to-secondary-500 transition-colors">
+                <button type="submit" className="absolute right-1 top-1 h-8 w-8 rounded-full bg-gradient-to-r from-[#f48fb1] to-[#e91e63] text-white flex items-center justify-center hover:from-[#e91e63] hover:to-[#c2185b] transition-colors">
                   <Search className="h-4 w-4" />
                 </button>
               </form>
@@ -126,33 +126,33 @@ export function Header() {
 
             {/* Actions */}
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="md:hidden text-white/80 hover:bg-primary-500/20 hover:text-white" onClick={openSearch}>
+              <Button variant="ghost" size="icon" className="md:hidden text-[var(--header-text)]/70 hover:bg-[var(--cat-hover)] hover:text-[var(--header-text)]" onClick={openSearch}>
                 <Search className="h-5 w-5" />
               </Button>
 
-              <Link href="/wishlist" className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg text-white/70 hover:bg-primary-500/20 hover:text-accent-400 transition-all duration-200 relative">
+              <Link href="/wishlist" className="hidden sm:flex items-center justify-center h-10 w-10 rounded-lg text-[var(--header-text)]/60 hover:bg-[var(--cat-hover)] hover:text-[#e91e63] transition-all duration-200 relative">
                 <Heart className="h-5 w-5" />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-accent-500 text-white text-[10px] font-medium flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#e91e63] text-white text-[10px] font-medium flex items-center justify-center">
                     {wishlistCount > 99 ? "99+" : wishlistCount}
                   </span>
                 )}
               </Link>
 
-              <Link href="/account" className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-white/70 hover:bg-primary-500/20 hover:text-white transition-all duration-200">
+              <Link href="/account" className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-[var(--header-text)]/60 hover:bg-[var(--cat-hover)] hover:text-[var(--header-text)] transition-all duration-200">
                 <User className="h-5 w-5" />
               </Link>
 
-              <Button variant="ghost" size="icon" className="relative text-white/80 hover:bg-primary-500/20 hover:text-white" onClick={toggleCart}>
+              <Button variant="ghost" size="icon" className="relative text-[var(--header-text)]/70 hover:bg-[var(--cat-hover)] hover:text-[var(--header-text)]" onClick={toggleCart}>
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
-                  <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-accent-500 text-white text-2xs font-medium flex items-center justify-center">
+                  <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#e91e63] text-white text-2xs font-medium flex items-center justify-center">
                     {itemCount > 99 ? "99+" : itemCount}
                   </motion.span>
                 )}
               </Button>
 
-              <Button variant="ghost" size="icon" className="md:hidden text-white/80 hover:bg-primary-500/20 hover:text-white" onClick={toggleMobileMenu}>
+              <Button variant="ghost" size="icon" className="md:hidden text-[var(--header-text)]/70 hover:bg-[var(--cat-hover)] hover:text-[var(--header-text)]" onClick={toggleMobileMenu}>
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
@@ -171,9 +171,9 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:text-white hover:bg-white/10 whitespace-nowrap",
-                      isActive ? "text-secondary-400 bg-white/10" : "text-white/70",
-                      activeMenu === link.label && "text-secondary-400 bg-white/10"
+                      "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:text-[#e91e63] hover:bg-[var(--cat-hover)] whitespace-nowrap",
+                      isActive ? "text-[#e91e63] bg-[var(--cat-hover)]" : "text-[var(--header-text)]/70",
+                      activeMenu === link.label && "text-[#e91e63] bg-[var(--cat-hover)]"
                     )}
                   >
                     {link.label}
@@ -192,10 +192,10 @@ export function Header() {
                         onMouseEnter={() => handleMenuEnter(link.label)}
                         onMouseLeave={handleMenuLeave}
                       >
-                        <div className="bg-[#1d0e1d]/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-primary-500/20 p-5 min-w-[820px]">
-                          <div className="flex items-center justify-between mb-4 pb-3 border-b border-primary-500/20">
-                            <h3 className="font-display font-bold text-white/95 text-base tracking-wide">{link.label}</h3>
-                            <Link href={link.href} className="text-xs font-medium text-secondary-400 hover:text-secondary-300 transition-colors">View All →</Link>
+                        <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(255,182,193,0.25)] border border-[var(--header-border)] p-5 min-w-[820px]">
+                          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--header-border)]">
+                            <h3 className="font-display font-bold text-[var(--header-text)] text-base tracking-wide">{link.label}</h3>
+                            <Link href={link.href} className="text-xs font-medium text-[#e91e63] hover:text-[#c2185b] transition-colors">View All →</Link>
                           </div>
                           <div className="grid grid-cols-5 gap-3">
                             {link.subcategories!.map((sub) => {
@@ -204,15 +204,15 @@ export function Header() {
                                 <Link
                                   key={sub.slug}
                                   href={`/products?category=${categorySlug}&sub=${sub.slug}`}
-                                  className="group/card flex flex-col rounded-xl overflow-hidden border border-primary-500/15 hover:border-secondary-400/40 hover:shadow-[0_0_20px_rgba(157,77,24,0.1)] transition-all duration-300"
+                                  className="group/card flex flex-col rounded-xl overflow-hidden border border-[var(--header-border)] hover:border-[#f48fb1] hover:shadow-[0_0_20px_rgba(255,182,193,0.25)] transition-all duration-300"
                                 >
-                                  <div className="relative h-24 w-full overflow-hidden bg-primary-900/30">
+                                  <div className="relative h-24 w-full overflow-hidden bg-[var(--header-accent)]">
                                     <Image src={sub.image} alt={sub.label} fill className="object-cover transition-transform duration-500 group-hover/card:scale-110" sizes="160px" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#1d0e1d]/50 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent" />
                                   </div>
-                                  <div className="p-2.5">
-                                    <p className="text-xs font-semibold text-white/90 group-hover/card:text-secondary-400 transition-colors leading-tight">{sub.label}</p>
-                                    <p className="text-[10px] text-white/40 mt-0.5 leading-tight line-clamp-1">{sub.description}</p>
+                                  <div className="p-2.5 bg-white">
+                                    <p className="text-xs font-semibold text-[var(--header-text)] group-hover/card:text-[#e91e63] transition-colors leading-tight">{sub.label}</p>
+                                    <p className="text-[10px] text-[var(--cat-text)]/50 mt-0.5 leading-tight line-clamp-1">{sub.description}</p>
                                   </div>
                                 </Link>
                               );

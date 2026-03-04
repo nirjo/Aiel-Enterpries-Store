@@ -92,7 +92,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Categories — Round Emoji Buttons */}
       <section className="py-14 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-10">
@@ -100,40 +100,40 @@ export default async function HomePage() {
               <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary tracking-wide">Shop by Category</h2>
               <p className="text-text-secondary mt-1">Browse our curated collections</p>
             </div>
-            <Link href="/categories" className="hidden sm:flex items-center gap-1 text-secondary-500 font-medium hover:text-secondary-600 transition-colors">
+            <Link href="/categories" className="hidden sm:flex items-center gap-1 text-[#e91e63] font-medium hover:text-[#c2185b] transition-colors">
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
-            {categories.map((category, index) => {
-              const overlays = [
-                "bg-gradient-to-r from-[#8f189d]/90 to-[#9d4d18]/80",
-                "bg-gradient-to-br from-[#9d4d18]/90 to-[#f0ad4e]/80",
-                "bg-gradient-to-t from-[#b41c2b]/90 to-[#8f189d]/80",
-                "bg-gradient-to-r from-[#f0ad4e]/90 to-[#b41c2b]/80",
-                "bg-gradient-to-bl from-[#8f189d]/85 to-[#9d4d18]/75",
-                "bg-gradient-to-tr from-[#b41c2b]/85 to-[#f0ad4e]/80",
-              ];
-              const shadows = [
-                "hover:shadow-[0_10px_40px_rgba(143,24,157,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(157,77,24,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(180,28,43,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(240,173,78,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(143,24,157,0.2)]",
-                "hover:shadow-[0_10px_40px_rgba(180,28,43,0.2)]",
-              ];
-              return (
-                <Link key={category.id} href={`/products?category=${category.slug}`} className={`group relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/15 shadow-sm ${shadows[index % 6]} hover:scale-[1.03] active:scale-[0.98] transition-all duration-300`}>
-                  <Image src={category.image_url || ""} alt={category.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 16vw" />
-                  <div className={`absolute inset-0 ${overlays[index % 6]} mix-blend-multiply transition-opacity duration-300 group-hover:opacity-90`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="font-display font-bold text-white text-sm md:text-base tracking-wide drop-shadow-md">{category.name}</h3>
-                    <p className="text-white/80 text-xs mt-0.5 font-medium">Explore →</p>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
+            {[
+              { emoji: "🧸", label: "Toys", slug: "sensory-toys" },
+              { emoji: "🎁", label: "Gifts", slug: "gift-items" },
+              { emoji: "📱", label: "Electronics", slug: "electronics" },
+              { emoji: "🏠", label: "Home", slug: "home-kitchen" },
+              { emoji: "🪵", label: "Wooden", slug: "wooden-toys" },
+              { emoji: "📚", label: "Stationery", slug: "stationery-items" },
+              { emoji: "⚽", label: "Sports", slug: "sport-exercise" },
+              { emoji: "🔥", label: "Sale", slug: "?featured=true" },
+            ].map((cat) => (
+              <Link
+                key={cat.slug}
+                href={cat.slug.startsWith("?") ? `/products${cat.slug}` : `/products?category=${cat.slug}`}
+                className="group flex flex-col items-center gap-3"
+                aria-label={`Shop ${cat.label}`}
+              >
+                <div
+                  className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full flex items-center justify-center text-5xl md:text-6xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:-translate-y-2 group-hover:scale-105 active:scale-95"
+                  style={{
+                    background: "linear-gradient(145deg, var(--cat-bg), var(--cat-hover))",
+                    border: "4px solid var(--header-accent)",
+                    boxShadow: "0 8px 25px var(--cat-shadow)",
+                  }}
+                >
+                  <span className="drop-shadow-sm group-hover:scale-110 transition-transform duration-300">{cat.emoji}</span>
+                </div>
+                <span className="text-sm font-semibold text-[var(--cat-text)] group-hover:text-[#e91e63] transition-colors">{cat.label}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

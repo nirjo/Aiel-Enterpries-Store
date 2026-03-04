@@ -56,6 +56,19 @@
   --clr-neutral-a30: #5e5e5e;
   --clr-neutral-a40: #303030;
   --clr-neutral-a50: #000000;
+
+  /* Header colors */
+  --header-bg: #ffffff;
+  --header-accent: #ffeef2;
+  --header-text: #333333;
+  --header-border: #f8e1e6;
+
+  /* Category buttons */
+  --cat-bg: #ffffff;
+  --cat-hover: #ffeef2;
+  --cat-active: #fadce3;
+  --cat-text: #4a4a4a;
+  --cat-shadow: rgba(255, 182, 193, 0.3);
 }
 
 @theme {

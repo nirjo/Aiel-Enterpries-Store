@@ -17,7 +17,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 }) => {
   return (
     <div className={cn("flex flex-col items-center sm:items-start group", className)}>
-      <div className="relative flex items-center justify-center overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm px-4 py-2 hover:bg-white/20 transition-all duration-300">
+      <div className="relative flex items-center justify-center overflow-hidden rounded-xl px-4 py-2 transition-all duration-300">
         <Image
           src="/logo_new.jpg"
           alt="Aiel Enterprises Logo"
