@@ -102,7 +102,7 @@ export default async function CategoriesPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f23]/70 via-[#0f0f23]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1d0e1d]/70 via-[#1d0e1d]/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <h2 className="text-lg md:text-xl font-display font-bold text-white tracking-wide mb-1 drop-shadow-md">
                     {cat.name}

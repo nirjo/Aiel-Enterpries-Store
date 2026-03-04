@@ -46,7 +46,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       transition={{ duration: 0.2 }}
     >
       <Link href={`/products/${product.slug}`} className="block group">
-        <div className="relative bg-white rounded-2xl border border-primary-500/10 overflow-hidden transition-all duration-300 hover:shadow-[0_10px_40px_rgba(65,29,211,0.12)] hover:border-secondary-400/30">
+        <div className="relative bg-white rounded-2xl border border-primary-500/10 overflow-hidden transition-all duration-300 hover:shadow-[0_10px_40px_rgba(143,24,157,0.12)] hover:border-secondary-400/30">
           {/* Image */}
           <div className="relative aspect-square bg-gradient-to-br from-secondary-50/50 to-primary-50/30 overflow-hidden">
             {product.thumbnail_url || product.images?.[0] ? (
@@ -90,7 +90,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
             {/* Add to cart */}
             <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-              <Button fullWidth size="sm" onClick={handleAddToCart} className="shadow-md bg-primary-500 hover:bg-primary-600">
+              <Button fullWidth size="sm" onClick={handleAddToCart} className="shadow-md bg-[#009f42] hover:bg-[#167533] text-white">
                 <ShoppingCart className="h-4 w-4" />
                 Add to Cart
               </Button>
@@ -102,7 +102,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             <div className="flex items-center gap-1 mb-2">
               <div className="flex items-center">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={cn("h-3.5 w-3.5", i < 4 ? "text-lime-500 fill-lime-500" : "text-gray-300")} />
+                  <Star key={i} className={cn("h-3.5 w-3.5", i < 4 ? "text-[#f0ad4e] fill-[#f0ad4e]" : "text-gray-300")} />
                 ))}
               </div>
               <span className="text-xs text-text-muted">(24)</span>
@@ -113,7 +113,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             </h3>
 
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-lg text-primary-500">{formatCurrency(product.price)}</span>
+              <span className="font-semibold text-lg text-[#9d4d18]">{formatCurrency(product.price)}</span>
               {product.compare_at_price && (
                 <span className="text-sm text-text-muted line-through">{formatCurrency(product.compare_at_price)}</span>
               )}

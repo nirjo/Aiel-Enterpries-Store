@@ -9,7 +9,7 @@ export function Footer() {
   const currentYear = CURRENT_YEAR;
 
   return (
-    <footer className="bg-gradient-to-t from-primary-900 via-[#0f0f23] to-[#0f0f23] text-white border-t border-primary-500/20">
+    <footer className="bg-gradient-to-t from-primary-900 via-[#1d0e1d] to-[#1d0e1d] text-white border-t border-primary-500/20">
       {/* Main footer */}
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

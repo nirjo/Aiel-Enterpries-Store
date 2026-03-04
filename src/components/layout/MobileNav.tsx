@@ -64,7 +64,7 @@ export function MobileNav() {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-[#0f0f23]/95 backdrop-blur-xl z-50 shadow-2xl flex flex-col md:hidden border-r border-primary-500/20"
+            className="fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-[#1d0e1d]/95 backdrop-blur-xl z-50 shadow-2xl flex flex-col md:hidden border-r border-primary-500/20"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-primary-500/20">

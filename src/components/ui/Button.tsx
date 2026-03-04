@@ -39,7 +39,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         "focus:ring-primary-400 shadow-soft hover:shadow-medium"
       ),
       secondary: cn(
-        "bg-secondary-400 text-[#0f0f23] hover:bg-secondary-500 active:bg-secondary-600",
+        "bg-secondary-400 text-[#1d0e1d] hover:bg-secondary-500 active:bg-secondary-600",
         "focus:ring-secondary-400 shadow-soft hover:shadow-medium font-semibold"
       ),
       outline: cn(

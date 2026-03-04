@@ -81,7 +81,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
           isScrolled
-            ? "bg-gradient-to-r from-primary-900/98 via-[#0f0f23]/98 to-secondary-900/90 backdrop-blur-xl shadow-2xl"
+            ? "bg-gradient-to-r from-primary-900/98 via-[#1d0e1d]/98 to-secondary-900/90 backdrop-blur-xl shadow-2xl"
             : "bg-gradient-to-r from-primary-800/98 to-secondary-800/90"
         )}
       >
@@ -90,10 +90,10 @@ export function Header() {
           <div className="container mx-auto px-4 flex justify-between items-center">
             <p>🚀 Free shipping on orders over ₹999</p>
             <div className="hidden md:flex items-center gap-4">
-              <Link href="/contact" className="hover:text-lime-400 transition-colors">
+              <Link href="/contact" className="hover:text-[#f0ad4e] transition-colors">
                 Contact Us
               </Link>
-              <Link href="/track-orders" className="hover:text-lime-400 transition-colors">
+              <Link href="/track-orders" className="hover:text-[#f0ad4e] transition-colors">
                 Track Orders
               </Link>
             </div>
@@ -192,7 +192,7 @@ export function Header() {
                         onMouseEnter={() => handleMenuEnter(link.label)}
                         onMouseLeave={handleMenuLeave}
                       >
-                        <div className="bg-[#0f0f23]/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-primary-500/20 p-5 min-w-[820px]">
+                        <div className="bg-[#1d0e1d]/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-primary-500/20 p-5 min-w-[820px]">
                           <div className="flex items-center justify-between mb-4 pb-3 border-b border-primary-500/20">
                             <h3 className="font-display font-bold text-white/95 text-base tracking-wide">{link.label}</h3>
                             <Link href={link.href} className="text-xs font-medium text-secondary-400 hover:text-secondary-300 transition-colors">View All →</Link>
@@ -204,11 +204,11 @@ export function Header() {
                                 <Link
                                   key={sub.slug}
                                   href={`/products?category=${categorySlug}&sub=${sub.slug}`}
-                                  className="group/card flex flex-col rounded-xl overflow-hidden border border-primary-500/15 hover:border-secondary-400/40 hover:shadow-[0_0_20px_rgba(29,211,156,0.1)] transition-all duration-300"
+                                  className="group/card flex flex-col rounded-xl overflow-hidden border border-primary-500/15 hover:border-secondary-400/40 hover:shadow-[0_0_20px_rgba(157,77,24,0.1)] transition-all duration-300"
                                 >
                                   <div className="relative h-24 w-full overflow-hidden bg-primary-900/30">
                                     <Image src={sub.image} alt={sub.label} fill className="object-cover transition-transform duration-500 group-hover/card:scale-110" sizes="160px" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f23]/50 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#1d0e1d]/50 to-transparent" />
                                   </div>
                                   <div className="p-2.5">
                                     <p className="text-xs font-semibold text-white/90 group-hover/card:text-secondary-400 transition-colors leading-tight">{sub.label}</p>

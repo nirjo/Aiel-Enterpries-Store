@@ -107,20 +107,20 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
             {categories.map((category, index) => {
               const overlays = [
-                "bg-gradient-to-r from-[#411dd3]/90 to-[#1dd39c]/80",
-                "bg-gradient-to-br from-[#1dd39c]/90 to-[#afd31d]/80",
-                "bg-gradient-to-t from-[#d31d54]/90 to-[#411dd3]/80",
-                "bg-gradient-to-r from-[#afd31d]/90 to-[#d31d54]/80",
-                "bg-gradient-to-bl from-[#411dd3]/85 to-[#1dd39c]/75",
-                "bg-gradient-to-tr from-[#d31d54]/85 to-[#afd31d]/80",
+                "bg-gradient-to-r from-[#8f189d]/90 to-[#9d4d18]/80",
+                "bg-gradient-to-br from-[#9d4d18]/90 to-[#f0ad4e]/80",
+                "bg-gradient-to-t from-[#b41c2b]/90 to-[#8f189d]/80",
+                "bg-gradient-to-r from-[#f0ad4e]/90 to-[#b41c2b]/80",
+                "bg-gradient-to-bl from-[#8f189d]/85 to-[#9d4d18]/75",
+                "bg-gradient-to-tr from-[#b41c2b]/85 to-[#f0ad4e]/80",
               ];
               const shadows = [
-                "hover:shadow-[0_10px_40px_rgba(65,29,211,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(29,211,156,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(211,29,84,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(175,211,29,0.25)]",
-                "hover:shadow-[0_10px_40px_rgba(65,29,211,0.2)]",
-                "hover:shadow-[0_10px_40px_rgba(211,29,84,0.2)]",
+                "hover:shadow-[0_10px_40px_rgba(143,24,157,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(157,77,24,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(180,28,43,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(240,173,78,0.25)]",
+                "hover:shadow-[0_10px_40px_rgba(143,24,157,0.2)]",
+                "hover:shadow-[0_10px_40px_rgba(180,28,43,0.2)]",
               ];
               return (
                 <Link key={category.id} href={`/products?category=${category.slug}`} className={`group relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/15 shadow-sm ${shadows[index % 6]} hover:scale-[1.03] active:scale-[0.98] transition-all duration-300`}>
@@ -173,17 +173,17 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500 relative overflow-hidden">
+      <section className="py-16 md:py-20 bg-gradient-to-r from-[#8f189d] via-[#761a81] to-[#9d4d18] relative overflow-hidden">
         <div className="absolute inset-0 opacity-15">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-400 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-400 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
-          <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-lime-400 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#9d4d18] rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#b41c2b] rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+          <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-[#f0ad4e] rounded-full blur-3xl" />
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4 tracking-wide">Welcome to Aiel Enterprises 🎉</h2>
           <p className="text-white/90 text-lg mb-8 max-w-lg mx-auto">Get 20% off your first order. Join our family of happy shoppers!</p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input type="email" placeholder="Enter your email" className="flex-1 h-12 px-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:outline-none focus:bg-white/15 focus:border-secondary-400/50 transition-colors backdrop-blur-sm" />
+            <input type="email" placeholder="Enter your email" className="flex-1 h-12 px-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:outline-none focus:bg-white/15 focus:border-[#f0ad4e]/50 transition-colors backdrop-blur-sm" />
             <Button variant="secondary" size="lg" className="min-w-[120px]">Subscribe</Button>
           </div>
         </div>

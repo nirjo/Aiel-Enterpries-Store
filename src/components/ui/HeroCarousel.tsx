@@ -118,7 +118,7 @@ export function HeroCarousel() {
   };
 
   return (
-    <section className="relative w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-hidden bg-[#0f0f23]">
+    <section className="relative w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-hidden bg-[#1d0e1d]">
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
         <motion.div
           key={current}
@@ -131,8 +131,8 @@ export function HeroCarousel() {
           className="absolute inset-0"
         >
           <Image src={slide.image} alt={slide.title} fill className="object-cover" sizes="100vw" priority={current === 0} />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#411dd3]/80 via-[#0f0f23]/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f23]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#8f189d]/80 via-[#1d0e1d]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1d0e1d]/70 to-transparent" />
         </motion.div>
       </AnimatePresence>
 

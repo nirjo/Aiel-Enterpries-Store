@@ -2,59 +2,110 @@
 
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════
+   WOWGIFFT.COM MANDATORY COLOR SYSTEM
+   ═══════════════════════════════════════════════════════ */
 :root {
   --background: #f8fafc;
-  --foreground: #0f0f23;
+  --foreground: #1d0e1d;
+
+  /* Primary colors */
+  --clr-primary-a0: #8f189d;
+  --clr-primary-a10: #761a81;
+  --clr-primary-a20: #5e1966;
+  --clr-primary-a30: #47174c;
+  --clr-primary-a40: #311434;
+  --clr-primary-a50: #1d0e1d;
+
+  /* Accent colors (orange / sale vibes) */
+  --clr-accent-a0: #9d4d18;
+  --clr-accent-a10: #824117;
+  --clr-accent-a20: #673515;
+  --clr-accent-a30: #4e2912;
+  --clr-accent-a40: #361e0f;
+  --clr-accent-a50: #1f1308;
+
+  /* Danger (sale badges) */
+  --clr-danger-a0: #b41c2b;
+  --clr-danger-a10: #851d22;
+  --clr-danger-a20: #581919;
+  --clr-danger-a30: #2f1310;
+
+  /* Success (add to cart) */
+  --clr-success-a0: #009f42;
+  --clr-success-a10: #167533;
+  --clr-success-a20: #184d25;
+  --clr-success-a30: #132916;
+
+  /* Warning */
+  --clr-warning-a0: #f0ad4e;
+  --clr-warning-a10: #af7f3c;
+  --clr-warning-a20: #71532a;
+  --clr-warning-a30: #392b19;
+
+  /* Info */
+  --clr-info-a0: #388cfa;
+  --clr-info-a10: #3267b5;
+  --clr-info-a20: #284475;
+  --clr-info-a30: #1a253b;
+
+  /* Neutral */
+  --clr-neutral-a0: #ffffff;
+  --clr-neutral-a10: #c6c6c6;
+  --clr-neutral-a20: #919191;
+  --clr-neutral-a30: #5e5e5e;
+  --clr-neutral-a40: #303030;
+  --clr-neutral-a50: #000000;
 }
 
 @theme {
-  /* Primary — Deep Purple (#411dd3) — 60% usage */
-  --color-primary-50: #f0ecfb;
-  --color-primary-100: #d9cff5;
-  --color-primary-200: #b9a3ed;
-  --color-primary-300: #9474e3;
-  --color-primary-400: #6b3fd8;
-  --color-primary-500: #411dd3;
-  --color-primary-600: #3a1abc;
-  --color-primary-700: #3116a0;
-  --color-primary-800: #2a1486;
-  --color-primary-900: #1e0e61;
+  /* Primary — Rich Purple */
+  --color-primary-50: #f5e8f7;
+  --color-primary-100: #e0bfe4;
+  --color-primary-200: #c98fd0;
+  --color-primary-300: #b15fbc;
+  --color-primary-400: #a330a8;
+  --color-primary-500: #8f189d;
+  --color-primary-600: #761a81;
+  --color-primary-700: #5e1966;
+  --color-primary-800: #47174c;
+  --color-primary-900: #311434;
 
-  /* Secondary — Teal (#1dd39c) — 30% usage */
-  --color-secondary-50: #ecfdf6;
-  --color-secondary-100: #d0fae8;
-  --color-secondary-200: #a3f4d3;
-  --color-secondary-300: #63e9b4;
-  --color-secondary-400: #1dd39c;
-  --color-secondary-500: #1bb78a;
-  --color-secondary-600: #179973;
-  --color-secondary-700: #12735a;
-  --color-secondary-800: #0f5d49;
-  --color-secondary-900: #0a3d31;
+  /* Secondary — Accent Orange */
+  --color-secondary-50: #fdf2e9;
+  --color-secondary-100: #f5d5b0;
+  --color-secondary-200: #d9a05e;
+  --color-secondary-300: #c07838;
+  --color-secondary-400: #9d4d18;
+  --color-secondary-500: #824117;
+  --color-secondary-600: #673515;
+  --color-secondary-700: #4e2912;
+  --color-secondary-800: #361e0f;
+  --color-secondary-900: #1f1308;
 
-  /* Accent — Magenta (#d31d54) — 7% usage */
-  --color-accent-50: #fef1f4;
-  --color-accent-100: #fcd6df;
-  --color-accent-200: #f9a5bb;
-  --color-accent-300: #f06e90;
-  --color-accent-400: #e63d6e;
-  --color-accent-500: #d31d54;
-  --color-accent-600: #be1b4a;
-  --color-accent-700: #a11640;
-  --color-accent-800: #861137;
-  --color-accent-900: #5e0c27;
+  /* Accent — Danger Red (sale badges) */
+  --color-accent-50: #fde9eb;
+  --color-accent-100: #f5c0c5;
+  --color-accent-200: #e37e87;
+  --color-accent-300: #d14a58;
+  --color-accent-400: #c22e3e;
+  --color-accent-500: #b41c2b;
+  --color-accent-600: #851d22;
+  --color-accent-700: #581919;
+  --color-accent-800: #2f1310;
+  --color-accent-900: #1a0b09;
 
-  /* Accent 2 — Lime (#afd31d) — 3% usage */
-  --color-lime-50: #f9fce8;
-  --color-lime-100: #f0f6c5;
-  --color-lime-200: #dded85;
-  --color-lime-300: #c8e24c;
-  --color-lime-400: #afd31d;
-  --color-lime-500: #9bc01a;
-  --color-lime-600: #84a316;
-  --color-lime-700: #6b8a14;
-  --color-lime-800: #556e10;
-  --color-lime-900: #3d4f0c;
+  /* Lime — Warning Gold */
+  --color-lime-50: #fef8e8;
+  --color-lime-100: #fbe8b8;
+  --color-lime-200: #f5cf78;
+  --color-lime-300: #f0ad4e;
+  --color-lime-400: #d89c42;
+  --color-lime-500: #af7f3c;
+  --color-lime-600: #8a6430;
+  --color-lime-700: #71532a;
+  --color-lime-800: #53401f;
+  --color-lime-900: #392b19;
 
   /* Surface (cards & panels) */
   --color-surface-50: #ffffff;
@@ -64,26 +115,26 @@
   --color-surface-400: #cbd5e1;
 
   /* Text */
-  --color-text-primary: #0f0f23;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  --color-text-primary: #1d0e1d;
+  --color-text-secondary: #5e5e5e;
+  --color-text-muted: #919191;
   --color-text-inverse: #ffffff;
 
   /* Status */
-  --color-success: #1dd39c;
-  --color-warning: #afd31d;
-  --color-error: #d31d54;
-  --color-info: #411dd3;
+  --color-success: #009f42;
+  --color-warning: #f0ad4e;
+  --color-error: #b41c2b;
+  --color-info: #388cfa;
 
   /* Fonts */
   --font-sans: 'Poppins', system-ui, sans-serif;
   --font-display: 'Orbitron', 'Poppins', system-ui, sans-serif;
 
-  /* Shadows — tetradic-tinted */
-  --shadow-soft: 0 1px 3px rgba(65, 29, 211, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-medium: 0 4px 6px -1px rgba(65, 29, 211, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-strong: 0 10px 25px -5px rgba(65, 29, 211, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
-  --shadow-glow: 0 0 15px rgba(65, 29, 211, 0.15), 0 0 30px rgba(29, 211, 156, 0.08);
+  /* Shadows — purple-tinted */
+  --shadow-soft: 0 1px 3px rgba(143, 24, 157, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 6px -1px rgba(143, 24, 157, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-strong: 0 10px 25px -5px rgba(143, 24, 157, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 15px rgba(143, 24, 157, 0.15), 0 0 30px rgba(157, 77, 24, 0.08);
 }
 
 * {
@@ -140,24 +191,24 @@ textarea,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #9474e3, #411dd3);
+  background: linear-gradient(180deg, #b15fbc, #8f189d);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #6b3fd8, #3a1abc);
+  background: linear-gradient(180deg, #a330a8, #761a81);
 }
 
 /* Focus visible */
 :focus-visible {
-  outline: 2px solid #411dd3;
+  outline: 2px solid #8f189d;
   outline-offset: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(65, 29, 211, 0.2);
-  color: #0f0f23;
+  background: rgba(143, 24, 157, 0.2);
+  color: #1d0e1d;
 }
 
 /* =========================================
@@ -190,11 +241,11 @@ textarea,
 
   0%,
   100% {
-    box-shadow: 0 1px 3px rgba(65, 29, 211, 0.06);
+    box-shadow: 0 1px 3px rgba(143, 24, 157, 0.06);
   }
 
   50% {
-    box-shadow: 0 4px 12px rgba(65, 29, 211, 0.18);
+    box-shadow: 0 4px 12px rgba(143, 24, 157, 0.18);
   }
 }
 
@@ -248,9 +299,9 @@ textarea,
 .metal-sheen {
   background: linear-gradient(120deg,
       transparent 30%,
-      rgba(65, 29, 211, 0.05) 38%,
-      rgba(65, 29, 211, 0.08) 40%,
-      rgba(65, 29, 211, 0.05) 42%,
+      rgba(143, 24, 157, 0.05) 38%,
+      rgba(143, 24, 157, 0.08) 40%,
+      rgba(143, 24, 157, 0.05) 42%,
       transparent 50%);
   background-size: 200% 100%;
   animation: shimmer 4s ease-in-out infinite;
@@ -259,9 +310,9 @@ textarea,
 /* Tetradic section utilities */
 .tetradic-hero {
   background: linear-gradient(135deg,
-      rgba(65, 29, 211, 0.95) 0%,
-      rgba(29, 211, 156, 0.80) 50%,
-      rgba(211, 29, 84, 0.90) 100%);
+      rgba(143, 24, 157, 0.95) 0%,
+      rgba(157, 77, 24, 0.80) 50%,
+      rgba(180, 28, 43, 0.90) 100%);
 }
 
 .tetradic-section {
@@ -271,51 +322,51 @@ textarea,
 
 .tetradic-card {
   background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(65, 29, 211, 0.12);
-  box-shadow: 0 4px 6px -1px rgba(65, 29, 211, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(143, 24, 157, 0.12);
+  box-shadow: 0 4px 6px -1px rgba(143, 24, 157, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.3s, border-color 0.3s;
 }
 
 .tetradic-card:hover {
-  box-shadow: 0 10px 25px -5px rgba(65, 29, 211, 0.15);
-  border-color: rgba(65, 29, 211, 0.25);
+  box-shadow: 0 10px 25px -5px rgba(143, 24, 157, 0.15);
+  border-color: rgba(143, 24, 157, 0.25);
 }
 
 .section-card {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(65, 29, 211, 0.08);
+  border: 1px solid rgba(143, 24, 157, 0.08);
   box-shadow: var(--shadow-medium);
 }
 
 .glow-border {
-  border: 1px solid rgba(65, 29, 211, 0.12);
+  border: 1px solid rgba(143, 24, 157, 0.12);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .glow-border:hover {
-  border-color: rgba(65, 29, 211, 0.35);
-  box-shadow: 0 4px 12px rgba(65, 29, 211, 0.12);
+  border-color: rgba(143, 24, 157, 0.35);
+  box-shadow: 0 4px 12px rgba(143, 24, 157, 0.12);
 }
 
 .space-glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(65, 29, 211, 0.08);
+  border: 1px solid rgba(143, 24, 157, 0.08);
 }
 
-/* Dark header & footer — tetradic primary */
+/* Dark header & footer — wowgifft primary */
 .dark-header-footer {
-  background: linear-gradient(to right, #1e0e61, #0f0f23, #0a3d31);
+  background: linear-gradient(to right, #311434, #1d0e1d, #1f1308);
   backdrop-filter: blur(16px);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border-bottom: 1px solid rgba(65, 29, 211, 0.3);
+  border-bottom: 1px solid rgba(143, 24, 157, 0.3);
 }
 
 .dark-panel {
-  background: rgba(15, 15, 35, 0.95);
+  background: rgba(29, 14, 29, 0.95);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(65, 29, 211, 0.25);
+  border: 1px solid rgba(143, 24, 157, 0.25);
 }
 
 /* =========================================
@@ -399,8 +450,8 @@ textarea,
   -webkit-backdrop-filter: blur(8px);
   /* iOS Safari */
   backdrop-filter: blur(8px);
-  border-bottom: 2px solid rgba(65, 29, 211, 0.10);
-  box-shadow: 0 2px 10px rgba(65, 29, 211, 0.07);
+  border-bottom: 2px solid rgba(143, 24, 157, 0.10);
+  box-shadow: 0 2px 10px rgba(143, 24, 157, 0.07);
   padding: 0;
   /* BFC: prevents margin-collapse with .products-grid below */
   overflow: hidden;
@@ -467,7 +518,7 @@ textarea,
   min-height: 48px;
   padding: 0 1rem;
   border-radius: 9999px;
-  border: 1.5px solid rgba(65, 29, 211, 0.18);
+  border: 1.5px solid rgba(143, 24, 157, 0.18);
   background: transparent;
   color: var(--color-text-secondary);
   font-family: var(--font-sans);
@@ -489,33 +540,33 @@ textarea,
 }
 
 .category-filter-btn:hover {
-  background: rgba(65, 29, 211, 0.06);
-  border-color: rgba(65, 29, 211, 0.35);
-  color: #411dd3;
+  background: rgba(143, 24, 157, 0.06);
+  border-color: rgba(143, 24, 157, 0.35);
+  color: #8f189d;
 }
 
 .category-filter-btn:focus-visible {
-  outline: 2px solid #411dd3;
+  outline: 2px solid #8f189d;
   outline-offset: 2px;
 }
 
 .category-filter-btn--active,
 .category-filter-btn[aria-pressed="true"] {
-  background: #411dd3;
-  border-color: #411dd3;
+  background: #8f189d;
+  border-color: #8f189d;
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(65, 29, 211, 0.25);
+  box-shadow: 0 2px 8px rgba(143, 24, 157, 0.25);
 }
 
 .category-filter-btn--view-all {
-  border-color: rgba(29, 211, 156, 0.40);
-  color: #1bb78a;
+  border-color: rgba(0, 159, 66, 0.40);
+  color: #009f42;
 }
 
 .category-filter-btn--view-all:hover {
-  background: rgba(29, 211, 156, 0.08);
-  border-color: #1dd39c;
-  color: #0f5d49;
+  background: rgba(0, 159, 66, 0.08);
+  border-color: #009f42;
+  color: #167533;
 }
 
 /* ─── 4. PRODUCTS GRID ───────────────────────────────────────────────────── */
@@ -674,7 +725,7 @@ textarea,
 @media (hover: hover) and (pointer: fine) {
   .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(65, 29, 211, 0.13);
+    box-shadow: 0 12px 32px rgba(143, 24, 157, 0.13);
   }
 }
 
