@@ -92,7 +92,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Categories — Round Emoji Buttons */}
+      {/* Categories — Round Image Buttons */}
       <section className="py-14 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-10">
@@ -104,34 +104,36 @@ export default async function HomePage() {
               View All <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
-            {[
-              { emoji: "🧸", label: "Toys", slug: "sensory-toys" },
-              { emoji: "🎁", label: "Gifts", slug: "gift-items" },
-              { emoji: "📱", label: "Electronics", slug: "electronics" },
-              { emoji: "🏠", label: "Home", slug: "home-kitchen" },
-              { emoji: "🪵", label: "Wooden", slug: "wooden-toys" },
-              { emoji: "📚", label: "Stationery", slug: "stationery-items" },
-              { emoji: "⚽", label: "Sports", slug: "sport-exercise" },
-              { emoji: "🔥", label: "Sale", slug: "?featured=true" },
-            ].map((cat) => (
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-5 md:gap-7">
+            {categories.slice(0, 12).map((category) => (
               <Link
-                key={cat.slug}
-                href={cat.slug.startsWith("?") ? `/products${cat.slug}` : `/products?category=${cat.slug}`}
+                key={category.id}
+                href={`/products?category=${category.slug}`}
                 className="group flex flex-col items-center gap-3"
-                aria-label={`Shop ${cat.label}`}
+                aria-label={`Shop ${category.name}`}
               >
                 <div
-                  className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full flex items-center justify-center text-5xl md:text-6xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:-translate-y-2 group-hover:scale-105 active:scale-95"
+                  className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden relative transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:-translate-y-2 group-hover:scale-105 active:scale-95"
                   style={{
-                    background: "linear-gradient(145deg, var(--cat-bg), var(--cat-hover))",
                     border: "4px solid var(--header-accent)",
                     boxShadow: "0 8px 25px var(--cat-shadow)",
                   }}
                 >
-                  <span className="drop-shadow-sm group-hover:scale-110 transition-transform duration-300">{cat.emoji}</span>
+                  {category.image_url ? (
+                    <Image
+                      src={category.image_url}
+                      alt={category.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="(max-width: 640px) 90px, (max-width: 768px) 110px, 120px"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-4xl" style={{ background: "linear-gradient(145deg, var(--cat-bg), var(--cat-hover))" }}>
+                      🛍️
+                    </div>
+                  )}
                 </div>
-                <span className="text-sm font-semibold text-[var(--cat-text)] group-hover:text-[#e91e63] transition-colors">{cat.label}</span>
+                <span className="text-xs sm:text-sm font-semibold text-[var(--cat-text)] group-hover:text-[#e91e63] transition-colors text-center line-clamp-1">{category.name}</span>
               </Link>
             ))}
           </div>
