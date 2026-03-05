@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SlidersHorizontal, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui";
 import { ProductGrid } from "@/components/product";
+import { CategoryCircles } from "@/components/product/CategoryCircles";
 import { createClient } from "@/lib/supabase/server";
 import { NAV_LINKS } from "@/lib/constants";
 import type { NavLink } from "@/lib/constants";
@@ -335,6 +336,13 @@ export default async function ProductsPage({
           </div>
         </div>
       )}
+
+      {/* Category circles navigation */}
+      <div className="bg-gradient-to-b from-white to-[#fff8fa] border-b border-[var(--header-border)]">
+        <div className="container mx-auto px-4">
+          <CategoryCircles categories={categories} activeSlug={params.category} />
+        </div>
+      </div>
 
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">

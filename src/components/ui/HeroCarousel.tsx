@@ -20,11 +20,19 @@ interface Slide {
 
 const slides: Slide[] = [
   {
+    image: "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=1400&h=700&fit=crop",
+    title: "🔥 Mega Sale Live",
+    highlight: "Up To 50% Off",
+    description: "Massive discounts on toys, home essentials, electronics & gifts. Don't miss out — limited time only!",
+    cta: { label: "Shop Sale", href: "/products" },
+    secondary: { label: "Browse All", href: "/categories" },
+  },
+  {
     image: getCategoryHeroImage("toys") || "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=1400&h=700&fit=crop",
     title: "🧸 Aiel Toy Paradise",
     highlight: "Play, Learn & Grow",
     description: "Sensory toys, Montessori sets, STEM kits, action figures & more — the ultimate toy destination for curious kids.",
-    cta: { label: "Shop Toys", href: "/products?category=aiel-toy-paradise" },
+    cta: { label: "Shop Toys", href: "/products?category=toys" },
     secondary: { label: "Browse All", href: "/products" },
   },
   {

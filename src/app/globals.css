@@ -872,4 +872,270 @@ textarea,
   .category-filter-btn {
     transition: none;
   }
+
+  .cat-circle {
+    transition: none !important;
+  }
+}
+
+/* =============================================================================
+   HOMEPAGE SECTIONS — Consistent spacing, section headers, newsletter
+   ============================================================================= */
+
+.homepage-section {
+  padding: 3.5rem 0;
+}
+
+@media (min-width: 769px) {
+  .homepage-section {
+    padding: 5rem 0;
+  }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a2e);
+  letter-spacing: 0.025em;
+}
+
+@media (min-width: 769px) {
+  .section-header h2 {
+    font-size: 1.875rem;
+  }
+}
+
+.section-header .view-all-link {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #e91e63;
+  transition: color 0.2s;
+}
+
+.section-header .view-all-link:hover {
+  color: #c2185b;
+}
+
+@media (min-width: 640px) {
+  .section-header .view-all-link {
+    display: flex;
+  }
+}
+
+/* Newsletter section */
+.newsletter-section {
+  background: linear-gradient(135deg, #fff0f3 0%, #fce4ec 50%, #f8bbd0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -25%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(233, 30, 99, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.newsletter-input {
+  flex: 1;
+  height: 3rem;
+  padding: 0 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid rgba(233, 30, 99, 0.2);
+  background: white;
+  font-size: 0.875rem;
+  color: #333;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.newsletter-input::placeholder {
+  color: #999;
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: #e91e63;
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+}
+
+/* Trust badge row */
+.trust-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 769px) {
+  .trust-badges-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trust-badge-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  border: 1px solid rgba(233, 30, 99, 0.15);
+}
+
+/* =============================================================================
+   CATEGORY CIRCLES — Circular Image Buttons
+   Beautiful circular category navigation with real product images.
+   Responsive: 4-col desktop → 3-col tablet → 2-col mobile.
+   ============================================================================= */
+
+/* ─── Container ──────────────────────────────────────────────────────────── */
+.categories-circles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── Circle base ────────────────────────────────────────────────────────── */
+.cat-circle {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cat-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Name label overlay */
+.cat-circle::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+  padding: 6px 4px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 11px;
+  text-align: center;
+  color: #333;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Circle hover ───────────────────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .cat-circle:hover {
+    transform: scale(1.12) translateY(-6px);
+    border-color: rgba(255, 182, 193, 0.5);
+    box-shadow: 0 20px 40px rgba(255, 182, 193, 0.35),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .cat-circle:hover img {
+    transform: scale(1.1);
+  }
+}
+
+/* ─── Circle active state ────────────────────────────────────────────────── */
+.cat-circle--active {
+  border-color: #f48fb1;
+  box-shadow: 0 0 0 3px rgba(244, 143, 177, 0.3),
+    0 10px 30px rgba(255, 182, 193, 0.3);
+}
+
+/* ─── Circle focus visible ───────────────────────────────────────────────── */
+.cat-circle:focus-visible {
+  outline: 3px solid #e91e63;
+  outline-offset: 3px;
+}
+
+/* ─── Responsive sizing ──────────────────────────────────────────────────── */
+
+/* Small phones: smaller circles */
+@media (max-width: 479px) {
+  .categories-circles-container {
+    gap: 1rem;
+    padding: 1.5rem 0.75rem;
+  }
+
+  .cat-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .cat-circle::after {
+    font-size: 10px;
+    padding: 4px 2px;
+  }
+}
+
+/* Tablets: slightly larger */
+@media (min-width: 769px) {
+  .categories-circles-container {
+    gap: 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .cat-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .cat-circle::after {
+    font-size: 12px;
+    padding: 8px 4px;
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1025px) {
+  .categories-circles-container {
+    gap: 2.5rem;
+    padding: 3rem 2rem;
+  }
+
+  .cat-circle {
+    width: 130px;
+    height: 130px;
+  }
 }
