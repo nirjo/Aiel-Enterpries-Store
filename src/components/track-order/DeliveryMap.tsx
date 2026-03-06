@@ -9,11 +9,11 @@ import "leaflet-defaulticon-compatibility";
 
 // Custom robot icon representing Aiel Enterprises
 const robotIcon = new L.Icon({
-    iconUrl: "/logo_new.jpg", // Using logo as a fun marker
+    iconUrl: "/aiel-enterprises-logo.jpg",
     iconSize: [40, 40],
     iconAnchor: [20, 40],
     popupAnchor: [0, -40],
-    className: "rounded-full border-2 border-primary-500 bg-white drop-shadow-md",
+    className: "rounded-full border-2 border-[#c9a84c] bg-white drop-shadow-md",
 });
 
 const homeIcon = new L.Icon({

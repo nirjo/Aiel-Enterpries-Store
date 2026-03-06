@@ -16,7 +16,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center mb-4">
-              <BrandLogo className="scale-75 sm:scale-90 origin-left" variant="dark" />
+              <BrandLogo size="md" showName variant="dark" />
             </Link>
             <p className="text-sm text-white/50 mb-4">
               Toys, home essentials, electronics & gifts — your one-stop family store.

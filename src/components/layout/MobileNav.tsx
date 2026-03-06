@@ -69,7 +69,7 @@ export function MobileNav() {
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-[var(--header-border)]">
               <Link href="/" onClick={closeMobileMenu}>
-                <BrandLogo className="scale-75 origin-left" variant="light" />
+                <BrandLogo size="sm" showName variant="light" />
               </Link>
               <button onClick={closeMobileMenu} className="w-9 h-9 rounded-lg hover:bg-[var(--cat-hover)] flex items-center justify-center transition-colors text-[var(--header-text)]/50">
                 <X className="h-5 w-5" />

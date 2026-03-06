@@ -96,7 +96,7 @@ function LoginForm() {
 
         <div className="text-center mb-8">
           <Link href="/" className="inline-block hover:scale-105 transition-transform duration-300">
-            <BrandLogo className="mx-auto mb-4" />
+            <BrandLogo size="lg" className="mx-auto mb-4" />
           </Link>
           <h1 className="text-2xl font-display font-bold text-text-primary mb-2">
             Welcome back

@@ -105,7 +105,7 @@ export function Header() {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <BrandLogo className="scale-75 sm:scale-90 origin-left" variant="light" />
+              <BrandLogo size="md" showName variant="light" />
             </Link>
 
             {/* Search bar - desktop */}
