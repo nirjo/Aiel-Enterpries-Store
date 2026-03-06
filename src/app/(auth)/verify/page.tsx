@@ -109,7 +109,7 @@ function VerifyForm() {
   return (
     <>
       <div className="text-center mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center mx-auto mb-4 border-2 border-primary-100 shadow-sm">
           <KeyRound className="h-8 w-8 text-primary-500" />
         </div>
         <h1 className="text-2xl font-display font-bold text-text-primary mb-2">
@@ -188,7 +188,7 @@ function VerifyForm() {
 function VerifyFormFallback() {
   return (
     <div className="text-center">
-      <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+      <div className="w-16 h-16 rounded-full bg-primary-50 flex items-center justify-center mx-auto mb-4 border-2 border-primary-100">
         <KeyRound className="h-8 w-8 text-primary-500" />
       </div>
       <h1 className="text-2xl font-display font-bold text-text-primary mb-2">

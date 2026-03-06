@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { Button, Input } from "@/components/ui";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { useAuth } from "@/components/providers";
 import { signInWithEmail } from "@/lib/auth";
 
@@ -94,9 +95,9 @@ function LoginForm() {
         </Link>
 
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center mx-auto mb-4 shadow-glow">
-            <span className="text-white font-bold text-2xl">A</span>
-          </div>
+          <Link href="/" className="inline-block hover:scale-105 transition-transform duration-300">
+            <BrandLogo className="mx-auto mb-4" />
+          </Link>
           <h1 className="text-2xl font-display font-bold text-text-primary mb-2">
             Welcome back
           </h1>
