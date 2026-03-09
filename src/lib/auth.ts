@@ -9,13 +9,16 @@ import type { Profile } from "@/types/database";
  */
 export async function signInWithGoogle(redirectTo?: string) {
     const supabase = getSupabaseClient();
+    const fullRedirectUrl = `${window.location.origin}/auth/callback${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`;
+    console.log("Supabase Auth Redirect URL being sent:", fullRedirectUrl);
+
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: `${window.location.origin}/auth/callback${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`,
+            redirectTo: fullRedirectUrl,
             queryParams: {
                 access_type: "offline",
-                prompt: "consent",
+                prompt: "select_account consent",
             },
         },
     });
@@ -28,54 +31,61 @@ export async function signInWithGoogle(redirectTo?: string) {
     return data;
 }
 
-/**
- * Sign in with Email OTP (Magic Link)
- * Sends a 6-digit OTP code to the user's email
- */
 export async function signInWithEmail(email: string) {
-    const supabase = getSupabaseClient();
-
-    // Get origin safely (only available on client)
     const origin = typeof window !== "undefined" ? window.location.origin : "";
 
-    console.log("Sending OTP to:", email);
+    console.log("Sending OTP via custom Resend sender to:", email);
 
-    const { data, error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-            // Allow new users to sign up
-            shouldCreateUser: true,
-            // Redirect URL after clicking magic link (if they click the link instead of using OTP)
-            emailRedirectTo: `${origin}/auth/callback`,
-        },
-    });
+    // Using our custom server action instead of supabase's built in magic-link 
+    // to bypass the unverified domain issue on Resend.
+    const { sendEmailOTP } = await import('@/app/actions/auth-email');
+    const result = await sendEmailOTP(email);
 
-    if (error) {
-        console.error("Email sign in error:", error.message, error);
-        throw error;
+    if (!result.success) {
+        console.error("Email sign in error:", result.error);
+        throw new Error(result.error || "Failed to send OTP code.");
     }
 
-    console.log("OTP sent successfully:", data);
-    return data;
+    console.log("OTP sent successfully");
+    // Store isNewUser hint for the client in localStorage temporarily 
+    // so we know if we should prompt for a Name and Password on verifying.
+    if (typeof window !== "undefined") {
+        if (result.isNewUser) {
+            localStorage.setItem("auth_new_user", "true");
+        } else {
+            localStorage.removeItem("auth_new_user");
+        }
+    }
+
+    return result;
 }
 
-/**
- * Verify the OTP code sent to email
- */
-export async function verifyOtp(email: string, token: string) {
-    const supabase = getSupabaseClient();
-    const { data, error } = await supabase.auth.verifyOtp({
-        email,
-        token,
-        type: "email",
-    });
+export async function verifyOtp(email: string, token: string, password?: string, name?: string) {
+    const isNewUser = typeof window !== "undefined" && localStorage.getItem("auth_new_user") === "true";
+    let res;
 
-    if (error) {
-        console.error("OTP verification error:", error);
-        throw error;
+    if (isNewUser) {
+        const { verifyOTPAndSignup } = await import('@/app/actions/auth-email');
+        const finalName = name || email.split('@')[0];
+        const finalPassword = password || (Math.random().toString(36).slice(-12) + "A1!");
+        res = await verifyOTPAndSignup(email, finalName, finalPassword, token);
+    } else {
+        const { verifyOTPAndLogin } = await import('@/app/actions/auth-email');
+        res = await verifyOTPAndLogin(email, token);
     }
 
-    return data;
+    if (!res.success) {
+        throw new Error(res.error || "Invalid OTP code");
+    }
+
+    if (typeof window !== "undefined") localStorage.removeItem("auth_new_user");
+
+    // Force supabase auth listener to update the session from the cookies set by server action!
+    const supabase = getSupabaseClient();
+    await supabase.auth.getSession();
+    await supabase.auth.refreshSession();
+
+    return { session: true };
 }
 
 /**

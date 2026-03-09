@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { sendEmail } from "@/lib/resend";
 // Optional Twilio import: import twilio from "twilio";
-
-// Requires RESEND_API_KEY in .env.local
-const resend = new Resend(process.env.RESEND_API_KEY || "dummy_key");
 
 export async function POST(request: Request) {
     try {
@@ -18,9 +15,8 @@ export async function POST(request: Request) {
         }
 
         // 1. Send Email via Resend
-        if (process.env.RESEND_API_KEY) {
-            await resend.emails.send({
-                from: "Aiel Enterprises <tracking@aiel-enterprises.com>",
+        if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== "dummy_key") {
+            await sendEmail({
                 to: [customerEmail],
                 subject: `Order Update: ${order} - ${status}`,
                 html: `

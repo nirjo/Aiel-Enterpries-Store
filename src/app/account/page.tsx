@@ -572,9 +572,12 @@ export default function AccountPage() {
     e.preventDefault();
     if (otpCode.trim().length !== 6) return;
     setIsVerifyingOtp(true); setAuthError(null);
-    try { await verifyOtp(email.trim(), otpCode.trim()); }
-    catch (error) { setAuthError(error instanceof Error ? error.message : "Invalid OTP code."); }
-    finally { setIsVerifyingOtp(false); }
+    try { 
+        await verifyOtp(email.trim(), otpCode.trim()); 
+        // Force reload so auth state properly initializes from cookies
+        window.location.reload();
+    }
+    catch (error) { setAuthError(error instanceof Error ? error.message : "Invalid OTP code."); setIsVerifyingOtp(false); }
   };
 
   // ── Address handlers ───────────────────────────────────────────────────────

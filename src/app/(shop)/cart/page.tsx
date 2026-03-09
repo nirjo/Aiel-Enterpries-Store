@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
@@ -8,10 +9,42 @@ import { useCartStore } from "@/stores/cart";
 import { formatCurrency } from "@/lib/utils/format";
 
 export default function CartPage() {
+  const [mounted, setMounted] = useState(false);
   const { items, removeItem, updateQuantity, getSubtotal, clearCart } = useCartStore();
   const subtotal = getSubtotal();
   const shipping = subtotal > 999 ? 0 : 99;
   const total = subtotal + shipping;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen">
+        <div className="bg-surface-100 py-4 border-b border-surface-300">
+          <div className="container mx-auto px-4">
+            <nav className="text-sm">
+              <ol className="flex items-center gap-2">
+                <li><span className="text-text-muted cursor-default">Home</span></li>
+                <li className="text-text-muted">/</li>
+                <li className="text-text-primary font-medium">Shopping Cart</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-surface-200 rounded w-48 mb-6" />
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 h-96 bg-surface-200 rounded-2xl" />
+              <div className="lg:col-span-1 h-64 bg-surface-200 rounded-2xl" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

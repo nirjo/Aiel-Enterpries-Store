@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
@@ -48,6 +48,21 @@ export default function CheckoutPage() {
     const shipping = subtotal > 999 ? 0 : 99;
     const tax = Math.round(subtotal * 0.18);
     const total = subtotal + shipping + tax;
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <div className="min-h-screen bg-surface-100 py-8">
+                <div className="container mx-auto px-4 flex justify-center">
+                    <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
+                </div>
+            </div>
+        );
+    }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

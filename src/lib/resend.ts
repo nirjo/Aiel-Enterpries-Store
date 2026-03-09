@@ -30,11 +30,20 @@ export async function sendEmail({
     const defaultFrom =
         process.env.RESEND_FROM_EMAIL || "Aiel Enterprises <onboarding@resend.dev>";
 
+    // Workaround for Resend verification error:
+    // If we are using the test domain, Resend ONLY allows sending to the verified email address.
+    const isTestingMode = defaultFrom.includes("onboarding@resend.dev");
+    const originalTo = Array.isArray(to) ? to.join(", ") : to;
+
+    // Default to the user's registered email in test mode to prevent crashes
+    const finalTo = isTestingMode ? "aielenterprises3321@gmail.com" : (Array.isArray(to) ? to : [to]);
+    const finalSubject = isTestingMode ? `[For: ${originalTo}] ${subject}` : subject;
+
     try {
         const { data, error } = await resend.emails.send({
             from: from || defaultFrom,
-            to: Array.isArray(to) ? to : [to],
-            subject,
+            to: finalTo,
+            subject: finalSubject,
             react: react ?? undefined,
             html: html ?? undefined,
             text: text ?? undefined,
