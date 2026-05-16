@@ -37,7 +37,7 @@ export default async function CategoriesPage() {
   const categories = await getCategories();
 
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-[#ffffff]">
       {/* ── Breadcrumb ── */}
       <div className="bg-surface-50 border-b border-surface-200 pt-6 pb-4 shadow-sm">
         <div className="container mx-auto px-4">

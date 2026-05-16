@@ -131,7 +131,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-[#ffffff]">
 
       {/* ═══════════════════════════════════════════
           SECTION 1 — HEADER (in layout.tsx, auto)

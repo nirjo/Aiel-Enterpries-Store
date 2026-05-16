@@ -76,13 +76,13 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-lime-400 flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-white/50">
-                  123 Business Street, Mumbai, Maharashtra 400001, India
+                  No.4, 1st Cross Street, GT Nagar, Thattanchavady, Puducherry-605009, India
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-lime-400 flex-shrink-0" />
-                <a href="tel:+919876543210" className="text-sm text-white/50 hover:text-secondary-400 transition-all">
-                  +91 98765 43210
+                <a href="tel:+919150234277" className="text-sm text-white/50 hover:text-secondary-400 transition-all">
+                  +91 9150234277
                 </a>
               </li>
               <li className="flex items-center gap-3">

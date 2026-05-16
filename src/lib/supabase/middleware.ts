@@ -6,9 +6,17 @@ export async function updateSession(request: NextRequest) {
         request,
     });
 
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+        console.error("Missing Supabase env vars in middleware");
+        return supabaseResponse;
+    }
+
     const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        supabaseUrl,
+        supabaseAnonKey,
         {
             cookies: {
                 getAll() {
@@ -42,8 +50,8 @@ export async function updateSession(request: NextRequest) {
         return NextResponse.redirect(url);
     }
 
-    // Protect checkout route
-    if (request.nextUrl.pathname.startsWith("/checkout") && !user) {
+    // Protect checkout route (only the exact /checkout path, not /checkout/success or /checkout/failure)
+    if (request.nextUrl.pathname === "/checkout" && !user) {
         const url = request.nextUrl.clone();
         url.pathname = "/login";
         url.searchParams.set("redirect", "/checkout");

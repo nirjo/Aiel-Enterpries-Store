@@ -170,8 +170,8 @@ export default async function OrderDetailPage({
                                 </p>
                                 <div className="mt-3 text-xs text-indigo-200 space-y-0.5">
                                     <p>GSTIN: 34XXXXX1234X1ZX</p>
-                                    <p>Puducherry, India — 605001</p>
-                                    <p>contact@aielenterprises.com</p>
+                                    <p>No.4, 1st Cross Street, GT Nagar, Thattanchavady, Puducherry-605009, India</p>
+                                    <p>support@aielenterprises.com</p>
                                 </div>
                             </div>
                             <div className="text-right">

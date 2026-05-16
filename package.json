@@ -10,7 +10,8 @@
     "upload-images": "node scripts/upload-images.mjs"
   },
   "dependencies": {
-    "@react-email/components": "^1.0.7",
+    "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.0.7",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.95.2",
     "clsx": "^2.1.1",

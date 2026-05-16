@@ -121,8 +121,8 @@ function buildInvoiceHTML(order: OrderData): string {
                 <p style="margin: 4px 0 0; color: #6b7280; font-size: 12px;">Your one-stop family store</p>
                 <p style="margin: 12px 0 0; color: #6b7280; font-size: 11px; line-height: 1.5;">
                     GSTIN: 34XXXXX1234X1ZX<br/>
-                    Puducherry, India — 605001<br/>
-                    contact@aielenterprises.com
+                    No.4, 1st Cross Street, GT Nagar, Thattanchavady, Puducherry-605009, India<br/>
+                    support@aielenterprises.com
                 </p>
             </div>
             <div style="text-align: right;">

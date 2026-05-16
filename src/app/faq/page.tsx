@@ -114,7 +114,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function FAQPage() {
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-[#ffffff]">
       {/* Hero Banner */}
       <section className="relative py-16 md:py-24 bg-gradient-to-r from-secondary-500 via-primary-500 to-accent-500 overflow-hidden">
         <div className="absolute inset-0 opacity-15">

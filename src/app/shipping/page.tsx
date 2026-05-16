@@ -62,7 +62,7 @@ const policies = [
 
 export default function ShippingPage() {
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-[#ffffff]">
       {/* Hero Banner */}
       <section className="relative py-16 md:py-24 bg-gradient-to-r from-primary-600 via-secondary-500 to-lime-500 overflow-hidden">
         <div className="absolute inset-0 opacity-15">

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function TrackOrderPage() {
     return (
-        <div className="min-h-screen bg-[#f8fafc]">
+        <div className="min-h-screen bg-[#ffffff]">
             {/* ── Hero Banner ── */}
             <section className="relative py-16 md:py-24 bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500 overflow-hidden">
                 {/* Decorative blurred circles */}
@@ -68,7 +68,7 @@ export default function TrackOrderPage() {
                 {/* Divider */}
                 <div className="relative mb-16">
                     <hr className="border-surface-200" />
-                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f8fafc] px-4 text-text-muted text-sm font-medium">
+                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] px-4 text-text-muted text-sm font-medium">
                         or
                     </span>
                 </div>

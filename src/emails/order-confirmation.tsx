@@ -219,7 +219,7 @@ export default function OrderConfirmationEmail({
                             margin: "0",
                         }}
                     >
-                        Aiel Enterprises · Puducherry, India
+                        Aiel Enterprises · No.4, 1st Cross Street, GT Nagar, Thattanchavady, Puducherry-605009, India
                     </Text>
                 </Container>
             </Body>

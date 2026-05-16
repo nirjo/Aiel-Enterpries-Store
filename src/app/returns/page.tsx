@@ -48,7 +48,7 @@ const notEligible = [
 
 export default function ReturnsPage() {
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-[#ffffff]">
       {/* Hero Banner */}
       <section className="relative py-16 md:py-24 bg-gradient-to-r from-accent-500 via-primary-500 to-secondary-500 overflow-hidden">
         <div className="absolute inset-0 opacity-15">
